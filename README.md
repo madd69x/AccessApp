@@ -17,7 +17,13 @@
 
 </div>
 
+---
 
+<div align="center">
+  <h3>📖 <a href="DOCUMENTATION.md">Read the Full Technical Documentation Here</a></h3>
+</div>
+
+---
 
 ## Flagship Modules
 
