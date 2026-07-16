@@ -1,7 +1,6 @@
 <div align="center">
 
-<!-- You can replace the src below with your actual banner image link later -->
-<img src="https://via.placeholder.com/1200x400/0A192F/E6F1FF?text=AccessApp" alt="AccessApp Banner" width="100%">
+<img src="app/src/main/res/drawable/logo.jpg" alt="AccessApp Logo" width="200" style="border-radius: 20px; margin-bottom: 20px;">
 
 # 🌌 AccessApp
 ### Your Personal Campus Assistant, Powered by AI
