@@ -17,13 +17,7 @@
 
 </div>
 
----
 
-<div align="center">
-  <img src="ui_showcase.jpg" alt="AccessApp UI Showcase" width="100%" style="border-radius: 12px; margin-bottom: 24px;">
-</div>
-
----
 
 ## Flagship Modules
 
