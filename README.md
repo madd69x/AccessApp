@@ -27,12 +27,66 @@
 
 ## Flagship Modules
 
-<div align="center">
-  <img src="radar_banner.jpg" alt="Obstacle Radar Module" width="100%" style="border-radius: 8px; margin-bottom: 20px;">
-  <img src="ocr_banner.jpg" alt="Notes-to-Audio OCR Module" width="100%" style="border-radius: 8px; margin-bottom: 20px;">
-  <img src="asl_banner.jpg" alt="Live Sign Language Translator Module" width="100%" style="border-radius: 8px; margin-bottom: 20px;">
-  <img src="color_banner.jpg" alt="Color & Light Detector Module" width="100%" style="border-radius: 8px; margin-bottom: 20px;">
-</div>
+<table>
+  <tr>
+    <td width="40%" align="center">
+      <img src="radar_banner.jpg" alt="Obstacle Radar Module" width="100%" style="border-radius: 8px;">
+    </td>
+    <td width="60%">
+      <h3>Obstacle Radar (MediaPipe Vision)</h3>
+      Uses real-time object detection via the device camera to identify approaching obstacles. 
+      <br><br>
+      <b>Key Features:</b>
+      <ul>
+        <li><b>Dynamic Haptic Feedback:</b> Device vibrates dynamically based on obstacle proximity.</li>
+        <li><b>Sonar Alerts:</b> Emits varying audio tones to indicate distance.</li>
+        <li><b>Glassmorphic HUD:</b> Premium UI alerting bystanders and the user to spatial awareness states.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="60%">
+      <h3>Notes-to-Audio (Unified OCR)</h3>
+      A seamless Optical Character Recognition (OCR) scanner powered by ML Kit.
+      <br><br>
+      <b>Key Features:</b>
+      <ul>
+        <li><b>Auto-Language Detection:</b> Automatically detects both Latin (English) and Devanagari (Hindi) characters without manual toggles.</li>
+        <li><b>Instant TTS:</b> Instantly converts scanned text into fluid speech using the native Android TTS Engine.</li>
+      </ul>
+    </td>
+    <td width="40%" align="center">
+      <img src="ocr_banner.jpg" alt="Notes-to-Audio OCR Module" width="100%" style="border-radius: 8px;">
+    </td>
+  </tr>
+  <tr>
+    <td width="40%" align="center">
+      <img src="asl_banner.jpg" alt="Live Sign Language Translator Module" width="100%" style="border-radius: 8px;">
+    </td>
+    <td width="60%">
+      <h3>Live Sign Language Translator</h3>
+      Uses Google's MediaPipe Gesture Recognizer to identify American Sign Language (ASL) letters in real-time. Translates live camera feeds into English text for seamless communication bridging, drastically improving interactivity for deaf users.
+    </td>
+  </tr>
+  <tr>
+    <td width="60%">
+      <h3>Color & Light Detector</h3>
+      Analyzes the center of the camera feed to output exact RGB values, luminance, and human-readable color names (e.g., "Dark Navy Blue") to assist visually impaired users in identifying objects, clothing, and ambient lighting conditions.
+    </td>
+    <td width="40%" align="center">
+      <img src="color_banner.jpg" alt="Color & Light Detector Module" width="100%" style="border-radius: 8px;">
+    </td>
+  </tr>
+  <tr>
+    <td width="40%" align="center">
+      <img src="https://via.placeholder.com/800x450/0A192F/E6F1FF?text=Walker-Friendly+Navigation" alt="Walker-Friendly Navigation Module" width="100%" style="border-radius: 8px;">
+    </td>
+    <td width="60%">
+      <h3>Walker-Friendly AI Navigation (Upcoming)</h3>
+      Smart, pedestrian-optimized routing using OpenStreetMap (OSRM) designed to prioritize footpaths, campus trails, and safe walkways over standard vehicular roads.
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -66,11 +120,5 @@ AccessApp utilizes a modern, professional aesthetic built for scale and ease of 
 
 <div align="center">
   <p><b>Made By Vortex AI</b></p>
-  <p>
-    Avadhi Sharma (3rd Year CSE) &bull;
-    Mudit Vaishnav (2nd Year ECC) &bull;
-    Mudra Chauhan (2nd Year CSE) &bull;
-    Jigyasha Mahariya (2nd Year ECC) &bull;
-    Monalika Vyas (2nd Year P&I)
-  </p>
+  <p>Avadhi Sharma (3rd Year CSE) &bull; Mudit Vaishnav (2nd Year ECC) &bull; Mudra Chauhan (2nd Year CSE) &bull; Jigyasha Mahariya (2nd Year ECC) &bull; Monalika Vyas (2nd Year P&I)</p>
 </div>
