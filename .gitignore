@@ -1,0 +1,21 @@
+# Android Studio
+*.iml
+.gradle
+local.properties
+/.idea/workspace.xml
+/.idea/libraries
+/.idea/modules.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/.idea/caches
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+
+# Secrets
+google-services.json
+
+# Model files (MediaPipe)
+# *.task
