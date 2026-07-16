@@ -1,84 +1,93 @@
-# AccessApp - Technical Documentation
+# Technical Documentation: AccessApp
 
-Welcome to the official technical documentation for **AccessApp**, the next-generation accessibility assistant designed for visually impaired and deaf users.
+## 1. Abstract
 
-## 🏗 Architecture & Technology Stack
+**AccessApp** is a comprehensive, artificial intelligence-driven accessibility application engineered specifically for individuals with visual or auditory impairments. The system leverages edge-based machine learning paradigms to provide real-time spatial awareness, optical character recognition, and gestural translation without reliance on cloud-based processing. This approach ensures maximal privacy, minimizes computational latency, and guarantees operability in environments with restricted network connectivity.
 
-AccessApp is built on a modern Android architecture designed for high performance, edge-AI capabilities, and fluid user experiences.
+## 2. System Architecture
 
-### Core Frameworks
-- **Language:** Kotlin (1.9.0+)
-- **UI Framework:** Jetpack Compose (Material 3)
-- **Minimum SDK:** API 30 (Android 11) - Enforces modern security and background processing constraints.
-- **Target SDK:** API 36
+The application is structured upon a modern, modular Android architecture, ensuring scalability and robust performance.
 
-### Edge AI & Machine Learning
-We prioritize **On-Device Machine Learning** to ensure the app functions rapidly without requiring an active internet connection (preserving privacy and reducing latency).
-- **Google MediaPipe Vision:** Used for real-time Object Detection (Obstacle Radar) and Gesture Recognition (ASL Translation).
-- **Google ML Kit:** Used for rapid Optical Character Recognition (OCR) and text extraction.
-- **Android TTS Engine:** Native Text-to-Speech synthesis for zero-latency audio feedback.
+*   **Programming Language:** Kotlin (Version 1.9.0+)
+*   **User Interface Framework:** Jetpack Compose (Material Design 3 parameters)
+*   **Minimum SDK Requirement:** API Level 30 (Android 11) - Enforced to leverage contemporary security protocols and background processing constraints.
+*   **Target SDK Requirement:** API Level 36
 
----
+### 2.1 Machine Learning Infrastructure
 
-## 🧩 Module Deep Dives
-
-### 1. Obstacle Radar
-The Obstacle Radar acts as a digital cane, utilizing the device's rear camera to identify objects in the user's path.
-
-**Technical Implementation:**
-- Utilizes the `efficientdet_lite0.tflite` model via MediaPipe.
-- Processes camera frames via `CameraX` `ImageAnalysis` use case.
-- Extracts bounding boxes and calculates approximate proximity based on bounding box area relative to the screen frame.
-- Triggers dynamic haptic feedback using the Android `Vibrator` API, increasing intensity and frequency as the object's bounding box grows larger (indicating it is closer).
-
-### 2. Notes-to-Audio (Unified OCR)
-A specialized document scanner designed to read real-world text (signs, notes, books) and speak it aloud.
-
-**Technical Implementation:**
-- Built using **Google ML Kit Vision (Text Recognition)**.
-- Automatically handles language detection for both Latin (English) and Devanagari (Hindi) scripts simultaneously without requiring the user to manually switch modes.
-- Text is piped directly into the Android `TextToSpeech` service.
-- The UI handles states gracefully, ensuring that overlapping frames do not cause the TTS engine to stutter.
-
-### 3. Live Sign Language Translator
-Bridges the communication gap by translating American Sign Language (ASL) alphabets into English text in real-time.
-
-**Technical Implementation:**
-- Powered by a custom-trained MediaPipe Gesture Recognizer model (`gesture_recognizer.task`).
-- Detects hand landmarks in 3D space and maps them against known ASL configurations.
-- Displays the translated character securely on the screen with high contrast for the user to read or show to a bystander.
-
-### 4. Color & Light Detector
-Assists visually impaired users in identifying the color of clothing, objects, or the ambient lighting of a room.
-
-**Technical Implementation:**
-- Analyzes the center pixel cluster of the `CameraX` feed.
-- Converts raw RGB pixel values into human-readable strings (e.g., "Dark Red", "Light Navy Blue") using a custom color-mapping algorithm.
-- Evaluates luminance to determine if a room is dark or well-lit, providing vital context to the user.
+The system employs on-device inference engines to process sensory data locally:
+*   **Google MediaPipe Vision:** Deployed for high-frequency frame analysis, facilitating object detection (Obstacle Radar) and skeletal node tracking (American Sign Language Translation).
+*   **Google ML Kit Vision:** Utilized for rapid Optical Character Recognition (OCR) and text segmentation.
+*   **Android Text-to-Speech (TTS) Engine:** Synthesizes localized audio feedback with near-zero latency.
 
 ---
 
-## 🎨 UI/UX Philosophy
-We firmly believe that accessibility tools should not look like clinical prototypes.
-- **Spring Physics:** Every button press and screen transition utilizes Compose `spring()` animations rather than linear tweens, giving the app a tactile, organic feel.
-- **Color Palette:** A highly curated palette of Deep Navy Blues, Light Blues, and Whites. 
-- **Typography:** Custom integration of the *Outfit* Google font.
+## 3. Module Specifications
+
+### 3.1 Obstacle Radar (Spatial Awareness Module)
+
+This module functions as a digital mobility aid, utilizing the device's primary camera sensor to calculate the proximity of physical obstructions within the user's trajectory.
+
+**Technical Implementation:**
+*   **Model:** Employs the `efficientdet_lite0.tflite` model, integrated via the MediaPipe framework.
+*   **Data Pipeline:** Processes sequential video frames through the `CameraX` `ImageAnalysis` use case.
+*   **Proximity Calculation:** Extracts bounding boxes from detected entities. Proximity is approximated by calculating the ratio of the bounding box area to the total field of view.
+*   **Sensory Feedback:** Interfaces with the Android `Vibrator` API to deliver dynamic haptic feedback. The frequency and amplitude of the vibrations are directly proportional to the calculated proximity of the nearest detected obstruction.
+
+### 3.2 Notes-to-Audio (Unified Optical Character Recognition)
+
+A specialized document parsing module engineered to extract textual data from physical environments (e.g., signage, documents) and convert it into audible speech.
+
+**Technical Implementation:**
+*   **Engine:** Built upon the Google ML Kit Vision API (Text Recognition module).
+*   **Language Processing:** Implements concurrent language classification, automatically identifying and processing both Latin (English) and Devanagari (Hindi) scripts without requiring manual user intervention.
+*   **Audio Synthesis:** Extracted text strings are queued and piped sequentially into the Android `TextToSpeech` service. The module incorporates state-management logic to prevent audio overlap and ensure fluid dictation.
+
+### 3.3 Live Sign Language Translator
+
+This module facilitates communication for individuals with auditory impairments by translating American Sign Language (ASL) alphabetic gestures into textual output in real-time.
+
+**Technical Implementation:**
+*   **Model:** Powered by a localized MediaPipe Gesture Recognizer model (`gesture_recognizer.task`).
+*   **Kinematic Analysis:** Detects and tracks 21 distinct hand landmarks in three-dimensional space, mapping the spatial configurations against a pre-defined dataset of ASL static gestures.
+*   **User Interface:** Projects the translated characters onto the display utilizing high-contrast typography to ensure readability for both the user and conversational partners.
+
+### 3.4 Color and Luminance Detector
+
+A sensory augmentation tool designed to assist visually impaired individuals in discerning the chromatic properties of objects and the ambient lighting conditions of their environment.
+
+**Technical Implementation:**
+*   **Pixel Analysis:** Targets the central pixel cluster within the active `CameraX` feed.
+*   **Chromatic Mapping:** Extracts raw RGB (Red, Green, Blue) values and processes them through a custom comparative algorithm to map the data to the nearest human-readable color nomenclature (e.g., "Dark Red", "Light Navy Blue").
+*   **Luminance Evaluation:** Calculates the relative luminance of the sampled area to determine environmental lighting conditions, outputting descriptive metrics (e.g., "Well-lit", "Dim") to provide contextual awareness.
 
 ---
 
-## 🚀 Build & Deployment
+## 4. User Interface and Experience Methodology
 
-### Cloning the Repository
+The interface is designed strictly in accordance with accessibility best practices, prioritizing tactile feedback and high-contrast visual elements over superfluous aesthetics.
+
+*   **Kinetic Feedback:** Employs the Compose `spring()` physics engine for all interactive elements and transition states. This provides a sense of physical weight and momentum to the digital interface, aiding spatial memory for visually impaired users.
+*   **Auditory Cues:** Integrates comprehensive system audio feedback for all state changes and button interactions.
+*   **Contrast and Legibility:** Utilizes a carefully calibrated palette of deep navy blues and high-luminance whites, compliant with WCAG (Web Content Accessibility Guidelines) contrast ratio standards.
+
+---
+
+## 5. Deployment and Build Protocols
+
+### 5.1 Repository Initialization
+To establish a local development environment, execute the following command:
 ```bash
 git clone https://github.com/madd69x/AccessApp.git
 cd AccessApp
 ```
 
-### Dependency Setup
-The project heavily relies on specific `.tflite` models. These are automatically downloaded by a custom Gradle task during the build process, ensuring the repository remains lightweight. Ensure you have an active internet connection during your first Gradle Sync.
+### 5.2 Dependency Management
+The application requires specific TensorFlow Lite (`.tflite`) model files to function. These binary assets are managed automatically via a custom Gradle task executed during the synchronization phase. An active internet connection is mandatory during the initial build to facilitate these downloads.
 
-### Running the App
-Due to the heavy reliance on `CameraX` and hardware sensors (Haptics, TTS), **AccessApp must be run on a physical Android device**. 
-1. Connect your Android 11+ device via USB debugging or Wireless debugging.
-2. Select the device in Android Studio.
-3. Click **Run** (`Shift + F10`).
+### 5.3 Execution Environment Constraints
+Due to the system's reliance on physical hardware sensors (camera arrays, haptic motors, localized TTS engines), **AccessApp must be compiled and deployed to a physical Android device**. Virtualization environments (Emulators) are incompatible with the core sensory modules. 
+
+1. Ensure the target device is running Android 11 (API Level 30) or higher.
+2. Enable USB Debugging or Wireless Debugging within Developer Options.
+3. Initiate the build sequence via Android Studio (`Shift + F10`).

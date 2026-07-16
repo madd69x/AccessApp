@@ -3,7 +3,7 @@
 <img src="banner.jpg" alt="AccessApp Banner" width="40%">
 
 # AccessApp
-### Next-Generation Accessibility Assistant
+### Comprehensive AI-Driven Accessibility Assistant
 
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.9.0-7F52FF?style=flat-square&logo=kotlin)](https://kotlinlang.org)
 [![Android](https://img.shields.io/badge/Android-11%2B-3DDC84?style=flat-square&logo=android)](https://developer.android.com/)
@@ -11,8 +11,8 @@
 [![MediaPipe](https://img.shields.io/badge/MediaPipe-Vision-FF6F00?style=flat-square&logo=google)](https://developers.google.com/mediapipe)
 
 <p align="center">
-  <b>AccessApp</b> is an advanced, AI-driven accessibility companion explicitly designed for visually impaired and deaf users navigating complex environments. 
-  <br>It integrates state-of-the-art On-Device Machine Learning with fluid, tactile UX.
+  <b>AccessApp</b> is a comprehensive, artificial intelligence-driven accessibility application engineered specifically for individuals with visual or auditory impairments. 
+  <br>The system leverages edge-based machine learning paradigms to provide real-time spatial awareness without reliance on cloud-based processing.
 </p>
 
 </div>
@@ -82,13 +82,12 @@
 
 ---
 
-## Design Philosophy
+## User Interface and Experience Methodology
 
-AccessApp utilizes a modern, professional aesthetic built for scale and ease of use.
-- **Spring-Physics Engine:** Fluid, momentum-based animations powered by Compose's Spring framework.
-- **Custom Typography:** Driven entirely by the modern Outfit Google Font.
-- **Tactile Soundscapes:** Comprehensive physical button feedback and system audio integration.
-- **Adaptive Theming:** Deep Navy Blues and soft gradients that cross-fade seamlessly between Day and Night modes.
+The interface is designed strictly in accordance with accessibility best practices, prioritizing tactile feedback and high-contrast visual elements over superfluous aesthetics.
+*   **Kinetic Feedback:** Employs the Compose `spring()` physics engine for all interactive elements to provide a sense of physical weight and momentum, aiding spatial memory.
+*   **Auditory Cues:** Integrates comprehensive system audio feedback for all state changes and button interactions.
+*   **Contrast and Legibility:** Utilizes a carefully calibrated palette of deep navy blues and high-luminance whites, designed for maximal readability.
 
 ---
 
