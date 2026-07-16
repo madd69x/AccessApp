@@ -20,7 +20,7 @@
 ---
 
 <div align="center">
-  <h3>📖 <a href="DOCUMENTATION.md">Read the Full Technical Documentation Here</a></h3>
+  <h4><a href="DOCUMENTATION.md">View Technical Documentation</a></h4>
 </div>
 
 ---
