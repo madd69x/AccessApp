@@ -71,15 +71,7 @@
       <img src="color_banner.jpg" alt="Color & Light Detector Module" width="100%" style="border-radius: 8px;">
     </td>
   </tr>
-  <tr>
-    <td width="40%" align="center">
-      <img src="https://via.placeholder.com/800x450/0A192F/E6F1FF?text=Walker-Friendly+Navigation" alt="Walker-Friendly Navigation Module" width="100%" style="border-radius: 8px;">
-    </td>
-    <td width="60%">
-      <h3>Walker-Friendly AI Navigation (Upcoming)</h3>
-      Smart, pedestrian-optimized routing using OpenStreetMap (OSRM) designed to prioritize footpaths, campus trails, and safe walkways over standard vehicular roads.
-    </td>
-  </tr>
+
 </table>
 
 ---
