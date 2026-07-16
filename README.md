@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="banner.jpg" alt="AccessApp Banner" width="100%">
+<img src="banner.jpg" alt="AccessApp Banner" width="40%">
 
 # AccessApp
 ### Next-Generation Accessibility Assistant
@@ -19,29 +19,20 @@
 
 ---
 
+<div align="center">
+  <img src="ui_showcase.jpg" alt="AccessApp UI Showcase" width="100%" style="border-radius: 12px; margin-bottom: 24px;">
+</div>
+
+---
+
 ## Flagship Modules
 
-<img src="ui_showcase.jpg" alt="AccessApp UI Showcase" width="100%" style="border-radius: 12px; margin-bottom: 24px;">
-
-### Obstacle Radar (MediaPipe Vision)
-Uses real-time object detection via the device camera to identify approaching obstacles. 
-- **Dynamic Haptic Feedback:** Device vibrates dynamically based on obstacle proximity.
-- **Sonar Alerts:** Emits varying audio tones to indicate distance.
-- **Glassmorphic HUD:** Premium UI alerting bystanders and the user to spatial awareness states.
-
-### Notes-to-Audio (Unified OCR)
-A seamless Optical Character Recognition (OCR) scanner powered by ML Kit.
-- **Auto-Language Detection:** Automatically detects both Latin (English) and Devanagari (Hindi) characters without manual toggles.
-- **Instant TTS:** Instantly converts scanned text into fluid speech using the native Android TTS Engine.
-
-### Live Sign Language Translator
-Uses Google's MediaPipe Gesture Recognizer to identify ASL letters in real-time. Translates live camera feeds into English text for seamless communication bridging.
-
-### Color & Light Detector
-Analyzes the center of the camera feed to output exact RGB values, luminance, and human-readable color names to assist visually impaired users in identifying objects, clothing, and ambient lighting.
-
-### Walker-Friendly AI Navigation (Upcoming)
-Smart, pedestrian-optimized routing using OpenStreetMap (OSRM) designed to prioritize footpaths, campus trails, and safe walkways over standard vehicular roads.
+<div align="center">
+  <img src="radar_banner.jpg" alt="Obstacle Radar Module" width="100%" style="border-radius: 8px; margin-bottom: 20px;">
+  <img src="ocr_banner.jpg" alt="Notes-to-Audio OCR Module" width="100%" style="border-radius: 8px; margin-bottom: 20px;">
+  <img src="asl_banner.jpg" alt="Live Sign Language Translator Module" width="100%" style="border-radius: 8px; margin-bottom: 20px;">
+  <img src="color_banner.jpg" alt="Color & Light Detector Module" width="100%" style="border-radius: 8px; margin-bottom: 20px;">
+</div>
 
 ---
 
