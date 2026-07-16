@@ -105,6 +105,6 @@ AccessApp utilizes a modern, professional aesthetic built for scale and ease of 
 ---
 
 <div align="center">
-  <p><b>Made By Vortex AI</b></p>
-  <p>Avadhi Sharma (3rd Year CSE) &bull; Mudit Vaishnav (2nd Year ECC) &bull; Mudra Chauhan (2nd Year CSE) &bull; Jigyasha Mahariya (2nd Year ECC) &bull; Monalika Vyas (2nd Year P&I)</p>
+  <h3>Made By Vortex AI</h3>
+  <code>Avadhi Sharma (3rd Year CSE)</code> &bull; <code>Mudit Vaishnav (2nd Year ECC)</code> &bull; <code>Mudra Chauhan (2nd Year CSE)</code> &bull; <code>Jigyasha Mahariya (2nd Year ECC)</code> &bull; <code>Monalika Vyas (2nd Year P&I)</code>
 </div>
