@@ -3,6 +3,7 @@ import { Environment, MeshTransmissionMaterial, Float } from "@react-three/drei"
 import { useRef } from "react";
 import * as THREE from "three";
 import { MagneticCursor } from "./components/ui/magnetic-cursor";
+import { Radar, Languages, Sun, Layers, Cpu } from "lucide-react";
 import FlowArt, { FlowSection } from "./components/ui/story-scroll";
 
 // Purely aesthetic spinning background element
@@ -43,49 +44,15 @@ const IconWrapper = ({ children }: { children: React.ReactNode }) => (
   </div>
 );
 
-const RadarIcon = () => (
-  <IconWrapper>
-    <svg style={{ width: '16px', height: '16px' }} className="text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5.05 5.05a10 10 0 0114.14 0M7.172 7.172a7 7 0 019.9 0M9.293 9.293a4 4 0 015.656 0M12 14a2 2 0 110-4 2 2 0 010 4z" />
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 16v6" opacity="0.3" />
-    </svg>
-  </IconWrapper>
-);
+const RadarIcon = () => (<IconWrapper><Radar size={16} color="#FFFFFF" /></IconWrapper>);
 
-const VisionIcon = () => (
-  <IconWrapper>
-    <svg style={{ width: '16px', height: '16px' }} className="text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2z" />
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 10h8M8 14h4" opacity="0.5" />
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M16 14l2-2" />
-    </svg>
-  </IconWrapper>
-);
+const VisionIcon = () => (<IconWrapper><Sun size={16} color="#FFFFFF" /></IconWrapper>);
 
-const TranslateIcon = () => (
-  <IconWrapper>
-    <svg style={{ width: '16px', height: '16px' }} className="text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" />
-      <circle cx="12" cy="12" r="10" strokeWidth="1" strokeDasharray="2 2" opacity="0.2" />
-    </svg>
-  </IconWrapper>
-);
+const TranslateIcon = () => (<IconWrapper><Languages size={16} color="#FFFFFF" /></IconWrapper>);
 
-const UXIcon = () => (
-  <IconWrapper>
-    <svg style={{ width: '16px', height: '16px' }} className="text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
-    </svg>
-  </IconWrapper>
-);
+const UXIcon = () => (<IconWrapper><Layers size={16} color="#FFFFFF" /></IconWrapper>);
 
-const CodeIcon = () => (
-  <IconWrapper>
-    <svg style={{ width: '16px', height: '16px' }} className="text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 9l3 3-3 3M13 15h3M4 6h16a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z" />
-    </svg>
-  </IconWrapper>
-);
+const CodeIcon = () => (<IconWrapper><Cpu size={16} color="#FFFFFF" /></IconWrapper>);
 
 
 
