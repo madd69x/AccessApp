@@ -3,8 +3,6 @@ import { ScrollControls, Scroll, useScroll, Environment, MeshTransmissionMateria
 import { useRef } from "react";
 import * as THREE from "three";
 import { motion } from "framer-motion";
-import { useRef } from "react";
-import * as THREE from "three";
 
 function ObsidianGlass() {
   const mesh = useRef<THREE.Mesh>(null);
