@@ -65,7 +65,7 @@ function Overlay() {
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#CCCCCC]">01 — Welcome</p>
         
         <div className="flex-1 flex flex-col justify-center items-center text-center">
-          <h1 data-magnetic className="text-[clamp(3.5rem,8vw,10rem)] font-['Sora'] font-extrabold uppercase tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-br from-white to-[#666666] drop-shadow-2xl  leading-none">
+          <h1 data-magnetic className="text-[clamp(3.5rem,8vw,10rem)] font-['Sora'] font-extrabold uppercase tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-br from-white to-[#666666] drop-shadow-2xl leading-none transition-all duration-500 hover:from-[#00F0FF] hover:to-[#0055FF] hover:drop-shadow-[0_0_30px_rgba(0,240,255,0.8)] cursor-default">
             Access<br/>App
           </h1>
           <h2 className="text-xl md:text-2xl font-['Sora'] font-medium uppercase tracking-widest text-[#CCCCCC] mb-8">
