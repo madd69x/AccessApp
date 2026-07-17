@@ -47,14 +47,14 @@ function ObsidianGlass() {
 
 // Professional, multi-layered SVG Icons
 const IconWrapper = ({ children }: { children: React.ReactNode }) => (
-  <div className="w-10 h-10 rounded-xl border border-[#333336] bg-gradient-to-b from-[#1A1A1A] to-[#000000] flex items-center justify-center mb-6 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+  <div className="w-8 h-8 rounded-lg border border-[#333336] bg-gradient-to-b from-[#1A1A1A] to-[#000000] flex items-center justify-center mb-4 shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
     {children}
   </div>
 );
 
 const RadarIcon = () => (
   <IconWrapper>
-    <svg className="w-4 h-4 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="w-3 h-3 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5.05 5.05a10 10 0 0114.14 0M7.172 7.172a7 7 0 019.9 0M9.293 9.293a4 4 0 015.656 0M12 14a2 2 0 110-4 2 2 0 010 4z" />
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 16v6" opacity="0.3" />
     </svg>
@@ -63,7 +63,7 @@ const RadarIcon = () => (
 
 const VisionIcon = () => (
   <IconWrapper>
-    <svg className="w-4 h-4 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="w-3 h-3 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2z" />
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 10h8M8 14h4" opacity="0.5" />
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M16 14l2-2" />
@@ -73,7 +73,7 @@ const VisionIcon = () => (
 
 const TranslateIcon = () => (
   <IconWrapper>
-    <svg className="w-4 h-4 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="w-3 h-3 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" />
       <circle cx="12" cy="12" r="10" strokeWidth="1" strokeDasharray="2 2" opacity="0.2" />
     </svg>
@@ -82,7 +82,7 @@ const TranslateIcon = () => (
 
 const UXIcon = () => (
   <IconWrapper>
-    <svg className="w-4 h-4 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="w-3 h-3 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
     </svg>
   </IconWrapper>
@@ -90,7 +90,7 @@ const UXIcon = () => (
 
 const CodeIcon = () => (
   <IconWrapper>
-    <svg className="w-4 h-4 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="w-3 h-3 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 9l3 3-3 3M13 15h3M4 6h16a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z" />
     </svg>
   </IconWrapper>
@@ -98,7 +98,7 @@ const CodeIcon = () => (
 
 const SecurityIcon = () => (
   <IconWrapper>
-    <svg className="w-4 h-4 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="w-3 h-3 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
     </svg>
   </IconWrapper>
@@ -188,7 +188,7 @@ function Overlay() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-150px" }}
         transition={{ duration: 1, ease: "easeOut" }}
-        className="min-h-screen px-6 md:px-12 max-w-6xl mx-auto pt-32 pb-40"
+        className="min-h-screen px-4 md:px-8 max-w-4xl mx-auto pt-32 pb-40"
       >
         <h2 className="text-4xl md:text-6xl font-['Sora'] font-bold tracking-tight text-center mb-6 text-white">
           Flagship Modules
@@ -200,7 +200,7 @@ function Overlay() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pointer-events-auto">
           
           {/* Card 1 */}
-          <div className="uiverse-glow-card bg-[#0A0A0A]/90 backdrop-blur-xl border-none p-8 rounded-2xl transition-all duration-500 group shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+          <div className="uiverse-glow-card bg-[#0A0A0A]/90 backdrop-blur-xl border-none p-5 rounded-2xl transition-all duration-500 group shadow-[0_5px_20px_rgba(0,0,0,0.8)]">
             <RadarIcon />
             <h3 className="text-2xl font-['Sora'] font-bold text-white mb-3 tracking-tight">Obstacle Radar</h3>
             <p className="text-sm text-[#CCCCCC] font-normal leading-relaxed mb-4">
@@ -213,7 +213,7 @@ function Overlay() {
           </div>
 
           {/* Card 2 */}
-          <div className="uiverse-glow-card bg-[#0A0A0A]/90 backdrop-blur-xl border-none p-8 rounded-2xl transition-all duration-500 group shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+          <div className="uiverse-glow-card bg-[#0A0A0A]/90 backdrop-blur-xl border-none p-5 rounded-2xl transition-all duration-500 group shadow-[0_5px_20px_rgba(0,0,0,0.8)]">
             <VisionIcon />
             <h3 className="text-2xl font-['Sora'] font-bold text-white mb-3 tracking-tight">Notes-to-Audio</h3>
             <p className="text-sm text-[#CCCCCC] font-normal leading-relaxed mb-4">
@@ -226,7 +226,7 @@ function Overlay() {
           </div>
 
           {/* Card 3 */}
-          <div className="uiverse-glow-card bg-[#0A0A0A]/90 backdrop-blur-xl border-none p-8 rounded-2xl transition-all duration-500 group shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+          <div className="uiverse-glow-card bg-[#0A0A0A]/90 backdrop-blur-xl border-none p-5 rounded-2xl transition-all duration-500 group shadow-[0_5px_20px_rgba(0,0,0,0.8)]">
             <TranslateIcon />
             <h3 className="text-2xl font-['Sora'] font-bold text-white mb-3 tracking-tight">Live ASL Translator</h3>
             <p className="text-sm text-[#CCCCCC] font-normal leading-relaxed mb-4">
@@ -238,7 +238,7 @@ function Overlay() {
           </div>
 
           {/* Card 4 */}
-          <div className="uiverse-glow-card bg-[#0A0A0A]/90 backdrop-blur-xl border-none p-8 rounded-2xl transition-all duration-500 group shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+          <div className="uiverse-glow-card bg-[#0A0A0A]/90 backdrop-blur-xl border-none p-5 rounded-2xl transition-all duration-500 group shadow-[0_5px_20px_rgba(0,0,0,0.8)]">
             <VisionIcon />
             <h3 className="text-2xl font-['Sora'] font-bold text-white mb-3 tracking-tight">Color & Light Detector</h3>
             <p className="text-sm text-[#CCCCCC] font-normal leading-relaxed mb-4">
@@ -260,13 +260,13 @@ function Overlay() {
         transition={{ duration: 0.8 }}
         className="min-h-screen px-6 md:px-12 max-w-6xl mx-auto pt-32 pb-40"
       >
-        <h2 className="text-4xl md:text-6xl font-['Sora'] font-bold tracking-tight text-center mb-16 text-white">
+        <h2 className="text-3xl md:text-5xl font-['Sora'] font-bold tracking-tight text-center mb-12 text-white">
           Under the Hood.
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pointer-events-auto">
           
-          <div className="uiverse-glow-card bg-[#0A0A0A]/90 backdrop-blur-xl border-none p-8 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+          <div className="uiverse-glow-card bg-[#0A0A0A]/90 backdrop-blur-xl border-none p-6 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
             <UXIcon />
             <h3 className="text-2xl font-['Sora'] font-bold text-white mb-4">User Experience Methodology</h3>
             <ul className="text-sm text-[#CCCCCC] font-normal leading-relaxed space-y-4">
@@ -276,7 +276,7 @@ function Overlay() {
             </ul>
           </div>
 
-          <div className="uiverse-glow-card bg-[#0A0A0A]/90 backdrop-blur-xl border-none p-8 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+          <div className="uiverse-glow-card bg-[#0A0A0A]/90 backdrop-blur-xl border-none p-6 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
             <CodeIcon />
             <h3 className="text-2xl font-['Sora'] font-bold text-white mb-4">Getting Started</h3>
             <p className="text-sm text-[#CCCCCC] font-normal mb-4">Built for modern Android ecosystems. Strict requirements ensure optimal neural network execution on the edge.</p>
