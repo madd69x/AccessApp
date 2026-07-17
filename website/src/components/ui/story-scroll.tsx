@@ -56,19 +56,10 @@ const FlowArt: React.FC<FlowArtProps> = ({
   'aria-label': ariaLabel = 'Story scroll',
 }) => {
   const containerRef = useRef<HTMLElement>(null);
-  const [reducedMotion, setReducedMotion] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => setReducedMotion(mq.matches);
-    update();
-    mq.addEventListener('change', update);
-    return () => mq.removeEventListener('change', update);
-  }, []);
 
   useGSAP(
     () => {
-      if (!containerRef.current || reducedMotion) return;
+      if (!containerRef.current) return;
 
       const sections = Array.from(
         containerRef.current.querySelectorAll<HTMLElement>('[data-flow-section]'),
@@ -117,7 +108,7 @@ const FlowArt: React.FC<FlowArtProps> = ({
         triggers.forEach((t) => t.kill());
       };
     },
-    { scope: containerRef, dependencies: [childCount(children), reducedMotion] },
+    { scope: containerRef, dependencies: [childCount(children)] },
   );
 
   return (
