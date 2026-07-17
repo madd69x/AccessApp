@@ -2,6 +2,9 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { ScrollControls, Scroll, useScroll, Environment, MeshTransmissionMaterial, Float } from "@react-three/drei";
 import { useRef } from "react";
 import * as THREE from "three";
+import { motion } from "framer-motion";
+import { useRef } from "react";
+import * as THREE from "three";
 
 function ObsidianGlass() {
   const mesh = useRef<THREE.Mesh>(null);
@@ -95,12 +98,26 @@ const CodeIcon = () => (
   </IconWrapper>
 );
 
+const SecurityIcon = () => (
+  <IconWrapper>
+    <svg className="w-6 h-6 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+    </svg>
+  </IconWrapper>
+);
+
 function Overlay() {
   return (
     <div className="w-full relative pointer-events-none text-[#FFFFFF] selection:bg-white selection:text-black font-['Inter']">
       
       {/* Hero Section */}
-      <section className="h-screen flex flex-col justify-center items-center px-6 text-center">
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, ease: "easeOut" }}
+        className="h-screen flex flex-col justify-center items-center px-6 text-center"
+      >
         <h1 className="text-7xl md:text-9xl font-bold tracking-tighter mb-6 text-white drop-shadow-2xl">
           AccessApp
         </h1>
@@ -110,10 +127,71 @@ function Overlay() {
         <p className="text-xl md:text-2xl text-[#A3A3A3] font-normal max-w-3xl leading-relaxed">
           Engineered specifically for individuals with visual or auditory impairments. Leveraging edge-based machine learning paradigms to provide real-time spatial awareness without reliance on cloud-based processing.
         </p>
-      </section>
+      </motion.section>
+
+      {/* The Mission Section */}
+      <motion.section 
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="h-screen flex flex-col justify-center items-center px-6 text-center max-w-5xl mx-auto"
+      >
+        <h2 className="text-5xl md:text-7xl font-semibold tracking-tighter text-white mb-10">
+          The scale of the problem.
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 w-full">
+          <div className="bg-[#111111]/80 backdrop-blur-md border border-[#333336] p-6 rounded-2xl">
+            <h4 className="text-4xl font-bold text-white mb-2">26.8M+</h4>
+            <p className="text-[#A3A3A3] text-sm">Persons with disabilities in India</p>
+          </div>
+          <div className="bg-[#111111]/80 backdrop-blur-md border border-[#333336] p-6 rounded-2xl">
+            <h4 className="text-4xl font-bold text-white mb-2">1-2%</h4>
+            <p className="text-[#A3A3A3] text-sm">Educational content is accessible</p>
+          </div>
+          <div className="bg-[#111111]/80 backdrop-blur-md border border-[#333336] p-6 rounded-2xl">
+            <h4 className="text-4xl font-bold text-white mb-2">3x</h4>
+            <p className="text-[#A3A3A3] text-sm">Higher dropout rates</p>
+          </div>
+          <div className="bg-[#111111]/80 backdrop-blur-md border border-[#333336] p-6 rounded-2xl">
+            <h4 className="text-4xl font-bold text-white mb-2">13M</h4>
+            <p className="text-[#A3A3A3] text-sm">Visually & hearing impaired</p>
+          </div>
+        </div>
+        <p className="text-xl text-[#A3A3A3] font-light leading-relaxed max-w-4xl mx-auto text-center">
+          Existing solutions are fragmented, heavily dependent on internet connectivity, and limited to English. AccessApp addresses these shortcomings by providing an <strong className="text-white">all-in-one, fully offline, bilingual (Hindi & English)</strong> platform that doesn't require juggling multiple siloed apps.
+        </p>
+      </motion.section>
+
+      {/* Architecture & Security Section */}
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+        className="h-screen flex flex-col justify-center items-center px-6 text-center max-w-5xl mx-auto"
+      >
+        <SecurityIcon />
+        <h2 className="text-5xl md:text-7xl font-semibold tracking-tighter text-white mb-8">
+          100% On-Device Processing.
+        </h2>
+        <h3 className="text-3xl text-white font-medium mb-6">Zero latency. Zero data collection.</h3>
+        <p className="text-xl md:text-2xl font-light text-[#86868B] leading-relaxed max-w-4xl mx-auto">
+          Privacy and speed are non-negotiable when navigating physical environments. AccessApp utilizes Android's CameraX API and hardware-accelerated TensorFlow Lite models to analyze video frames strictly on your local device. 
+        </p>
+        <p className="text-xl font-light text-[#86868B] leading-relaxed max-w-4xl mx-auto mt-6">
+          Your camera feed never leaves your phone. No cloud API calls, no hidden telemetry, and no internet connection required. It's security by design, guaranteeing split-second response times even in cellular dead zones.
+        </p>
+      </motion.section>
 
       {/* Flagship Modules Section */}
-      <section className="min-h-screen px-6 md:px-12 max-w-7xl mx-auto pt-32 pb-40">
+      <motion.section 
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-150px" }}
+        transition={{ duration: 1, ease: "easeOut" }}
+        className="min-h-screen px-6 md:px-12 max-w-7xl mx-auto pt-32 pb-40"
+      >
         <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-center mb-8 text-white">
           Flagship Modules
         </h2>
@@ -175,10 +253,16 @@ function Overlay() {
           </div>
 
         </div>
-      </section>
+      </motion.section>
 
       {/* UX & Technical Details Section */}
-      <section className="min-h-screen px-6 md:px-12 max-w-7xl mx-auto pt-32 pb-40">
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+        className="min-h-screen px-6 md:px-12 max-w-7xl mx-auto pt-32 pb-40"
+      >
         <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-center mb-24 text-white">
           Under the hood.
         </h2>
@@ -209,10 +293,16 @@ function Overlay() {
           </div>
 
         </div>
-      </section>
+      </motion.section>
 
       {/* Footer Section */}
-      <footer className="h-screen flex flex-col justify-end items-center px-6 pb-20 text-center pointer-events-auto">
+      <motion.footer 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "0px" }}
+        transition={{ duration: 1.5 }}
+        className="h-screen flex flex-col justify-end items-center px-6 pb-20 text-center pointer-events-auto"
+      >
         <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tighter mb-12">
           Experience AccessApp.
         </h1>
@@ -235,7 +325,7 @@ function Overlay() {
             <span>Avadhi Sharma</span> • <span>Mudit Vaishnav</span> • <span>Mudra Chauhan</span> • <span>Jigyasha Mahariya</span> • <span>Monalika Vyas</span>
           </div>
         </div>
-      </footer>
+      </motion.footer>
 
     </div>
   );
