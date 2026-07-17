@@ -200,7 +200,7 @@ function Overlay() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pointer-events-auto">
           
           {/* Card 1 */}
-          <div className="bg-[#0A0A0A]/80 backdrop-blur-xl border border-[#333336] p-12 rounded-3xl hover:border-[#666666] transition-all duration-500 group shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+          <div className="uiverse-glow-card bg-[#0A0A0A]/90 backdrop-blur-xl border-none p-12 rounded-3xl transition-all duration-500 group shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
             <RadarIcon />
             <h3 className="text-3xl font-bold text-white mb-4 tracking-tight">Obstacle Radar (MediaPipe Vision)</h3>
             <p className="text-lg text-[#CCCCCC] font-normal leading-relaxed mb-4">
@@ -214,7 +214,7 @@ function Overlay() {
           </div>
 
           {/* Card 2 */}
-          <div className="bg-[#0A0A0A]/80 backdrop-blur-xl border border-[#333336] p-12 rounded-3xl hover:border-[#666666] transition-all duration-500 group shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+          <div className="uiverse-glow-card bg-[#0A0A0A]/90 backdrop-blur-xl border-none p-12 rounded-3xl transition-all duration-500 group shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
             <VisionIcon />
             <h3 className="text-3xl font-bold text-white mb-4 tracking-tight">Notes-to-Audio (Unified OCR)</h3>
             <p className="text-lg text-[#CCCCCC] font-normal leading-relaxed mb-4">
@@ -227,7 +227,7 @@ function Overlay() {
           </div>
 
           {/* Card 3 */}
-          <div className="bg-[#0A0A0A]/80 backdrop-blur-xl border border-[#333336] p-12 rounded-3xl hover:border-[#666666] transition-all duration-500 group shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+          <div className="uiverse-glow-card bg-[#0A0A0A]/90 backdrop-blur-xl border-none p-12 rounded-3xl transition-all duration-500 group shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
             <TranslateIcon />
             <h3 className="text-3xl font-bold text-white mb-4 tracking-tight">Live Sign Language Translator</h3>
             <p className="text-lg text-[#CCCCCC] font-normal leading-relaxed mb-4">
@@ -239,7 +239,7 @@ function Overlay() {
           </div>
 
           {/* Card 4 */}
-          <div className="bg-[#0A0A0A]/80 backdrop-blur-xl border border-[#333336] p-12 rounded-3xl hover:border-[#666666] transition-all duration-500 group shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+          <div className="uiverse-glow-card bg-[#0A0A0A]/90 backdrop-blur-xl border-none p-12 rounded-3xl transition-all duration-500 group shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
             <VisionIcon />
             <h3 className="text-3xl font-bold text-white mb-4 tracking-tight">Color & Light Detector</h3>
             <p className="text-lg text-[#CCCCCC] font-normal leading-relaxed mb-4">
@@ -267,7 +267,7 @@ function Overlay() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pointer-events-auto">
           
-          <div className="bg-[#0A0A0A]/80 backdrop-blur-xl border border-[#333336] p-12 rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+          <div className="uiverse-glow-card bg-[#0A0A0A]/90 backdrop-blur-xl border-none p-12 rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
             <UXIcon />
             <h3 className="text-3xl font-bold text-white mb-6">User Experience Methodology</h3>
             <ul className="text-lg text-[#CCCCCC] font-normal leading-relaxed space-y-6">
@@ -277,7 +277,7 @@ function Overlay() {
             </ul>
           </div>
 
-          <div className="bg-[#0A0A0A]/80 backdrop-blur-xl border border-[#333336] p-12 rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+          <div className="uiverse-glow-card bg-[#0A0A0A]/90 backdrop-blur-xl border-none p-12 rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
             <CodeIcon />
             <h3 className="text-3xl font-bold text-white mb-6">Getting Started</h3>
             <p className="text-lg text-[#CCCCCC] font-normal mb-6">Built for modern Android ecosystems. Strict requirements ensure optimal neural network execution on the edge.</p>
@@ -309,7 +309,7 @@ function Overlay() {
           href="https://github.com/madd69x/AccessApp" 
           target="_blank" 
           rel="noreferrer"
-          className="group relative flex items-center justify-center gap-3 overflow-hidden rounded-full bg-[#FFFFFF] px-12 py-5 text-xl font-semibold text-black transition-all duration-300 hover:scale-105 hover:bg-[#E5E5EA] shadow-[0_0_40px_rgba(255,255,255,0.2)] mb-32"
+          className="uiverse-shimmer-btn group relative flex items-center justify-center gap-3 rounded-full bg-[#FFFFFF] px-12 py-5 text-xl font-semibold text-black transition-all duration-300 hover:scale-105 hover:bg-[#E5E5EA] shadow-[0_0_40px_rgba(255,255,255,0.2)] mb-32"
         >
           <span>View on GitHub</span>
           <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -337,7 +337,7 @@ const Header = () => (
       href="https://github.com/madd69x/AccessApp" 
       target="_blank" 
       rel="noreferrer"
-      className="bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-[#E5E5EA] transition-colors"
+      className="uiverse-shimmer-btn bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-[#E5E5EA] transition-colors shadow-[0_0_20px_rgba(255,255,255,0.2)]"
     >
       Download
     </a>
