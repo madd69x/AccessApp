@@ -1,9 +1,9 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, MeshTransmissionMaterial, Float } from "@react-three/drei";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import * as THREE from "three";
 import { MagneticCursor } from "./components/ui/magnetic-cursor";
-import { Radar, Languages, Sun, Layers, Cpu } from "lucide-react";
+import { Radar, Languages, Sun, Layers, Cpu, Eye, Download, ArrowRight, Shield, WifiOff, ChevronDown } from "lucide-react";
 import FlowArt, { FlowSection } from "./components/ui/story-scroll";
 
 // Purely aesthetic spinning background element
@@ -37,177 +37,383 @@ const ObsidianGlass = () => {
   );
 };
 
-// Professional, multi-layered SVG Icons
+// Icon wrapper with fixed sizing
 const IconWrapper = ({ children }: { children: React.ReactNode }) => (
-  <div className="rounded-lg border border-[#333336] bg-gradient-to-b from-[#1A1A1A] to-[#000000] flex items-center justify-center mb-4 shadow-[0_2px_10px_rgba(0,0,0,0.5)] flex-shrink-0" style={{ width: '32px', height: '32px', minWidth: '32px', minHeight: '32px' }}>
+  <div
+    className="rounded-xl border border-[#2A2A2A] bg-[#111] flex items-center justify-center mb-5 flex-shrink-0"
+    style={{ width: '44px', height: '44px', minWidth: '44px', minHeight: '44px' }}
+  >
     {children}
   </div>
 );
 
-const RadarIcon = () => (<IconWrapper><Radar size={16} color="#FFFFFF" /></IconWrapper>);
+// Stat counter component
+const StatItem = ({ value, label }: { value: string; label: string }) => (
+  <div className="text-center">
+    <p className="text-3xl md:text-5xl font-['Sora'] font-bold text-white tracking-tight">{value}</p>
+    <p className="text-xs md:text-sm text-[#888] uppercase tracking-widest mt-2">{label}</p>
+  </div>
+);
 
-const VisionIcon = () => (<IconWrapper><Sun size={16} color="#FFFFFF" /></IconWrapper>);
+// Feature card used in modules section
+const FeatureCard = ({
+  icon,
+  title,
+  description,
+  tags,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  tags?: string[];
+}) => (
+  <div className="group bg-[#0E0E0E] border border-[#1A1A1A] hover:border-[#333] p-7 rounded-2xl transition-all duration-300 hover:-translate-y-1">
+    <div className="flex items-start gap-4">
+      <IconWrapper>{icon}</IconWrapper>
+      <div className="flex-1 min-w-0">
+        <h3 className="text-lg font-['Sora'] font-semibold text-white mb-2 tracking-tight">{title}</h3>
+        <p className="text-sm text-[#999] font-normal leading-relaxed">{description}</p>
+        {tags && tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 mt-4">
+            {tags.map((tag) => (
+              <span key={tag} className="text-[10px] uppercase tracking-widest text-[#666] border border-[#222] rounded-full px-3 py-1">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+);
 
-const TranslateIcon = () => (<IconWrapper><Languages size={16} color="#FFFFFF" /></IconWrapper>);
-
-const UXIcon = () => (<IconWrapper><Layers size={16} color="#FFFFFF" /></IconWrapper>);
-
-const CodeIcon = () => (<IconWrapper><Cpu size={16} color="#FFFFFF" /></IconWrapper>);
-
-
+// Tech stack item
+const TechItem = ({ label, value }: { label: string; value: string }) => (
+  <div className="flex justify-between items-baseline py-3 border-b border-[#1A1A1A] last:border-b-0">
+    <span className="text-xs text-[#666] uppercase tracking-widest">{label}</span>
+    <span className="text-sm text-white font-medium">{value}</span>
+  </div>
+);
 
 function Overlay() {
+  const [activeTab, setActiveTab] = useState(0);
+
+  const tabs = [
+    { label: 'UX Design', icon: <Layers size={14} color="#fff" /> },
+    { label: 'ML Pipeline', icon: <Cpu size={14} color="#fff" /> },
+    { label: 'Privacy', icon: <Shield size={14} color="#fff" /> },
+  ];
+
+  const tabContent = [
+    {
+      title: 'Designed for Zero Friction',
+      points: [
+        { strong: 'Kinetic Feedback', text: 'Compose spring() physics engine for organic, responsive micro-interactions.' },
+        { strong: 'Spatial Audio', text: 'Full 3D audio cues that adapt to the user\'s physical orientation.' },
+        { strong: 'Adaptive Contrast', text: 'APCA-calibrated palette that adjusts based on ambient light sensor data.' },
+      ],
+    },
+    {
+      title: 'Edge-First Intelligence',
+      points: [
+        { strong: 'TensorFlow Lite', text: 'Quantized INT8 models running at 30fps on mid-range Android hardware.' },
+        { strong: 'MediaPipe', text: 'Real-time hand landmark and gesture recognition with sub-50ms latency.' },
+        { strong: 'ML Kit OCR', text: 'Multi-language optical character recognition with automatic script detection.' },
+      ],
+    },
+    {
+      title: 'Privacy by Architecture',
+      points: [
+        { strong: 'Zero Cloud Dependency', text: 'All inference runs on-device. No images or data ever leave the phone.' },
+        { strong: 'No Telemetry', text: 'AccessApp collects absolutely no usage data or analytics.' },
+        { strong: 'Open Source', text: 'Every line of code is publicly auditable on GitHub.' },
+      ],
+    },
+  ];
+
   return (
     <FlowArt aria-label="AccessApp Experience" className="text-white font-['Inter'] selection:bg-white selection:text-black">
-      
-      {/* 1. Hero Section */}
-      <FlowSection aria-label="Hero" style={{ backgroundColor: 'transparent' }}>
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#CCCCCC]">01 — Welcome</p>
-        
-        <div className="flex-1 flex flex-col justify-center items-center text-center">
-          <h1 data-magnetic className="text-[clamp(3.5rem,8vw,10rem)] font-['Sora'] font-extrabold uppercase tracking-tighter mb-4 text-white drop-shadow-2xl leading-none cursor-default">
-            Access<br/>App
-          </h1>
-          <h2 className="text-xl md:text-2xl font-['Sora'] font-medium uppercase tracking-widest text-[#CCCCCC] mb-8">
-            AI-Driven Accessibility
-          </h2>
-          <p className="text-base md:text-lg text-[#A3A3A3] font-normal max-w-2xl leading-relaxed mb-12">
-            Engineered specifically for individuals with visual or auditory impairments. Leveraging edge-based machine learning paradigms to provide real-time spatial awareness without reliance on cloud-based processing.
+
+      {/* ── 1. HERO ── */}
+      <FlowSection aria-label="Hero" style={{ backgroundColor: '#000000' }}>
+        <div className="flex-1 flex flex-col justify-center items-center text-center relative">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-[#555] mb-10">
+            Accessibility · Reimagined
           </p>
-          <a 
+
+          <h1
             data-magnetic
-            href="https://github.com/madd69x/AccessApp" 
-            target="_blank" 
-            rel="noreferrer"
-            className="uiverse-shimmer-btn bg-white text-black px-10 py-4 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-[#E5E5EA] transition-colors shadow-[0_0_40px_rgba(255,255,255,0.3)] pointer-events-auto "
+            className="text-[clamp(3.5rem,9vw,11rem)] font-['Sora'] font-extrabold uppercase tracking-tighter mb-6 text-white leading-[0.9] cursor-default"
           >
-            Download Now
-          </a>
-        </div>
-      </FlowSection>
-
-      {/* 2. Mission Section */}
-      <FlowSection aria-label="Mission" style={{ backgroundColor: '#050505' }}>
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#CCCCCC]">02 — The Mission</p>
-        
-        <div className="flex-1 flex flex-col justify-center items-center text-center">
-          <h2 className="text-[clamp(3rem,6vw,8rem)] font-['Sora'] font-bold leading-tight uppercase tracking-tight text-white mb-8">
-            Autonomy<br/>First
-          </h2>
-          <p className="text-lg md:text-xl font-normal text-[#86868B] leading-relaxed max-w-3xl mx-auto">
-            Traditional accessibility tools often rely on high-latency cloud APIs, compromising privacy and reliability in low-connectivity environments.
-          </p>
-          <p className="text-lg font-normal text-[#86868B] leading-relaxed max-w-3xl mx-auto mt-4">
-            AccessApp fundamentally alters this paradigm by running advanced computer vision models directly on the user's local hardware—ensuring instant, private, and offline-capable assistance.
-          </p>
-        </div>
-      </FlowSection>
-
-      {/* 3. Flagship Modules Section */}
-      <FlowSection aria-label="Modules" style={{ backgroundColor: '#0A0A0A' }}>
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#CCCCCC]">03 — Flagship Modules</p>
-        
-        <div className="flex-1 flex flex-col justify-center items-center pointer-events-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mt-8">
-            <div className="bg-[#111]/80 backdrop-blur-xl border-none p-5 rounded-2xl shadow-[0_5px_20px_rgba(0,0,0,0.8)]">
-              <RadarIcon />
-              <h3 className="text-xl font-['Sora'] font-bold text-white mb-2 tracking-tight">Obstacle Radar</h3>
-              <p className="text-xs text-[#CCCCCC] font-normal leading-relaxed mb-3">
-                Uses real-time object detection via the device camera to identify approaching obstacles.
-              </p>
-              <ul className="text-xs text-[#A3A3A3] list-disc pl-4 space-y-1">
-                <li><strong className="text-white">Dynamic Haptic Feedback</strong></li>
-                <li><strong className="text-white">Sonar Alerts</strong></li>
-              </ul>
-            </div>
-
-            <div className="bg-[#111]/80 backdrop-blur-xl border-none p-5 rounded-2xl shadow-[0_5px_20px_rgba(0,0,0,0.8)]">
-              <VisionIcon />
-              <h3 className="text-xl font-['Sora'] font-bold text-white mb-2 tracking-tight">Notes-to-Audio</h3>
-              <p className="text-xs text-[#CCCCCC] font-normal leading-relaxed mb-3">
-                A seamless Optical Character Recognition (OCR) scanner powered by ML Kit.
-              </p>
-              <ul className="text-xs text-[#A3A3A3] list-disc pl-4 space-y-1">
-                <li><strong className="text-white">Auto-Language Detection</strong></li>
-                <li><strong className="text-white">Instant TTS</strong></li>
-              </ul>
-            </div>
-
-            <div className="bg-[#111]/80 backdrop-blur-xl border-none p-5 rounded-2xl shadow-[0_5px_20px_rgba(0,0,0,0.8)]">
-              <TranslateIcon />
-              <h3 className="text-xl font-['Sora'] font-bold text-white mb-2 tracking-tight">Live ASL Translator</h3>
-              <p className="text-xs text-[#CCCCCC] font-normal leading-relaxed mb-3">
-                Uses Google's MediaPipe Gesture Recognizer to identify ASL letters in real-time. Translates live camera feeds into English text.
-              </p>
-            </div>
-
-            <div className="bg-[#111]/80 backdrop-blur-xl border-none p-5 rounded-2xl shadow-[0_5px_20px_rgba(0,0,0,0.8)]">
-              <VisionIcon />
-              <h3 className="text-xl font-['Sora'] font-bold text-white mb-2 tracking-tight">Color & Light</h3>
-              <p className="text-xs text-[#CCCCCC] font-normal leading-relaxed mb-3">
-                Analyzes the camera feed to output exact RGB values and relative luminance, converting them to human-readable color names.
-              </p>
-            </div>
-          </div>
-        </div>
-      </FlowSection>
-
-      {/* 4. Under the Hood */}
-      <FlowSection aria-label="Under the Hood" style={{ backgroundColor: '#111111' }}>
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#CCCCCC]">04 — Architecture</p>
-        
-        <div className="flex-1 flex flex-col justify-center items-center pointer-events-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mt-8">
-            <div className="bg-[#050505]/80 backdrop-blur-xl border-none p-6 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
-              <UXIcon />
-              <h3 className="text-xl font-['Sora'] font-bold text-white mb-3">User Experience Methodology</h3>
-              <ul className="text-xs text-[#CCCCCC] font-normal leading-relaxed space-y-3">
-                <li><strong className="text-white">Kinetic Feedback:</strong> Employs the Compose <code>spring()</code> physics engine.</li>
-                <li><strong className="text-white">Auditory Cues:</strong> Comprehensive system audio feedback.</li>
-                <li><strong className="text-white">Contrast & Legibility:</strong> Calibrated palette for readability.</li>
-              </ul>
-            </div>
-
-            <div className="bg-[#050505]/80 backdrop-blur-xl border-none p-6 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
-              <CodeIcon />
-              <h3 className="text-xl font-['Sora'] font-bold text-white mb-3">Getting Started</h3>
-              <p className="text-xs text-[#CCCCCC] font-normal mb-3">Strict requirements ensure optimal neural network execution on the edge.</p>
-              <ul className="text-xs text-[#CCCCCC] font-normal leading-relaxed space-y-2 border-l-2 border-[#333336] pl-4">
-                <li><strong className="text-white">IDE:</strong> Android Studio Iguana</li>
-                <li><strong className="text-white">SDK:</strong> API 30 to API 36</li>
-                <li><strong className="text-white">Architecture:</strong> Jetpack Compose M3</li>
-                <li><strong className="text-white">ML Pipeline:</strong> TensorFlow Lite</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </FlowSection>
-
-      {/* 5. Footer */}
-      <FlowSection aria-label="Footer" style={{ backgroundColor: '#000000' }}>
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#CCCCCC]">05 — Join</p>
-        
-        <div className="flex-1 flex flex-col justify-end items-center pb-8 text-center pointer-events-auto">
-          <h1 className="text-4xl md:text-6xl font-['Sora'] font-extrabold text-white uppercase tracking-tighter mb-12">
-            Experience AccessApp.
+            Access<br />App
           </h1>
-          
-          <a 
-            href="https://github.com/madd69x/AccessApp" 
-            target="_blank" 
-            rel="noreferrer"
-            className="uiverse-shimmer-btn group relative flex items-center justify-center gap-3 rounded-full bg-[#FFFFFF] px-12 py-5 text-xl font-semibold text-black transition-all duration-300 hover:scale-105 hover:bg-[#E5E5EA] shadow-[0_0_40px_rgba(255,255,255,0.2)] mb-20"
-          >
-            <span>View on GitHub</span>
-            <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-            </svg>
-          </a>
-          
-          <div className="w-full border-t border-[#333336] pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-normal text-[#A3A3A3]">
-            <p>© 2026 Vortex AI. All rights reserved.</p>
-            <div className="flex gap-4 mt-4 md:mt-0 flex-wrap justify-center">
-              <span>Avadhi Sharma</span> • <span>Mudit Vaishnav</span> • <span>Mudra Chauhan</span> • <span>Jigyasha Mahariya</span> • <span>Monalika Vyas</span>
+
+          <p className="text-base md:text-xl text-[#777] font-normal max-w-xl leading-relaxed mb-12">
+            AI-powered spatial awareness for the visually and hearing impaired.
+            Runs entirely on-device. No cloud. No latency. No compromise.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 items-center pointer-events-auto mb-16">
+            <a
+              data-magnetic
+              href="https://github.com/madd69x/AccessApp/releases"
+              target="_blank"
+              rel="noreferrer"
+              className="group flex items-center gap-3 bg-white text-black px-8 py-4 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-[#E5E5E5] transition-all duration-300"
+            >
+              <Download size={16} strokeWidth={2.5} />
+              <span>Download APK</span>
+            </a>
+            <a
+              data-magnetic
+              href="https://github.com/madd69x/AccessApp"
+              target="_blank"
+              rel="noreferrer"
+              className="group flex items-center gap-3 bg-transparent border border-[#333] text-white px-8 py-4 rounded-full text-sm font-bold uppercase tracking-widest hover:border-[#666] hover:bg-[#111] transition-all duration-300"
+            >
+              <svg style={{width:"16px",height:"16px"}} viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              <span>Source Code</span>
+            </a>
+          </div>
+
+          <div className="animate-bounce text-[#444]">
+            <ChevronDown size={24} />
+          </div>
+        </div>
+      </FlowSection>
+
+      {/* ── 2. STATS / SOCIAL PROOF ── */}
+      <FlowSection aria-label="Stats" style={{ backgroundColor: '#050505' }}>
+        <div className="flex-1 flex flex-col justify-center items-center">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-[#555] mb-12">
+            Built for Impact
+          </p>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16 w-full max-w-4xl mb-16">
+            <StatItem value="4" label="Core Modules" />
+            <StatItem value="<50ms" label="Inference Latency" />
+            <StatItem value="100%" label="Offline Capable" />
+            <StatItem value="0" label="Data Collected" />
+          </div>
+
+          <div className="flex items-center gap-6 text-[#555]">
+            <div className="flex items-center gap-2">
+              <WifiOff size={14} />
+              <span className="text-xs uppercase tracking-widest">No internet required</span>
+            </div>
+            <span className="text-[#333]">·</span>
+            <div className="flex items-center gap-2">
+              <Shield size={14} />
+              <span className="text-xs uppercase tracking-widest">Privacy first</span>
+            </div>
+            <span className="text-[#333]">·</span>
+            <div className="flex items-center gap-2">
+              <Eye size={14} />
+              <span className="text-xs uppercase tracking-widest">Open source</span>
+            </div>
+          </div>
+        </div>
+      </FlowSection>
+
+      {/* ── 3. MISSION ── */}
+      <FlowSection aria-label="Mission" style={{ backgroundColor: '#080808' }}>
+        <div className="flex-1 flex flex-col justify-center items-center">
+          <div className="max-w-3xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-[#555] mb-8">
+              The Problem
+            </p>
+            <h2 className="text-[clamp(2rem,5vw,4.5rem)] font-['Sora'] font-bold leading-[1.1] text-white mb-8">
+              Accessibility shouldn't depend on a Wi-Fi signal.
+            </h2>
+            <p className="text-lg text-[#777] font-normal leading-relaxed mb-6">
+              Traditional accessibility tools rely on high-latency cloud APIs, compromising privacy and failing completely in low-connectivity environments — precisely where users need them most.
+            </p>
+            <p className="text-lg text-[#777] font-normal leading-relaxed">
+              AccessApp fundamentally changes this by running advanced computer vision models directly on the user's device. Instant response. Total privacy. Works anywhere.
+            </p>
+          </div>
+        </div>
+      </FlowSection>
+
+      {/* ── 4. FLAGSHIP MODULES ── */}
+      <FlowSection aria-label="Modules" style={{ backgroundColor: '#0A0A0A' }}>
+        <div className="flex-1 flex flex-col justify-center items-center pointer-events-auto">
+          <div className="w-full max-w-4xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-[#555] mb-4">
+              Core Features
+            </p>
+            <h2 className="text-3xl md:text-5xl font-['Sora'] font-bold text-white mb-10 tracking-tight">
+              Four modules. Zero cloud dependency.
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FeatureCard
+                icon={<Radar size={20} color="#fff" />}
+                title="Obstacle Radar"
+                description="Real-time object detection via the device camera. Identifies approaching obstacles and their distance with millimeter precision."
+                tags={['Haptic Feedback', 'Sonar Alerts', 'TFLite']}
+              />
+              <FeatureCard
+                icon={<Eye size={20} color="#fff" />}
+                title="Notes-to-Audio"
+                description="OCR scanner powered by ML Kit that converts any printed or handwritten text into spoken audio instantly."
+                tags={['Auto-Language', 'Neural TTS', 'ML Kit']}
+              />
+              <FeatureCard
+                icon={<Languages size={20} color="#fff" />}
+                title="Live ASL Translator"
+                description="Uses MediaPipe Gesture Recognizer to identify American Sign Language letters in real-time from the camera feed."
+                tags={['MediaPipe', 'Real-time', 'A-Z Letters']}
+              />
+              <FeatureCard
+                icon={<Sun size={20} color="#fff" />}
+                title="Color & Light"
+                description="Analyzes camera feed to output exact RGB values and relative luminance, converting them to human-readable color names."
+                tags={['RGB Analysis', 'Luminance', 'Voice Output']}
+              />
+            </div>
+          </div>
+        </div>
+      </FlowSection>
+
+      {/* ── 5. ARCHITECTURE (tabbed) ── */}
+      <FlowSection aria-label="Architecture" style={{ backgroundColor: '#0D0D0D' }}>
+        <div className="flex-1 flex flex-col justify-center items-center pointer-events-auto">
+          <div className="w-full max-w-4xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-[#555] mb-4">
+              Under the Hood
+            </p>
+            <h2 className="text-3xl md:text-5xl font-['Sora'] font-bold text-white mb-10 tracking-tight">
+              Engineering at the edge.
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Left: interactive tabs */}
+              <div>
+                <div className="flex gap-2 mb-8">
+                  {tabs.map((tab, i) => (
+                    <button
+                      key={tab.label}
+                      onClick={() => setActiveTab(i)}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-widest transition-all duration-300 border ${
+                        activeTab === i
+                          ? 'bg-white text-black border-white'
+                          : 'bg-transparent text-[#666] border-[#222] hover:border-[#444] hover:text-[#999]'
+                      }`}
+                    >
+                      {tab.icon}
+                      {tab.label}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="min-h-[200px]">
+                  <h3 className="text-xl font-['Sora'] font-semibold text-white mb-6">
+                    {tabContent[activeTab].title}
+                  </h3>
+                  <ul className="space-y-5">
+                    {tabContent[activeTab].points.map((point) => (
+                      <li key={point.strong} className="flex gap-3">
+                        <div className="w-1.5 h-1.5 rounded-full bg-white mt-2 flex-shrink-0" />
+                        <div>
+                          <strong className="text-white text-sm">{point.strong}</strong>
+                          <p className="text-sm text-[#888] mt-0.5">{point.text}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Right: tech stack */}
+              <div className="bg-[#090909] border border-[#1A1A1A] rounded-2xl p-7">
+                <h3 className="text-lg font-['Sora'] font-semibold text-white mb-6">Tech Stack</h3>
+                <TechItem label="Language" value="Kotlin" />
+                <TechItem label="UI Framework" value="Jetpack Compose M3" />
+                <TechItem label="Min SDK" value="API 30 (Android 11)" />
+                <TechItem label="Target SDK" value="API 36 (Android 16)" />
+                <TechItem label="ML Runtime" value="TensorFlow Lite" />
+                <TechItem label="Gesture Engine" value="MediaPipe" />
+                <TechItem label="OCR" value="Google ML Kit" />
+                <TechItem label="IDE" value="Android Studio Iguana" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </FlowSection>
+
+      {/* ── 6. HOW IT WORKS ── */}
+      <FlowSection aria-label="How it works" style={{ backgroundColor: '#060606' }}>
+        <div className="flex-1 flex flex-col justify-center items-center">
+          <div className="w-full max-w-4xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-[#555] mb-4">
+              Getting Started
+            </p>
+            <h2 className="text-3xl md:text-5xl font-['Sora'] font-bold text-white mb-12 tracking-tight">
+              Three steps. That's it.
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                { step: '01', title: 'Download', desc: 'Grab the APK from GitHub Releases or clone the repo to build from source.' },
+                { step: '02', title: 'Install', desc: 'Sideload the APK onto any Android device running API 30+ (Android 11 or later).' },
+                { step: '03', title: 'Use', desc: 'Open AccessApp, choose a module, and point your camera. No sign-ups. No accounts. No cloud.' },
+              ].map((item) => (
+                <div key={item.step} className="group">
+                  <p className="text-5xl font-['Sora'] font-bold text-[#1A1A1A] group-hover:text-[#333] transition-colors duration-300 mb-4">
+                    {item.step}
+                  </p>
+                  <h3 className="text-lg font-['Sora'] font-semibold text-white mb-2">{item.title}</h3>
+                  <p className="text-sm text-[#888] leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </FlowSection>
+
+      {/* ── 7. CTA / FOOTER ── */}
+      <FlowSection aria-label="Footer" style={{ backgroundColor: '#000000' }}>
+        <div className="flex-1 flex flex-col justify-center items-center text-center pointer-events-auto">
+          <h2 className="text-4xl md:text-7xl font-['Sora'] font-extrabold text-white uppercase tracking-tighter mb-6 leading-[0.95]">
+            See the world<br />differently.
+          </h2>
+          <p className="text-base text-[#777] max-w-md mb-12">
+            AccessApp is free, open-source, and built for the people who need it most.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 items-center mb-24">
+            <a
+              data-magnetic
+              href="https://github.com/madd69x/AccessApp/releases"
+              target="_blank"
+              rel="noreferrer"
+              className="group flex items-center gap-3 bg-white text-black px-10 py-5 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-[#E5E5E5] transition-all duration-300"
+            >
+              <Download size={18} strokeWidth={2.5} />
+              <span>Download Now</span>
+              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+            </a>
+            <a
+              data-magnetic
+              href="https://github.com/madd69x/AccessApp"
+              target="_blank"
+              rel="noreferrer"
+              className="group flex items-center gap-3 border border-[#333] text-white px-10 py-5 rounded-full text-sm font-bold uppercase tracking-widest hover:border-[#666] hover:bg-[#111] transition-all duration-300"
+            >
+              <svg style={{width:"18px",height:"18px"}} viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              <span>View Source</span>
+            </a>
+          </div>
+
+          <div className="w-full border-t border-[#1A1A1A] pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-[#555] uppercase tracking-widest">
+            <p>© 2026 Vortex AI</p>
+            <div className="flex gap-6 mt-4 md:mt-0 flex-wrap justify-center">
+              <span>Avadhi Sharma</span>
+              <span>Mudit Vaishnav</span>
+              <span>Mudra Chauhan</span>
+              <span>Jigyasha Mahariya</span>
+              <span>Monalika Vyas</span>
             </div>
           </div>
         </div>
@@ -221,7 +427,7 @@ export default function App() {
   return (
     <MagneticCursor magneticFactor={0.5} blendMode="difference" cursorSize={40}>
       <div className="w-full min-h-screen overflow-x-hidden bg-black relative">
-        <Canvas 
+        <Canvas
           camera={{ position: [0, 0, 9], fov: 40 }}
           style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none' }}
         >
