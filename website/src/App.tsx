@@ -63,9 +63,9 @@ function Overlay() {
       {/* 1. Hero Section */}
       <FlowSection aria-label="Hero" style={{ backgroundColor: 'transparent' }}>
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#CCCCCC]">01 — Welcome</p>
-        <hr className="my-[2vw] border-none border-t border-white/20" />
+        
         <div className="flex-1 flex flex-col justify-center items-center text-center">
-          <h1 data-magnetic className="text-[clamp(3.5rem,8vw,10rem)] font-['Sora'] font-extrabold uppercase tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-br from-white to-[#666666] drop-shadow-2xl mix-blend-difference leading-none">
+          <h1 data-magnetic className="text-[clamp(3.5rem,8vw,10rem)] font-['Sora'] font-extrabold uppercase tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-br from-white to-[#666666] drop-shadow-2xl  leading-none">
             Access<br/>App
           </h1>
           <h2 className="text-xl md:text-2xl font-['Sora'] font-medium uppercase tracking-widest text-[#CCCCCC] mb-8">
@@ -79,7 +79,7 @@ function Overlay() {
             href="https://github.com/madd69x/AccessApp" 
             target="_blank" 
             rel="noreferrer"
-            className="uiverse-shimmer-btn bg-white text-black px-10 py-4 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-[#E5E5EA] transition-colors shadow-[0_0_40px_rgba(255,255,255,0.3)] pointer-events-auto mix-blend-difference"
+            className="uiverse-shimmer-btn bg-white text-black px-10 py-4 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-[#E5E5EA] transition-colors shadow-[0_0_40px_rgba(255,255,255,0.3)] pointer-events-auto "
           >
             Download Now
           </a>
@@ -89,7 +89,7 @@ function Overlay() {
       {/* 2. Mission Section */}
       <FlowSection aria-label="Mission" style={{ backgroundColor: '#050505' }}>
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#CCCCCC]">02 — The Mission</p>
-        <hr className="my-[2vw] border-none border-t border-white/20" />
+        
         <div className="flex-1 flex flex-col justify-center items-center text-center">
           <h2 className="text-[clamp(3rem,6vw,8rem)] font-['Sora'] font-bold leading-tight uppercase tracking-tight text-white mb-8">
             Autonomy<br/>First
@@ -106,7 +106,7 @@ function Overlay() {
       {/* 3. Flagship Modules Section */}
       <FlowSection aria-label="Modules" style={{ backgroundColor: '#0A0A0A' }}>
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#CCCCCC]">03 — Flagship Modules</p>
-        <hr className="my-[2vw] border-none border-t border-white/20" />
+        
         <div className="flex-1 flex flex-col justify-center items-center pointer-events-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mt-8">
             <div className="bg-[#111]/80 backdrop-blur-xl border-none p-5 rounded-2xl shadow-[0_5px_20px_rgba(0,0,0,0.8)]">
@@ -155,7 +155,7 @@ function Overlay() {
       {/* 4. Under the Hood */}
       <FlowSection aria-label="Under the Hood" style={{ backgroundColor: '#111111' }}>
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#CCCCCC]">04 — Architecture</p>
-        <hr className="my-[2vw] border-none border-t border-white/20" />
+        
         <div className="flex-1 flex flex-col justify-center items-center pointer-events-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mt-8">
             <div className="bg-[#050505]/80 backdrop-blur-xl border-none p-6 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
@@ -186,7 +186,7 @@ function Overlay() {
       {/* 5. Footer */}
       <FlowSection aria-label="Footer" style={{ backgroundColor: '#000000' }}>
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#CCCCCC]">05 — Join</p>
-        <hr className="my-[2vw] border-none border-t border-white/20" />
+        
         <div className="flex-1 flex flex-col justify-end items-center pb-8 text-center pointer-events-auto">
           <h1 className="text-4xl md:text-6xl font-['Sora'] font-extrabold text-white uppercase tracking-tighter mb-12">
             Experience AccessApp.
