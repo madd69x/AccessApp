@@ -3,7 +3,7 @@ import { ScrollControls, Scroll, useScroll, Environment, MeshTransmissionMateria
 import { useRef } from "react";
 import * as THREE from "three";
 
-function GlassObject() {
+function ObsidianGlass() {
   const mesh = useRef<THREE.Mesh>(null);
   const scroll = useScroll();
 
@@ -11,31 +11,32 @@ function GlassObject() {
     if (!mesh.current) return;
     const r1 = scroll.range(0, 1);
     
-    // Smooth, clinical rotation
-    mesh.current.rotation.y += delta * 0.15;
-    mesh.current.rotation.x += delta * 0.12;
+    // Slow, heavy rotation
+    mesh.current.rotation.y += delta * 0.1;
+    mesh.current.rotation.x += delta * 0.08;
     
-    // Scale and drift downward based on scroll
-    mesh.current.position.y = -r1 * 16; // Increased drift due to more pages
-    mesh.current.position.z = r1 * 4;
-    const scale = 1.2 + r1 * 1.5;
+    // Push deep into the background so it doesn't wash out text
+    mesh.current.position.y = -r1 * 18;
+    mesh.current.position.z = -5 + (r1 * 2); // Start deep, move slightly forward
+    
+    const scale = 2 + r1 * 2;
     mesh.current.scale.set(scale, scale, scale);
   });
 
   return (
-    <Float speed={1.5} rotationIntensity={0.5} floatIntensity={1}>
+    <Float speed={1} rotationIntensity={0.2} floatIntensity={0.5}>
       <mesh ref={mesh}>
-        <torusGeometry args={[1.5, 0.4, 64, 128]} />
+        <torusKnotGeometry args={[2, 0.6, 128, 64]} />
         <MeshTransmissionMaterial 
           backside
-          samples={8}
-          thickness={1.5}
-          chromaticAberration={0.03}
-          anisotropy={0.2}
-          distortion={0.2}
-          distortionScale={0.2}
-          temporalDistortion={0.0}
-          color="#ffffff"
+          samples={4}
+          thickness={3}
+          chromaticAberration={0.05}
+          anisotropy={0.3}
+          distortion={0.5}
+          distortionScale={0.3}
+          temporalDistortion={0.1}
+          color="#111111" // Dark obsidian glass
           resolution={1024}
         />
       </mesh>
@@ -43,192 +44,231 @@ function GlassObject() {
   );
 }
 
-// Minimalist, smaller SVG Icons with elegant bounding circles
+// Professional, multi-layered SVG Icons
 const IconWrapper = ({ children }: { children: React.ReactNode }) => (
-  <div className="w-12 h-12 rounded-full border border-[#333336] bg-[#111111] flex items-center justify-center mb-8 shadow-inner">
+  <div className="w-14 h-14 rounded-2xl border border-[#333336] bg-gradient-to-b from-[#1A1A1A] to-[#000000] flex items-center justify-center mb-8 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
     {children}
   </div>
 );
 
 const RadarIcon = () => (
   <IconWrapper>
-    <svg className="w-5 h-5 text-[#F5F5F7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.871c1.355 0 2.697.056 4.024.166C17.155 8.51 18 9.473 18 10.608v2.513M15 8.25v-1.5m-6 1.5v-1.5m12 9.75l-1.5.75m0 0l-3-1.5m3 1.5v-2.25m-15 2.25l1.5.75m0 0l3-1.5m-3 1.5v-2.25M3 9.75l1.5-.75m15 1.5l-1.5-.75M12 10.5v10.5m0-10.5l-3 1.5m3-1.5l3 1.5"></path></svg>
+    <svg className="w-6 h-6 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5.05 5.05a10 10 0 0114.14 0M7.172 7.172a7 7 0 019.9 0M9.293 9.293a4 4 0 015.656 0M12 14a2 2 0 110-4 2 2 0 010 4z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 16v6" opacity="0.3" />
+    </svg>
   </IconWrapper>
 );
 
 const VisionIcon = () => (
   <IconWrapper>
-    <svg className="w-5 h-5 text-[#F5F5F7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+    <svg className="w-6 h-6 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 10h8M8 14h4" opacity="0.5" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M16 14l2-2" />
+    </svg>
   </IconWrapper>
 );
 
 const TranslateIcon = () => (
   <IconWrapper>
-    <svg className="w-5 h-5 text-[#F5F5F7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802"></path></svg>
+    <svg className="w-6 h-6 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" />
+      <circle cx="12" cy="12" r="10" strokeWidth="1" strokeDasharray="2 2" opacity="0.2" />
+    </svg>
   </IconWrapper>
 );
 
-const LuminanceIcon = () => (
+const UXIcon = () => (
   <IconWrapper>
-    <svg className="w-5 h-5 text-[#F5F5F7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"></path></svg>
+    <svg className="w-6 h-6 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+    </svg>
   </IconWrapper>
 );
 
-const SecurityIcon = () => (
+const CodeIcon = () => (
   <IconWrapper>
-    <svg className="w-5 h-5 text-[#F5F5F7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"></path></svg>
+    <svg className="w-6 h-6 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 9l3 3-3 3M13 15h3M4 6h16a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z" />
+    </svg>
   </IconWrapper>
 );
 
 function Overlay() {
   return (
-    <div className="w-full relative pointer-events-none text-[#F5F5F7] selection:bg-white selection:text-black font-['Outfit']">
+    <div className="w-full relative pointer-events-none text-[#FFFFFF] selection:bg-white selection:text-black font-['Inter']">
       
       {/* Hero Section */}
       <section className="h-screen flex flex-col justify-center items-center px-6 text-center">
-        <h1 className="text-7xl md:text-9xl font-semibold tracking-tighter mb-4 text-white drop-shadow-lg">
-          AccessApp.
+        <h1 className="text-7xl md:text-9xl font-bold tracking-tighter mb-6 text-white drop-shadow-2xl">
+          AccessApp
         </h1>
-        <h2 className="text-3xl md:text-5xl font-light tracking-tight text-[#A1A1A6] mb-8">
-          Visionary accessibility.
+        <h2 className="text-3xl md:text-5xl font-medium tracking-tight text-[#CCCCCC] mb-8">
+          Comprehensive AI-Driven Accessibility.
         </h2>
-        <p className="text-xl md:text-2xl text-[#86868B] font-light max-w-3xl leading-relaxed">
-          The definitive on-device AI companion. Engineered from the ground up to empower students with unprecedented spatial intelligence, instantaneous optical character recognition, and seamless gestural translation.
-        </p>
-      </section>
-
-      {/* The Mission Section */}
-      <section className="h-screen flex flex-col justify-center items-center px-6 text-center max-w-5xl mx-auto">
-        <h2 className="text-5xl md:text-7xl font-semibold tracking-tighter text-white mb-10">
-          A new paradigm for inclusion.
-        </h2>
-        <p className="text-2xl md:text-3xl font-light text-[#86868B] leading-relaxed max-w-4xl mx-auto mb-8">
-          Over 2.2% of Indian students face profound systemic barriers navigating campus facilities, interpreting physical documents, and communicating with peers. Traditional assistive technologies are often fragmented, prohibitively expensive, or overly reliant on high-latency cloud processing.
-        </p>
-        <p className="text-xl text-[#A1A1A6] font-light leading-relaxed max-w-3xl mx-auto border-l-2 border-[#333336] pl-6 text-left">
-          We rebuilt accessibility infrastructure to solve this. AccessApp consolidates four highly specialized neural networks into a single, cohesive Android application that operates entirely in edge environments—putting absolute independence directly in your pocket.
-        </p>
-      </section>
-
-      {/* Architecture & Security Section */}
-      <section className="h-screen flex flex-col justify-center items-center px-6 text-center max-w-5xl mx-auto">
-        <SecurityIcon />
-        <h2 className="text-5xl md:text-7xl font-semibold tracking-tighter text-white mb-8">
-          100% On-Device Processing.
-        </h2>
-        <h3 className="text-3xl text-white font-medium mb-6">Zero latency. Zero data collection.</h3>
-        <p className="text-xl md:text-2xl font-light text-[#86868B] leading-relaxed max-w-4xl mx-auto">
-          Privacy and speed are non-negotiable when navigating physical environments. AccessApp utilizes Android's CameraX API and hardware-accelerated TensorFlow Lite models to analyze video frames strictly on your local device. 
-        </p>
-        <p className="text-xl font-light text-[#86868B] leading-relaxed max-w-4xl mx-auto mt-6">
-          Your camera feed never leaves your phone. No cloud API calls, no hidden telemetry, and no internet connection required. It's security by design, guaranteeing split-second response times even in cellular dead zones.
+        <p className="text-xl md:text-2xl text-[#A3A3A3] font-normal max-w-3xl leading-relaxed">
+          Engineered specifically for individuals with visual or auditory impairments. Leveraging edge-based machine learning paradigms to provide real-time spatial awareness without reliance on cloud-based processing.
         </p>
       </section>
 
       {/* Flagship Modules Section */}
       <section className="min-h-screen px-6 md:px-12 max-w-7xl mx-auto pt-32 pb-40">
-        <h2 className="text-5xl md:text-7xl font-semibold tracking-tighter text-center mb-8 text-white">
-          Intelligence, on edge.
+        <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-center mb-8 text-white">
+          Flagship Modules
         </h2>
-        <p className="text-xl text-[#86868B] text-center mb-24 max-w-3xl mx-auto font-light">
-          Four distinct, hardware-accelerated machine learning models working in perfect harmony to interpret the physical world.
+        <p className="text-xl text-[#A3A3A3] text-center mb-24 max-w-3xl mx-auto font-normal">
+          Four distinct, hardware-accelerated machine learning models working in perfect harmony.
         </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pointer-events-auto">
           
-          <div className="bg-black/40 backdrop-blur-md border border-[#333336] p-12 rounded-[2rem] hover:border-[#F5F5F7] transition-all duration-700 group shadow-2xl">
+          {/* Card 1 */}
+          <div className="bg-[#0A0A0A]/80 backdrop-blur-xl border border-[#333336] p-12 rounded-3xl hover:border-[#666666] transition-all duration-500 group shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
             <RadarIcon />
-            <h3 className="text-3xl font-semibold text-white mb-4 tracking-tight group-hover:text-white">Spatial Radar</h3>
-            <p className="text-lg text-[#A1A1A6] font-light leading-relaxed mb-4">
-              Maps your immediate surroundings in real-time. Acting as a digital cane, it leverages the <span className="text-white font-medium">EfficientDet-Lite0</span> object detection model.
+            <h3 className="text-3xl font-bold text-white mb-4 tracking-tight">Obstacle Radar (MediaPipe Vision)</h3>
+            <p className="text-lg text-[#CCCCCC] font-normal leading-relaxed mb-4">
+              Uses real-time object detection via the device camera to identify approaching obstacles.
             </p>
-            <p className="text-md text-[#86868B] font-light leading-relaxed border-t border-[#333336] pt-4">
-              Calculates bounding box ratios against the total camera field of view to determine proximity, triggering dynamic, variable-frequency haptic feedback via the Android Vibrator API to alert users of approaching obstacles.
-            </p>
+            <ul className="text-base text-[#A3A3A3] font-normal leading-relaxed border-t border-[#333336] pt-4 list-disc pl-5 space-y-2">
+              <li><strong className="text-white">Dynamic Haptic Feedback:</strong> Device vibrates dynamically based on obstacle proximity.</li>
+              <li><strong className="text-white">Sonar Alerts:</strong> Emits varying audio tones to indicate distance.</li>
+              <li><strong className="text-white">Glassmorphic HUD:</strong> Premium UI alerting bystanders to spatial awareness states.</li>
+            </ul>
           </div>
 
-          <div className="bg-black/40 backdrop-blur-md border border-[#333336] p-12 rounded-[2rem] hover:border-[#F5F5F7] transition-all duration-700 group shadow-2xl">
+          {/* Card 2 */}
+          <div className="bg-[#0A0A0A]/80 backdrop-blur-xl border border-[#333336] p-12 rounded-3xl hover:border-[#666666] transition-all duration-500 group shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
             <VisionIcon />
-            <h3 className="text-3xl font-semibold text-white mb-4 tracking-tight group-hover:text-white">Neural OCR</h3>
-            <p className="text-lg text-[#A1A1A6] font-light leading-relaxed mb-4">
-              Instantaneous text comprehension. Frame any document, and the on-device <span className="text-white font-medium">Google ML Kit Vision API</span> fluently parses complex layouts.
+            <h3 className="text-3xl font-bold text-white mb-4 tracking-tight">Notes-to-Audio (Unified OCR)</h3>
+            <p className="text-lg text-[#CCCCCC] font-normal leading-relaxed mb-4">
+              A seamless Optical Character Recognition (OCR) scanner powered by ML Kit.
             </p>
-            <p className="text-md text-[#86868B] font-light leading-relaxed border-t border-[#333336] pt-4">
-              Processes both Latin (English) and Devanagari (Hindi) scripts concurrently, piping the extracted text strings directly into the native Android Text-to-Speech (TTS) engine for natural-sounding auditory feedback.
-            </p>
+            <ul className="text-base text-[#A3A3A3] font-normal leading-relaxed border-t border-[#333336] pt-4 list-disc pl-5 space-y-2">
+              <li><strong className="text-white">Auto-Language Detection:</strong> Automatically detects both Latin (English) and Devanagari (Hindi) characters without manual toggles.</li>
+              <li><strong className="text-white">Instant TTS:</strong> Instantly converts scanned text into fluid speech using the native Android TTS Engine.</li>
+            </ul>
           </div>
 
-          <div className="bg-black/40 backdrop-blur-md border border-[#333336] p-12 rounded-[2rem] hover:border-[#F5F5F7] transition-all duration-700 group shadow-2xl">
+          {/* Card 3 */}
+          <div className="bg-[#0A0A0A]/80 backdrop-blur-xl border border-[#333336] p-12 rounded-3xl hover:border-[#666666] transition-all duration-500 group shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
             <TranslateIcon />
-            <h3 className="text-3xl font-semibold text-white mb-4 tracking-tight group-hover:text-white">ASL Engine</h3>
-            <p className="text-lg text-[#A1A1A6] font-light leading-relaxed mb-4">
-              Bridging the communication divide. Powered by <span className="text-white font-medium">Google MediaPipe</span>, it analyzes high-framerate camera input to track skeletal structures.
+            <h3 className="text-3xl font-bold text-white mb-4 tracking-tight">Live Sign Language Translator</h3>
+            <p className="text-lg text-[#CCCCCC] font-normal leading-relaxed mb-4">
+              Uses Google's MediaPipe Gesture Recognizer to identify American Sign Language (ASL) letters in real-time.
             </p>
-            <p className="text-md text-[#86868B] font-light leading-relaxed border-t border-[#333336] pt-4">
-              Identifies 21 distinct 3D hand landmarks in 3D space, mapping joint angles to static American Sign Language (ASL) alphabetic gestures, and translates them instantly into massive, readable typography on screen.
+            <p className="text-base text-[#A3A3A3] font-normal leading-relaxed border-t border-[#333336] pt-4">
+              Translates live camera feeds into English text for seamless communication bridging, drastically improving interactivity for deaf users.
             </p>
           </div>
 
-          <div className="bg-black/40 backdrop-blur-md border border-[#333336] p-12 rounded-[2rem] hover:border-[#F5F5F7] transition-all duration-700 group shadow-2xl">
-            <LuminanceIcon />
-            <h3 className="text-3xl font-semibold text-white mb-4 tracking-tight group-hover:text-white">Luminance</h3>
-            <p className="text-lg text-[#A1A1A6] font-light leading-relaxed mb-4">
-              Environmental awareness re-imagined. Continuously evaluates the central pixel clusters of the active camera feed to determine ambient lighting conditions.
+          {/* Card 4 */}
+          <div className="bg-[#0A0A0A]/80 backdrop-blur-xl border border-[#333336] p-12 rounded-3xl hover:border-[#666666] transition-all duration-500 group shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+            <VisionIcon />
+            <h3 className="text-3xl font-bold text-white mb-4 tracking-tight">Color & Light Detector</h3>
+            <p className="text-lg text-[#CCCCCC] font-normal leading-relaxed mb-4">
+              Analyzes the center of the camera feed to output exact RGB values and relative luminance.
             </p>
-            <p className="text-md text-[#86868B] font-light leading-relaxed border-t border-[#333336] pt-4">
-              Employs a custom comparative mapping algorithm to translate raw RGB matrix values into human-readable colors (e.g., "Dark Navy Blue") and calculates relative luminance to verbally announce if a room is well-lit or dim.
+            <p className="text-base text-[#A3A3A3] font-normal leading-relaxed border-t border-[#333336] pt-4">
+              Converts raw values into human-readable color names (e.g., "Dark Navy Blue") to assist visually impaired users in identifying objects, clothing, and ambient lighting conditions.
             </p>
           </div>
 
         </div>
       </section>
 
-      {/* Outro & Download Section */}
-      <section className="h-screen flex flex-col justify-center items-center px-6 text-center">
-        <h1 className="text-6xl md:text-8xl font-semibold text-white tracking-tighter mb-16">
-          Ready to deploy.
+      {/* UX & Technical Details Section */}
+      <section className="min-h-screen px-6 md:px-12 max-w-7xl mx-auto pt-32 pb-40">
+        <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-center mb-24 text-white">
+          Under the hood.
+        </h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pointer-events-auto">
+          
+          <div className="bg-[#0A0A0A]/80 backdrop-blur-xl border border-[#333336] p-12 rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+            <UXIcon />
+            <h3 className="text-3xl font-bold text-white mb-6">User Experience Methodology</h3>
+            <ul className="text-lg text-[#CCCCCC] font-normal leading-relaxed space-y-6">
+              <li><strong className="text-white">Kinetic Feedback:</strong> Employs the Compose <code>spring()</code> physics engine for all interactive elements to provide a sense of physical weight and momentum, aiding spatial memory.</li>
+              <li><strong className="text-white">Auditory Cues:</strong> Integrates comprehensive system audio feedback for all state changes and button interactions.</li>
+              <li><strong className="text-white">Contrast & Legibility:</strong> Utilizes a carefully calibrated palette designed exclusively for maximal readability under visual impairment conditions.</li>
+            </ul>
+          </div>
+
+          <div className="bg-[#0A0A0A]/80 backdrop-blur-xl border border-[#333336] p-12 rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+            <CodeIcon />
+            <h3 className="text-3xl font-bold text-white mb-6">Getting Started</h3>
+            <p className="text-lg text-[#CCCCCC] font-normal mb-6">Built for modern Android ecosystems. Strict requirements ensure optimal neural network execution on the edge.</p>
+            <ul className="text-lg text-[#CCCCCC] font-normal leading-relaxed space-y-4 border-l-2 border-[#333336] pl-6">
+              <li><strong className="text-white">IDE:</strong> Android Studio Iguana (or newer)</li>
+              <li><strong className="text-white">Minimum SDK:</strong> API 30 (Android 11)</li>
+              <li><strong className="text-white">Target SDK:</strong> API 36</li>
+              <li><strong className="text-white">Architecture:</strong> Jetpack Compose Material 3</li>
+              <li><strong className="text-white">ML Pipeline:</strong> TensorFlow Lite & Google MediaPipe Vision</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      {/* Footer Section */}
+      <footer className="h-screen flex flex-col justify-end items-center px-6 pb-20 text-center pointer-events-auto">
+        <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tighter mb-12">
+          Experience AccessApp.
         </h1>
         
         <a 
           href="https://github.com/madd69x/AccessApp" 
           target="_blank" 
           rel="noreferrer"
-          className="pointer-events-auto group relative flex items-center justify-center gap-4 overflow-hidden rounded-full bg-black/60 backdrop-blur-xl border border-[#333336] px-12 py-5 text-xl font-medium text-[#F5F5F7] transition-all duration-500 hover:bg-white hover:text-black hover:border-white shadow-[0_0_30px_rgba(255,255,255,0.05)] hover:shadow-[0_0_50px_rgba(255,255,255,0.3)]"
+          className="group relative flex items-center justify-center gap-3 overflow-hidden rounded-full bg-[#FFFFFF] px-12 py-5 text-xl font-semibold text-black transition-all duration-300 hover:scale-105 hover:bg-[#E5E5EA] shadow-[0_0_40px_rgba(255,255,255,0.2)] mb-32"
         >
-          <span>Download Application</span>
-          <svg className="w-6 h-6 transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-3 3m0 0l-3-3m3 3V4"></path>
+          <span>View on GitHub</span>
+          <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
           </svg>
         </a>
         
-        <div className="mt-32">
-          <p className="text-[#86868B] text-xl font-light tracking-wide mb-8">Architected by <span className="text-white font-medium">Vortex AI</span></p>
-          <div className="flex flex-wrap justify-center gap-8 text-[#A1A1A6] font-light text-lg">
-            <span>Avadhi Sharma</span>
-            <span>Mudit Vaishnav</span>
-            <span>Mudra Chauhan</span>
-            <span>Jigyasha Mahariya</span>
-            <span>Monalika Vyas</span>
+        <div className="w-full max-w-5xl border-t border-[#333336] pt-12 flex flex-col md:flex-row justify-between items-center text-sm font-normal text-[#A3A3A3]">
+          <p>© 2026 Vortex AI. All rights reserved.</p>
+          <div className="flex gap-4 mt-4 md:mt-0">
+            <span>Avadhi Sharma</span> • <span>Mudit Vaishnav</span> • <span>Mudra Chauhan</span> • <span>Jigyasha Mahariya</span> • <span>Monalika Vyas</span>
           </div>
         </div>
-      </section>
+      </footer>
 
     </div>
   );
 }
 
+// Global Header Component (Fixed outside Canvas)
+const Header = () => (
+  <header className="fixed top-0 left-0 w-full px-8 py-6 flex justify-between items-center z-50 bg-black/50 backdrop-blur-lg border-b border-[#333336] font-['Inter'] text-white">
+    <div className="text-2xl font-bold tracking-tight">AccessApp</div>
+    <a 
+      href="https://github.com/madd69x/AccessApp" 
+      target="_blank" 
+      rel="noreferrer"
+      className="bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-[#E5E5EA] transition-colors"
+    >
+      Download
+    </a>
+  </header>
+);
+
 export default function App() {
   return (
-    <div className="w-screen h-screen bg-black">
+    <div className="w-screen h-screen bg-black overflow-hidden relative">
+      <Header />
       <Canvas camera={{ position: [0, 0, 9], fov: 40 }}>
         <color attach="background" args={['#000000']} />
-        <ambientLight intensity={1.5} />
-        <directionalLight position={[10, 10, 10]} intensity={3} />
-        <Environment preset="city" />
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[10, 10, 10]} intensity={1} />
+        <Environment preset="studio" />
         
-        <ScrollControls pages={5} damping={0.15}>
+        <ScrollControls pages={4} damping={0.15}>
           <Scroll>
-            <GlassObject />
+            <ObsidianGlass />
           </Scroll>
           <Scroll html style={{ width: '100%', height: '100%' }}>
             <Overlay />
