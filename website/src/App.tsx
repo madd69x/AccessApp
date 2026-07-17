@@ -144,9 +144,12 @@ function Overlay() {
           href="https://github.com/madd69x/AccessApp" 
           target="_blank" 
           rel="noreferrer"
-          className="pointer-events-auto bg-[#F5F5F7] text-black px-12 py-5 rounded-full text-2xl font-medium tracking-tight hover:bg-white hover:scale-105 transition-all duration-300 shadow-[0_0_40px_rgba(255,255,255,0.1)]"
+          className="pointer-events-auto group relative flex items-center justify-center gap-3 overflow-hidden rounded-full bg-black/50 border border-[#333336] px-10 py-4 text-xl font-medium text-[#F5F5F7] transition-all duration-500 hover:bg-white hover:text-black hover:border-white shadow-[0_0_30px_rgba(255,255,255,0.05)] hover:shadow-[0_0_40px_rgba(255,255,255,0.2)]"
         >
-          Download Application
+          <span>Download Application</span>
+          <svg className="w-5 h-5 transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-3 3m0 0l-3-3m3 3V4"></path>
+          </svg>
         </a>
         
         <div className="mt-32">
