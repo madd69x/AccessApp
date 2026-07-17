@@ -49,7 +49,7 @@ const IconWrapper = ({ children }: { children: React.ReactNode }) => (
 
 // Stat counter component
 const StatItem = ({ value, label }: { value: string; label: string }) => (
-  <div className="text-center">
+  <div className="uiverse-stat">
     <p className="text-3xl md:text-5xl font-['Sora'] font-bold text-white tracking-tight">{value}</p>
     <p className="text-xs md:text-sm text-[#888] uppercase tracking-widest mt-2">{label}</p>
   </div>
@@ -67,7 +67,7 @@ const FeatureCard = ({
   description: string;
   tags?: string[];
 }) => (
-  <div className="group bg-[#0E0E0E] border border-[#1A1A1A] hover:border-[#333] p-7 rounded-2xl transition-all duration-300 hover:-translate-y-1">
+  <div className="uiverse-card group p-7">
     <div className="flex items-start gap-4">
       <IconWrapper>{icon}</IconWrapper>
       <div className="flex-1 min-w-0">
@@ -76,7 +76,7 @@ const FeatureCard = ({
         {tags && tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-4">
             {tags.map((tag) => (
-              <span key={tag} className="text-[10px] uppercase tracking-widest text-[#666] border border-[#222] rounded-full px-3 py-1">
+              <span key={tag} className="uiverse-tag">
                 {tag}
               </span>
             ))}
@@ -170,7 +170,7 @@ function Overlay() {
       {/* ── 1. HERO ── */}
       <FlowSection aria-label="Hero" style={{ backgroundColor: '#000000' }}>
         <div className="flex-1 flex flex-col justify-center items-center text-center relative">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-[#555] mb-10">
+          <p className="uiverse-label mb-10">
             Accessibility · Reimagined
           </p>
 
@@ -200,7 +200,7 @@ function Overlay() {
       {/* ── 2. STATS / SOCIAL PROOF ── */}
       <FlowSection aria-label="Stats" style={{ backgroundColor: '#050505' }}>
         <div className="flex-1 flex flex-col justify-center items-center">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-[#555] mb-12">
+          <p className="uiverse-label mb-12">
             Built for Impact
           </p>
 
@@ -234,7 +234,7 @@ function Overlay() {
       <FlowSection aria-label="Mission" style={{ backgroundColor: '#080808' }}>
         <div className="flex-1 flex flex-col justify-center items-center">
           <div className="max-w-3xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-[#555] mb-8">
+            <p className="uiverse-label mb-8">
               The Problem
             </p>
             <h2 className="text-[clamp(2rem,5vw,4.5rem)] font-['Sora'] font-bold leading-[1.1] text-white mb-8">
@@ -254,7 +254,7 @@ function Overlay() {
       <FlowSection aria-label="Modules" style={{ backgroundColor: '#0A0A0A' }}>
         <div className="flex-1 flex flex-col justify-center items-center pointer-events-auto">
           <div className="w-full max-w-4xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-[#555] mb-4">
+            <p className="uiverse-label mb-4">
               Core Features
             </p>
             <h2 className="text-3xl md:text-5xl font-['Sora'] font-bold text-white mb-10 tracking-tight">
@@ -295,7 +295,7 @@ function Overlay() {
       <FlowSection aria-label="Architecture" style={{ backgroundColor: '#0D0D0D' }}>
         <div className="flex-1 flex flex-col justify-center items-center pointer-events-auto">
           <div className="w-full max-w-4xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-[#555] mb-4">
+            <p className="uiverse-label mb-4">
               Under the Hood
             </p>
             <h2 className="text-3xl md:text-5xl font-['Sora'] font-bold text-white mb-10 tracking-tight">
@@ -305,16 +305,12 @@ function Overlay() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Left: interactive tabs */}
               <div>
-                <div className="flex gap-2 mb-8">
+                <div className="uiverse-tabs mb-8">
                   {tabs.map((tab, i) => (
                     <button
                       key={tab.label}
                       onClick={() => setActiveTab(i)}
-                      className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-widest transition-all duration-300 border ${
-                        activeTab === i
-                          ? 'bg-white text-black border-white'
-                          : 'bg-transparent text-[#666] border-[#222] hover:border-[#444] hover:text-[#999]'
-                      }`}
+                      className={`uiverse-tab ${activeTab === i ? 'active' : ''}`}
                     >
                       {tab.icon}
                       {tab.label}
@@ -328,8 +324,10 @@ function Overlay() {
                   </h3>
                   <ul className="space-y-5">
                     {tabContent[activeTab].points.map((point) => (
-                      <li key={point.strong} className="flex gap-3">
-                        <div className="w-1.5 h-1.5 rounded-full bg-white mt-2 flex-shrink-0" />
+                      <li key={point.strong} className="flex gap-4">
+                        <div className="mt-2.5 flex-shrink-0">
+                          <div className="uiverse-pulse" />
+                        </div>
                         <div>
                           <strong className="text-white text-sm">{point.strong}</strong>
                           <p className="text-sm text-[#888] mt-0.5">{point.text}</p>
@@ -361,7 +359,7 @@ function Overlay() {
       <FlowSection aria-label="How it works" style={{ backgroundColor: '#060606' }}>
         <div className="flex-1 flex flex-col justify-center items-center">
           <div className="w-full max-w-4xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-[#555] mb-4">
+            <p className="uiverse-label mb-4">
               Getting Started
             </p>
             <h2 className="text-3xl md:text-5xl font-['Sora'] font-bold text-white mb-12 tracking-tight">
@@ -375,7 +373,7 @@ function Overlay() {
                 { step: '03', title: 'Use', desc: 'Open AccessApp, choose a module, and point your camera. No sign-ups. No accounts. No cloud.' },
               ].map((item) => (
                 <div key={item.step} className="group">
-                  <p className="text-5xl font-['Sora'] font-bold text-[#1A1A1A] group-hover:text-[#333] transition-colors duration-300 mb-4">
+                  <p className="uiverse-step-num mb-4">
                     {item.step}
                   </p>
                   <h3 className="text-lg font-['Sora'] font-semibold text-white mb-2">{item.title}</h3>

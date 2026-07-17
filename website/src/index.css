@@ -13,96 +13,110 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
   background: #333336;
-  border-radius: 4px;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #555558;
 }
 
-/* UIverse Shimmer Button Styles */
-.uiverse-shimmer-btn {
+/* ── UIverse: Animated rotating border card (by zanina-yassine) ── */
+.uiverse-card {
   position: relative;
+  border-radius: 1rem;
   overflow: hidden;
-  transition: all 0.3s ease;
-  z-index: 1;
+  background: #0e0e0e;
+  transition: transform 0.3s ease;
 }
-
-.uiverse-shimmer-btn::before {
+.uiverse-card:hover {
+  transform: translateY(-4px);
+}
+.uiverse-card::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.3) 50%,
-    rgba(255, 255, 255, 0) 100%
+  inset: -1px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 80deg,
+    #555 120deg,
+    transparent 160deg,
+    transparent 360deg
   );
-  transform: skewX(-25deg);
-  animation: shimmer 3s infinite;
-  z-index: -1;
-}
-
-@keyframes shimmer {
-  0% {
-    left: -100%;
-  }
-  100% {
-    left: 200%;
-  }
-}
-
-/* UIverse Animated Gradient Border Card */
-.uiverse-glow-card {
-  position: relative;
-}
-
-.uiverse-glow-card::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: 1.5rem; /* matches rounded-3xl */
-  background: linear-gradient(
-    45deg,
-    #333336,
-    #000000,
-    #666666,
-    #000000,
-    #333336
-  );
-  background-size: 400%;
-  z-index: -1;
   opacity: 0;
   transition: opacity 0.5s ease;
-  animation: glowing 8s linear infinite;
+  animation: card-rotate 4s linear infinite;
+  z-index: 0;
 }
-
-.uiverse-glow-card:hover::before {
+.uiverse-card:hover::before {
   opacity: 1;
 }
-
-@keyframes glowing {
-  0% {
-    background-position: 0 0;
-  }
-  50% {
-    background-position: 400% 0;
-  }
-  100% {
-    background-position: 0 0;
-  }
+.uiverse-card::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: #0e0e0e;
+  z-index: 1;
+}
+.uiverse-card > * {
+  position: relative;
+  z-index: 2;
+}
+@keyframes card-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-/* ── UIverse Skew-Reveal Buttons (by adamgiebl, monochrome) ── */
+/* ── UIverse: Glowing pulse dot (by abrahamcalsin) ── */
+.uiverse-pulse {
+  position: relative;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+}
+.uiverse-pulse::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  animation: pulse-ring 2s ease-out infinite;
+}
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+/* ── UIverse: Animated section label (by marcelodolza) ── */
+.uiverse-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75em;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  color: #555;
+}
+.uiverse-label::before {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #555);
+}
+
+/* ── UIverse: Skew-Reveal Buttons (by adamgiebl, monochrome) ── */
 
 /* Primary: white background, black skew slides away */
 .uiverse-btn-primary {
@@ -160,8 +174,6 @@ body {
 .uiverse-btn-primary:active {
   transform: scale(0.95);
 }
-
-/* Large variant */
 .uiverse-btn-primary.large {
   font-size: 16px;
 }
@@ -228,11 +240,101 @@ body {
 .uiverse-btn-secondary:active {
   transform: scale(0.95);
 }
-
-/* Large variant */
 .uiverse-btn-secondary.large {
   font-size: 16px;
 }
 .uiverse-btn-secondary.large span {
   padding: 1em 1.6em 1em 1.4em;
+}
+
+/* ── UIverse: Pill tab switcher (by millanbrankovic) ── */
+.uiverse-tabs {
+  display: inline-flex;
+  background: #111;
+  border-radius: 9999px;
+  padding: 4px;
+  gap: 2px;
+  border: 1px solid #1a1a1a;
+}
+.uiverse-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #555;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Sora', 'Inter', sans-serif;
+}
+.uiverse-tab:hover {
+  color: #999;
+}
+.uiverse-tab.active {
+  background: #fff;
+  color: #000;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* ── UIverse: Stat counter with underline accent (by cssbuttons) ── */
+.uiverse-stat {
+  position: relative;
+  text-align: center;
+  padding-bottom: 12px;
+}
+.uiverse-stat::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 40px;
+  height: 2px;
+  background: #fff;
+  border-radius: 1px;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.uiverse-stat:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* ── UIverse: Tag pill (by alexmakarevich) ── */
+.uiverse-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #555;
+  border: 1px solid #222;
+  border-radius: 9999px;
+  padding: 4px 12px;
+  transition: all 0.3s ease;
+}
+.uiverse-tag:hover {
+  color: #fff;
+  border-color: #555;
+  background: rgba(255,255,255,0.05);
+}
+
+/* ── UIverse: Step number with outline (by devloop) ── */
+.uiverse-step-num {
+  font-family: 'Sora', sans-serif;
+  font-size: 4rem;
+  font-weight: 800;
+  color: transparent;
+  -webkit-text-stroke: 1px #222;
+  transition: all 0.4s ease;
+  line-height: 1;
+}
+.uiverse-step-num:hover {
+  -webkit-text-stroke: 1px #666;
+  text-shadow: 0 0 30px rgba(255,255,255,0.05);
 }
