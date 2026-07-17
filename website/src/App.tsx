@@ -65,7 +65,7 @@ function Overlay() {
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#CCCCCC]">01 — Welcome</p>
         
         <div className="flex-1 flex flex-col justify-center items-center text-center">
-          <h1 data-magnetic className="text-[clamp(3.5rem,8vw,10rem)] font-['Sora'] font-extrabold uppercase tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-br from-white to-[#666666] drop-shadow-2xl leading-none transition-all duration-500 hover:from-[#111111] hover:to-[#000000] hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.8)] cursor-default">
+          <h1 data-magnetic className="text-[clamp(3.5rem,8vw,10rem)] font-['Sora'] font-extrabold uppercase tracking-tighter mb-4 text-white drop-shadow-2xl leading-none cursor-default">
             Access<br/>App
           </h1>
           <h2 className="text-xl md:text-2xl font-['Sora'] font-medium uppercase tracking-widest text-[#CCCCCC] mb-8">
@@ -219,7 +219,7 @@ function Overlay() {
 
 export default function App() {
   return (
-    <MagneticCursor magneticFactor={0.5} blendMode="exclusion" cursorSize={40}>
+    <MagneticCursor magneticFactor={0.5} blendMode="difference" cursorSize={40}>
       <div className="w-full min-h-screen overflow-x-hidden bg-black relative">
         <Canvas 
           camera={{ position: [0, 0, 9], fov: 40 }}
