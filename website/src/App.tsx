@@ -168,7 +168,7 @@ function Overlay() {
     <FlowArt aria-label="AccessApp Experience" className="text-white font-['Inter'] selection:bg-white selection:text-black">
 
       {/* ── 1. HERO ── */}
-      <FlowSection aria-label="Hero" style={{ backgroundColor: '#000000' }}>
+      <FlowSection aria-label="Hero" style={{ backgroundColor: '#0F172A' }}>
         <div className="flex-1 flex flex-col justify-center items-center text-center relative">
           <p className="uiverse-label mb-10">
             Accessibility · Reimagined
@@ -198,7 +198,7 @@ function Overlay() {
       </FlowSection>
 
       {/* ── 2. STATS / SOCIAL PROOF ── */}
-      <FlowSection aria-label="Stats" style={{ backgroundColor: '#050505' }}>
+      <FlowSection aria-label="Stats" style={{ backgroundColor: '#141E33' }}>
         <div className="flex-1 flex flex-col justify-center items-center">
           <p className="uiverse-label mb-12">
             Built for Impact
@@ -231,7 +231,7 @@ function Overlay() {
       </FlowSection>
 
       {/* ── 3. MISSION ── */}
-      <FlowSection aria-label="Mission" style={{ backgroundColor: '#080808' }}>
+      <FlowSection aria-label="Mission" style={{ backgroundColor: '#0B1221' }}>
         <div className="flex-1 flex flex-col justify-center items-center">
           <div className="max-w-3xl">
             <p className="uiverse-label mb-8">
@@ -251,7 +251,7 @@ function Overlay() {
       </FlowSection>
 
       {/* ── 4. FLAGSHIP MODULES ── */}
-      <FlowSection aria-label="Modules" style={{ backgroundColor: '#0A0A0A' }}>
+      <FlowSection aria-label="Modules" style={{ backgroundColor: '#0F172A' }}>
         <div className="flex-1 flex flex-col justify-center items-center pointer-events-auto">
           <div className="w-full max-w-4xl">
             <p className="uiverse-label mb-4">
@@ -292,7 +292,7 @@ function Overlay() {
       </FlowSection>
 
       {/* ── 5. ARCHITECTURE (tabbed) ── */}
-      <FlowSection aria-label="Architecture" style={{ backgroundColor: '#0D0D0D' }}>
+      <FlowSection aria-label="Architecture" style={{ backgroundColor: '#141E33' }}>
         <div className="flex-1 flex flex-col justify-center items-center pointer-events-auto">
           <div className="w-full max-w-4xl">
             <p className="uiverse-label mb-4">
@@ -339,7 +339,7 @@ function Overlay() {
               </div>
 
               {/* Right: tech stack */}
-              <div className="bg-[#090909] border border-[#1A1A1A] rounded-2xl p-7">
+              <div className="bg-[#1E293B] border border-[#334155] rounded-2xl p-7">
                 <h3 className="text-lg font-['Sora'] font-semibold text-white mb-6">Tech Stack</h3>
                 <TechItem label="Language" value="Kotlin" />
                 <TechItem label="UI Framework" value="Jetpack Compose M3" />
@@ -356,7 +356,7 @@ function Overlay() {
       </FlowSection>
 
       {/* ── 6. HOW IT WORKS ── */}
-      <FlowSection aria-label="How it works" style={{ backgroundColor: '#060606' }}>
+      <FlowSection aria-label="How it works" style={{ backgroundColor: '#0B1221' }}>
         <div className="flex-1 flex flex-col justify-center items-center">
           <div className="w-full max-w-4xl">
             <p className="uiverse-label mb-4">
@@ -386,7 +386,7 @@ function Overlay() {
       </FlowSection>
 
       {/* ── 7. CTA / FOOTER ── */}
-      <FlowSection aria-label="Footer" style={{ backgroundColor: '#000000' }}>
+      <FlowSection aria-label="Footer" style={{ backgroundColor: '#0F172A' }}>
         <div className="flex-1 flex flex-col justify-center items-center text-center pointer-events-auto">
           <h2 className="text-4xl md:text-7xl font-['Sora'] font-extrabold text-white uppercase tracking-tighter mb-6 leading-[0.95]">
             See the world<br />differently.
@@ -425,7 +425,7 @@ export default function App() {
           camera={{ position: [0, 0, 9], fov: 40 }}
           style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none' }}
         >
-          <color attach="background" args={['#000000']} />
+          <color attach="background" args={['#0F172A']} />
           <ambientLight intensity={0.5} />
           <directionalLight position={[10, 10, 10]} intensity={1} />
           <Environment preset="studio" />

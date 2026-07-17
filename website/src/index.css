@@ -6,8 +6,8 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  background-color: #000000;
-  color: #FFFFFF;
+  background-color: #0F172A; /* Slate 900 */
+  color: #F8FAFC; /* Slate 50 */
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -19,19 +19,19 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #333336;
+  background: #1E293B; /* Slate 800 */
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #555558;
+  background: #334155; /* Slate 700 */
 }
 
-/* ── UIverse: Animated rotating border card (by zanina-yassine) ── */
+/* ── UIverse: Animated rotating border card ── */
 .uiverse-card {
   position: relative;
   border-radius: 1rem;
   overflow: hidden;
-  background: #0e0e0e;
+  background: #1E293B; /* Slate 800 */
   transition: transform 0.3s ease;
 }
 .uiverse-card:hover {
@@ -46,7 +46,7 @@ body {
     from 0deg,
     transparent 0deg,
     transparent 80deg,
-    #555 120deg,
+    #3B82F6 120deg, /* Classic Professional Blue */
     transparent 160deg,
     transparent 360deg
   );
@@ -63,7 +63,7 @@ body {
   position: absolute;
   inset: 1px;
   border-radius: inherit;
-  background: #0e0e0e;
+  background: #1E293B; /* Slate 800 */
   z-index: 1;
 }
 .uiverse-card > * {
@@ -75,21 +75,21 @@ body {
   to { transform: rotate(360deg); }
 }
 
-/* ── UIverse: Glowing pulse dot (by abrahamcalsin) ── */
+/* ── UIverse: Glowing pulse dot ── */
 .uiverse-pulse {
   position: relative;
   display: inline-block;
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #fff;
+  background: #3B82F6; /* Blue pulse */
 }
 .uiverse-pulse::before {
   content: "";
   position: absolute;
   inset: -3px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(59, 130, 246, 0.4);
   animation: pulse-ring 2s ease-out infinite;
 }
 @keyframes pulse-ring {
@@ -97,7 +97,7 @@ body {
   100% { transform: scale(2.5); opacity: 0; }
 }
 
-/* ── UIverse: Animated section label (by marcelodolza) ── */
+/* ── UIverse: Animated section label ── */
 .uiverse-label {
   display: inline-flex;
   align-items: center;
@@ -106,19 +106,19 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.35em;
-  color: #555;
+  color: #94A3B8; /* Slate 400 */
 }
 .uiverse-label::before {
   content: "";
   display: inline-block;
   width: 24px;
   height: 1px;
-  background: linear-gradient(to right, transparent, #555);
+  background: linear-gradient(to right, transparent, #3B82F6);
 }
 
-/* ── UIverse: Skew-Reveal Buttons (by adamgiebl, monochrome) ── */
+/* ── UIverse: Skew-Reveal Buttons (App Theme) ── */
 
-/* Primary: white background, black skew slides away */
+/* Primary: blue gradient background, dark skew slides away */
 .uiverse-btn-primary {
   position: relative;
   font-family: 'Sora', 'Inter', sans-serif;
@@ -128,8 +128,8 @@ body {
   border-radius: 0.8em;
   cursor: pointer;
   border: none;
-  background: linear-gradient(to right, #ffffff, #e8e8e8);
-  color: ghostwhite;
+  background: linear-gradient(to right, #3B82F6, #2563EB); /* Blue gradient */
+  color: white;
   overflow: hidden;
   text-decoration: none;
   display: inline-flex;
@@ -159,7 +159,7 @@ body {
 }
 .uiverse-btn-primary::before {
   content: "";
-  background: #000;
+  background: #0F172A; /* Slate 900 */
   width: 120%;
   left: -10%;
   transform: skew(30deg);
@@ -169,7 +169,7 @@ body {
   transform: translate3d(100%, 0, 0);
 }
 .uiverse-btn-primary:hover span {
-  color: #000;
+  color: white;
 }
 .uiverse-btn-primary:active {
   transform: scale(0.95);
@@ -181,7 +181,7 @@ body {
   padding: 1em 1.6em 1em 1.4em;
 }
 
-/* Secondary: dark background, white skew slides away */
+/* Secondary: slate background, blue skew slides away */
 .uiverse-btn-secondary {
   position: relative;
   font-family: 'Sora', 'Inter', sans-serif;
@@ -190,9 +190,9 @@ body {
   letter-spacing: 0.05em;
   border-radius: 0.8em;
   cursor: pointer;
-  border: 1px solid #333;
-  background: linear-gradient(to right, #1a1a1a, #0a0a0a);
-  color: #666;
+  border: 1px solid #1E293B; /* Slate 800 */
+  background: linear-gradient(to right, #1E293B, #0F172A);
+  color: #94A3B8; /* Slate 400 */
   overflow: hidden;
   text-decoration: none;
   display: inline-flex;
@@ -222,7 +222,7 @@ body {
 }
 .uiverse-btn-secondary::before {
   content: "";
-  background: #fff;
+  background: #3B82F6; /* Blue skew */
   width: 120%;
   left: -10%;
   transform: skew(30deg);
@@ -235,7 +235,7 @@ body {
   color: #fff;
 }
 .uiverse-btn-secondary:hover {
-  border-color: #555;
+  border-color: #334155; /* Slate 700 */
 }
 .uiverse-btn-secondary:active {
   transform: scale(0.95);
@@ -247,14 +247,14 @@ body {
   padding: 1em 1.6em 1em 1.4em;
 }
 
-/* ── UIverse: Pill tab switcher (by millanbrankovic) ── */
+/* ── UIverse: Pill tab switcher ── */
 .uiverse-tabs {
   display: inline-flex;
-  background: #111;
+  background: #0F172A; /* Slate 900 */
   border-radius: 9999px;
   padding: 4px;
   gap: 2px;
-  border: 1px solid #1a1a1a;
+  border: 1px solid #1E293B; /* Slate 800 */
 }
 .uiverse-tab {
   display: inline-flex;
@@ -266,7 +266,7 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #555;
+  color: #94A3B8; /* Slate 400 */
   background: transparent;
   border: none;
   cursor: pointer;
@@ -274,15 +274,15 @@ body {
   font-family: 'Sora', 'Inter', sans-serif;
 }
 .uiverse-tab:hover {
-  color: #999;
+  color: #F8FAFC; /* Slate 50 */
 }
 .uiverse-tab.active {
-  background: #fff;
-  color: #000;
+  background: #1E293B; /* Slate 800 */
+  color: #3B82F6; /* Blue accent */
   box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
-/* ── UIverse: Stat counter with underline accent (by cssbuttons) ── */
+/* ── UIverse: Stat counter with underline accent ── */
 .uiverse-stat {
   position: relative;
   text-align: center;
@@ -296,7 +296,7 @@ body {
   transform: translateX(-50%) scaleX(0);
   width: 40px;
   height: 2px;
-  background: #fff;
+  background: #3B82F6; /* Blue */
   border-radius: 1px;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -304,7 +304,7 @@ body {
   transform: translateX(-50%) scaleX(1);
 }
 
-/* ── UIverse: Tag pill (by alexmakarevich) ── */
+/* ── UIverse: Tag pill ── */
 .uiverse-tag {
   display: inline-flex;
   align-items: center;
@@ -312,29 +312,30 @@ body {
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: #555;
-  border: 1px solid #222;
+  color: #94A3B8; /* Slate 400 */
+  border: 1px solid #334155; /* Slate 700 */
   border-radius: 9999px;
   padding: 4px 12px;
   transition: all 0.3s ease;
 }
 .uiverse-tag:hover {
-  color: #fff;
-  border-color: #555;
-  background: rgba(255,255,255,0.05);
+  color: #F8FAFC; /* Slate 50 */
+  border-color: #3B82F6; /* Blue */
+  background: rgba(59, 130, 246, 0.1);
 }
 
-/* ── UIverse: Step number with outline (by devloop) ── */
+/* ── UIverse: Step number with outline ── */
 .uiverse-step-num {
   font-family: 'Sora', sans-serif;
   font-size: 4rem;
   font-weight: 800;
   color: transparent;
-  -webkit-text-stroke: 1px #222;
+  -webkit-text-stroke: 1px #334155; /* Slate 700 */
   transition: all 0.4s ease;
   line-height: 1;
 }
 .uiverse-step-num:hover {
-  -webkit-text-stroke: 1px #666;
-  text-shadow: 0 0 30px rgba(255,255,255,0.05);
+  -webkit-text-stroke: 1px #3B82F6; /* Blue */
+  text-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
 }
+
