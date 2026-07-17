@@ -101,3 +101,138 @@ body {
     background-position: 0 0;
   }
 }
+
+/* ── UIverse Skew-Reveal Buttons (by adamgiebl, monochrome) ── */
+
+/* Primary: white background, black skew slides away */
+.uiverse-btn-primary {
+  position: relative;
+  font-family: 'Sora', 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  border-radius: 0.8em;
+  cursor: pointer;
+  border: none;
+  background: linear-gradient(to right, #ffffff, #e8e8e8);
+  color: ghostwhite;
+  overflow: hidden;
+  text-decoration: none;
+  display: inline-flex;
+}
+.uiverse-btn-primary span {
+  position: relative;
+  z-index: 10;
+  transition: color 0.4s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.85em 1.4em 0.85em 1.2em;
+}
+.uiverse-btn-primary svg {
+  width: 1.1em;
+  height: 1.1em;
+  flex-shrink: 0;
+}
+.uiverse-btn-primary::before,
+.uiverse-btn-primary::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+.uiverse-btn-primary::before {
+  content: "";
+  background: #000;
+  width: 120%;
+  left: -10%;
+  transform: skew(30deg);
+  transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+}
+.uiverse-btn-primary:hover::before {
+  transform: translate3d(100%, 0, 0);
+}
+.uiverse-btn-primary:hover span {
+  color: #000;
+}
+.uiverse-btn-primary:active {
+  transform: scale(0.95);
+}
+
+/* Large variant */
+.uiverse-btn-primary.large {
+  font-size: 16px;
+}
+.uiverse-btn-primary.large span {
+  padding: 1em 1.6em 1em 1.4em;
+}
+
+/* Secondary: dark background, white skew slides away */
+.uiverse-btn-secondary {
+  position: relative;
+  font-family: 'Sora', 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  border-radius: 0.8em;
+  cursor: pointer;
+  border: 1px solid #333;
+  background: linear-gradient(to right, #1a1a1a, #0a0a0a);
+  color: #666;
+  overflow: hidden;
+  text-decoration: none;
+  display: inline-flex;
+}
+.uiverse-btn-secondary span {
+  position: relative;
+  z-index: 10;
+  transition: color 0.4s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.85em 1.4em 0.85em 1.2em;
+}
+.uiverse-btn-secondary svg {
+  width: 1.1em;
+  height: 1.1em;
+  flex-shrink: 0;
+}
+.uiverse-btn-secondary::before,
+.uiverse-btn-secondary::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+.uiverse-btn-secondary::before {
+  content: "";
+  background: #fff;
+  width: 120%;
+  left: -10%;
+  transform: skew(30deg);
+  transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+}
+.uiverse-btn-secondary:hover::before {
+  transform: translate3d(100%, 0, 0);
+}
+.uiverse-btn-secondary:hover span {
+  color: #fff;
+}
+.uiverse-btn-secondary:hover {
+  border-color: #555;
+}
+.uiverse-btn-secondary:active {
+  transform: scale(0.95);
+}
+
+/* Large variant */
+.uiverse-btn-secondary.large {
+  font-size: 16px;
+}
+.uiverse-btn-secondary.large span {
+  padding: 1em 1.6em 1em 1.4em;
+}
