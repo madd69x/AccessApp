@@ -329,15 +329,26 @@ function Overlay() {
   );
 }
 
-// Global Header Component (Fixed outside Canvas)
+// Premium Floating Glassmorphic Header Component
 const Header = () => (
-  <header className="fixed top-0 left-0 w-full px-8 py-6 flex justify-between items-center z-50 bg-black/50 backdrop-blur-lg border-b border-[#333336] font-['Inter'] text-white">
-    <div className="text-2xl font-bold tracking-tight">AccessApp</div>
+  <header className="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-4xl px-4 py-3 flex justify-between items-center z-50 bg-[#0A0A0A]/60 backdrop-blur-2xl border border-[#333336] rounded-full shadow-[0_10px_40px_rgba(0,0,0,0.8)] font-['Inter'] text-white">
+    <div className="flex items-center gap-3 pl-4">
+      <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#333336] to-[#666666] flex items-center justify-center">
+        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+      </div>
+      <span className="text-xl font-bold tracking-tight">AccessApp</span>
+    </div>
+    <div className="hidden md:flex items-center gap-8 text-sm font-medium text-[#A3A3A3]">
+      <span className="hover:text-white cursor-pointer transition-colors">Mission</span>
+      <span className="hover:text-white cursor-pointer transition-colors">Architecture</span>
+      <span className="hover:text-white cursor-pointer transition-colors">Features</span>
+      <span className="hover:text-white cursor-pointer transition-colors">Team</span>
+    </div>
     <a 
       href="https://github.com/madd69x/AccessApp" 
       target="_blank" 
       rel="noreferrer"
-      className="uiverse-shimmer-btn bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-[#E5E5EA] transition-colors shadow-[0_0_20px_rgba(255,255,255,0.2)]"
+      className="uiverse-shimmer-btn bg-white text-black px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-[#E5E5EA] transition-colors shadow-[0_0_20px_rgba(255,255,255,0.2)]"
     >
       Download
     </a>
@@ -354,7 +365,7 @@ export default function App() {
         <directionalLight position={[10, 10, 10]} intensity={1} />
         <Environment preset="studio" />
         
-        <ScrollControls pages={4} damping={0.15}>
+        <ScrollControls pages={7} damping={0.15}>
           <Scroll>
             <ObsidianGlass />
           </Scroll>
