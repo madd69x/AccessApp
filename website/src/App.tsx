@@ -6,79 +6,67 @@ import { MagneticCursor } from "./components/ui/magnetic-cursor";
 import { Radar, Languages, Sun, Layers, Cpu, Eye, Download, Shield, WifiOff, ChevronDown } from "lucide-react";
 import FlowArt, { FlowSection } from "./components/ui/story-scroll";
 
-// Purely aesthetic spinning background element
+// ── Background 3D element ──
 const ObsidianGlass = () => {
   const meshRef = useRef<THREE.Mesh>(null);
-
   useFrame((_state, delta) => {
     if (meshRef.current) {
       meshRef.current.rotation.x += delta * 0.1;
       meshRef.current.rotation.y += delta * 0.15;
     }
   });
-
   return (
     <Float speed={2} rotationIntensity={1} floatIntensity={2}>
       <mesh ref={meshRef}>
         <torusGeometry args={[2.5, 0.8, 64, 128]} />
-        <MeshTransmissionMaterial 
-          backside
-          samples={4}
-          thickness={0.5}
-          chromaticAberration={1}
-          anisotropy={0.3}
-          distortion={0.5}
-          distortionScale={0.5}
-          temporalDistortion={0.1}
-          color="#111111"
+        <MeshTransmissionMaterial
+          backside samples={4} thickness={0.5}
+          chromaticAberration={1} anisotropy={0.3}
+          distortion={0.5} distortionScale={0.5}
+          temporalDistortion={0.1} color="#111827"
         />
       </mesh>
     </Float>
   );
 };
 
-// Icon wrapper with fixed sizing
+// ── Icon wrapper ──
 const IconWrapper = ({ children }: { children: React.ReactNode }) => (
   <div
-    className="rounded-xl border border-[#2A2A2A] bg-[#111] flex items-center justify-center mb-5 flex-shrink-0"
+    className="rounded-xl border border-[#334155] bg-[#0F172A] flex items-center justify-center mb-4 flex-shrink-0"
     style={{ width: '44px', height: '44px', minWidth: '44px', minHeight: '44px' }}
   >
     {children}
   </div>
 );
 
-// Stat counter component
+// ── Stat counter ──
 const StatItem = ({ value, label }: { value: string; label: string }) => (
   <div className="uiverse-stat">
-    <p className="text-3xl md:text-5xl font-['Sora'] font-bold text-white tracking-tight">{value}</p>
-    <p className="text-xs md:text-sm text-[#888] uppercase tracking-widest mt-2">{label}</p>
+    <p className="text-2xl sm:text-3xl md:text-5xl font-['Sora'] font-bold text-white tracking-tight">{value}</p>
+    <p className="text-[10px] sm:text-xs text-[#64748B] uppercase tracking-widest mt-2">{label}</p>
   </div>
 );
 
-// Feature card used in modules section
+// ── Feature card ──
 const FeatureCard = ({
-  icon,
-  title,
-  description,
-  tags,
+  icon, title, description, tags,
 }: {
   icon: React.ReactNode;
   title: string;
   description: string;
   tags?: string[];
 }) => (
-  <div className="uiverse-card group p-7">
+  <div className="uiverse-card group p-5 md:p-7">
     <div className="flex items-start gap-4">
       <IconWrapper>{icon}</IconWrapper>
       <div className="flex-1 min-w-0">
-        <h3 className="text-lg font-['Sora'] font-semibold text-white mb-2 tracking-tight">{title}</h3>
-        <p className="text-sm text-[#999] font-normal leading-relaxed">{description}</p>
+        <h3 className="text-base md:text-lg font-['Sora'] font-semibold text-white mb-2 tracking-tight">{title}</h3>
+        <p className="text-sm text-[#94A3B8] font-normal leading-relaxed">{description}</p>
         {tags && tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-4">
+          <div className="flex flex-wrap gap-1.5 mt-3">
             {tags.map((tag) => (
-              <span key={tag} className="uiverse-tag">
-                {tag}
-              </span>
+              <span key={tag} className="uiverse-tag">{tag}</span>
             ))}
           </div>
         )}
@@ -87,7 +75,7 @@ const FeatureCard = ({
   </div>
 );
 
-// ── UIverse Skew-Reveal Buttons ──
+// ── Download APK button ──
 const DownloadButton = ({ large = false }: { large?: boolean }) => (
   <a
     data-magnetic
@@ -103,6 +91,7 @@ const DownloadButton = ({ large = false }: { large?: boolean }) => (
   </a>
 );
 
+// ── GitHub Source Code button ──
 const GithubButton = ({ large = false }: { large?: boolean }) => (
   <a
     data-magnetic
@@ -120,21 +109,22 @@ const GithubButton = ({ large = false }: { large?: boolean }) => (
   </a>
 );
 
-// Tech stack item
+// ── Tech stack table row ──
 const TechItem = ({ label, value }: { label: string; value: string }) => (
-  <div className="flex justify-between items-baseline py-3 border-b border-[#1A1A1A] last:border-b-0">
-    <span className="text-xs text-[#666] uppercase tracking-widest">{label}</span>
-    <span className="text-sm text-white font-medium">{value}</span>
+  <div className="tech-row">
+    <span className="text-xs text-[#64748B] uppercase tracking-widest font-medium">{label}</span>
+    <span className="text-sm text-[#F1F5F9] font-semibold">{value}</span>
   </div>
 );
 
+// ── Main overlay ──
 function Overlay() {
   const [activeTab, setActiveTab] = useState(0);
 
   const tabs = [
-    { label: 'UX Design', icon: <Layers size={14} color="#fff" /> },
-    { label: 'ML Pipeline', icon: <Cpu size={14} color="#fff" /> },
-    { label: 'Privacy', icon: <Shield size={14} color="#fff" /> },
+    { label: 'UX Design', icon: <Layers size={13} /> },
+    { label: 'ML Pipeline', icon: <Cpu size={13} /> },
+    { label: 'Privacy', icon: <Shield size={13} /> },
   ];
 
   const tabContent = [
@@ -165,85 +155,75 @@ function Overlay() {
   ];
 
   return (
-    <FlowArt aria-label="AccessApp Experience" className="text-white font-['Inter'] selection:bg-white selection:text-black">
+    <FlowArt aria-label="AccessApp Experience" className="text-white font-['Inter'] selection:bg-blue-500 selection:text-white">
 
       {/* ── 1. HERO ── */}
       <FlowSection aria-label="Hero" style={{ backgroundColor: '#0F172A' }}>
-        <div className="flex-1 flex flex-col justify-center items-center text-center relative">
-          <p className="uiverse-label mb-10">
+        <div className="flex-1 flex flex-col justify-center items-center text-center relative px-4">
+          <p className="uiverse-label mb-8 md:mb-10">
             Accessibility · Reimagined
           </p>
 
           <h1
             data-magnetic
-            className="text-[clamp(3.5rem,9vw,11rem)] font-['Sora'] font-extrabold uppercase tracking-tighter mb-6 text-white leading-[0.9] cursor-default"
+            className="text-[clamp(2.8rem,8vw,10rem)] font-['Sora'] font-extrabold uppercase tracking-tighter mb-5 text-white leading-[0.9] cursor-default"
           >
             Access<br />App
           </h1>
 
-          <p className="text-base md:text-xl text-[#777] font-normal max-w-xl leading-relaxed mb-12">
+          <p className="text-sm md:text-lg text-[#64748B] font-normal max-w-md md:max-w-xl leading-relaxed mb-10 md:mb-12">
             AI-powered spatial awareness for the visually and hearing impaired.
             Runs entirely on-device. No cloud. No latency. No compromise.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 items-center pointer-events-auto mb-16">
+          <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center pointer-events-auto w-full sm:w-auto max-w-sm sm:max-w-none mb-12 md:mb-16">
             <DownloadButton />
             <GithubButton />
           </div>
 
-          <div className="animate-bounce text-[#444]">
-            <ChevronDown size={24} />
+          <div className="animate-bounce text-[#334155]">
+            <ChevronDown size={22} />
           </div>
         </div>
       </FlowSection>
 
-      {/* ── 2. STATS / SOCIAL PROOF ── */}
+      {/* ── 2. STATS ── */}
       <FlowSection aria-label="Stats" style={{ backgroundColor: '#141E33' }}>
-        <div className="flex-1 flex flex-col justify-center items-center">
-          <p className="uiverse-label mb-12">
+        <div className="flex-1 flex flex-col justify-center items-center px-4">
+          <p className="uiverse-label mb-10 md:mb-12">
             Built for Impact
           </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16 w-full max-w-4xl mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-16 w-full max-w-3xl mb-12 md:mb-16">
             <StatItem value="4" label="Core Modules" />
             <StatItem value="<50ms" label="Inference Latency" />
             <StatItem value="100%" label="Offline Capable" />
             <StatItem value="0" label="Data Collected" />
           </div>
 
-          <div className="flex items-center gap-6 text-[#555]">
-            <div className="flex items-center gap-2">
-              <WifiOff size={14} />
-              <span className="text-xs uppercase tracking-widest">No internet required</span>
-            </div>
-            <span className="text-[#333]">·</span>
-            <div className="flex items-center gap-2">
-              <Shield size={14} />
-              <span className="text-xs uppercase tracking-widest">Privacy first</span>
-            </div>
-            <span className="text-[#333]">·</span>
-            <div className="flex items-center gap-2">
-              <Eye size={14} />
-              <span className="text-xs uppercase tracking-widest">Open source</span>
-            </div>
+          {/* Badge pills */}
+          <div className="flex flex-wrap gap-3 justify-center">
+            <div className="badge-pill"><WifiOff size={13} />No Internet Required</div>
+            <div className="badge-pill"><Shield size={13} />Privacy First</div>
+            <div className="badge-pill"><Eye size={13} />Open Source</div>
           </div>
         </div>
       </FlowSection>
 
       {/* ── 3. MISSION ── */}
       <FlowSection aria-label="Mission" style={{ backgroundColor: '#0B1221' }}>
-        <div className="flex-1 flex flex-col justify-center items-center">
-          <div className="max-w-3xl">
-            <p className="uiverse-label mb-8">
+        <div className="flex-1 flex flex-col justify-center items-center px-4">
+          <div className="max-w-3xl w-full">
+            <p className="uiverse-label mb-6 md:mb-8">
               The Problem
             </p>
-            <h2 className="text-[clamp(1.5rem,3vw,2.75rem)] font-['Sora'] font-bold leading-[1.1] text-white mb-8 tracking-tight">
+            <h2 className="text-[clamp(1.5rem,3vw,2.75rem)] font-['Sora'] font-bold leading-[1.15] text-white mb-6 md:mb-8 tracking-tight">
               Accessibility shouldn't depend on a Wi-Fi signal.
             </h2>
-            <p className="text-lg text-[#777] font-normal leading-relaxed mb-6">
+            <p className="text-sm md:text-base text-[#64748B] font-normal leading-relaxed mb-5">
               Traditional accessibility tools rely on high-latency cloud APIs, compromising privacy and failing completely in low-connectivity environments — precisely where users need them most.
             </p>
-            <p className="text-lg text-[#777] font-normal leading-relaxed">
+            <p className="text-sm md:text-base text-[#64748B] font-normal leading-relaxed">
               AccessApp fundamentally changes this by running advanced computer vision models directly on the user's device. Instant response. Total privacy. Works anywhere.
             </p>
           </div>
@@ -252,36 +232,36 @@ function Overlay() {
 
       {/* ── 4. FLAGSHIP MODULES ── */}
       <FlowSection aria-label="Modules" style={{ backgroundColor: '#0F172A' }}>
-        <div className="flex-1 flex flex-col justify-center items-center pointer-events-auto">
+        <div className="flex-1 flex flex-col justify-center items-center pointer-events-auto px-4">
           <div className="w-full max-w-4xl">
-            <p className="uiverse-label mb-4">
+            <p className="uiverse-label mb-3 md:mb-4">
               Core Features
             </p>
-            <h2 className="text-3xl md:text-5xl font-['Sora'] font-bold text-white mb-10 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-['Sora'] font-bold text-white mb-7 md:mb-10 tracking-tight">
               Four modules. Zero cloud dependency.
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-5">
               <FeatureCard
-                icon={<Radar size={20} color="#fff" />}
+                icon={<Radar size={19} color="#3B82F6" />}
                 title="Obstacle Radar"
                 description="Real-time object detection via the device camera. Identifies approaching obstacles and their distance with millimeter precision."
                 tags={['Haptic Feedback', 'Sonar Alerts', 'TFLite']}
               />
               <FeatureCard
-                icon={<Eye size={20} color="#fff" />}
+                icon={<Eye size={19} color="#3B82F6" />}
                 title="Notes-to-Audio"
                 description="OCR scanner powered by ML Kit that converts any printed or handwritten text into spoken audio instantly."
                 tags={['Auto-Language', 'Neural TTS', 'ML Kit']}
               />
               <FeatureCard
-                icon={<Languages size={20} color="#fff" />}
+                icon={<Languages size={19} color="#3B82F6" />}
                 title="Live ASL Translator"
                 description="Uses MediaPipe Gesture Recognizer to identify American Sign Language letters in real-time from the camera feed."
-                tags={['MediaPipe', 'Real-time', 'A-Z Letters']}
+                tags={['MediaPipe', 'Real-time', 'A–Z Letters']}
               />
               <FeatureCard
-                icon={<Sun size={20} color="#fff" />}
+                icon={<Sun size={19} color="#3B82F6" />}
                 title="Color & Light"
                 description="Analyzes camera feed to output exact RGB values and relative luminance, converting them to human-readable color names."
                 tags={['RGB Analysis', 'Luminance', 'Voice Output']}
@@ -291,35 +271,38 @@ function Overlay() {
         </div>
       </FlowSection>
 
-      {/* ── 5. ARCHITECTURE (tabbed) ── */}
+      {/* ── 5. ARCHITECTURE ── */}
       <FlowSection aria-label="Architecture" style={{ backgroundColor: '#141E33' }}>
-        <div className="flex-1 flex flex-col justify-center items-center pointer-events-auto">
+        <div className="flex-1 flex flex-col justify-center items-center pointer-events-auto px-4">
           <div className="w-full max-w-4xl">
-            <p className="uiverse-label mb-4">
+            <p className="uiverse-label mb-3 md:mb-4">
               Under the Hood
             </p>
-            <h2 className="text-3xl md:text-5xl font-['Sora'] font-bold text-white mb-10 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-['Sora'] font-bold text-white mb-7 md:mb-10 tracking-tight">
               Engineering at the edge.
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Left: interactive tabs */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Left: tabs */}
               <div>
-                <div className="uiverse-tabs mb-8">
-                  {tabs.map((tab, i) => (
-                    <button
-                      key={tab.label}
-                      onClick={() => setActiveTab(i)}
-                      className={`uiverse-tab ${activeTab === i ? 'active' : ''}`}
-                    >
-                      {tab.icon}
-                      {tab.label}
-                    </button>
-                  ))}
+                {/* scrollable wrapper on mobile */}
+                <div className="overflow-x-auto pb-2 mb-6 md:mb-8">
+                  <div className="uiverse-tabs">
+                    {tabs.map((tab, i) => (
+                      <button
+                        key={tab.label}
+                        onClick={() => setActiveTab(i)}
+                        className={`uiverse-tab${activeTab === i ? ' active' : ''}`}
+                      >
+                        {tab.icon}
+                        {tab.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
-                <div className="min-h-[200px]">
-                  <h3 className="text-xl font-['Sora'] font-semibold text-white mb-6">
+                <div className="min-h-[180px]">
+                  <h3 className="text-lg md:text-xl font-['Sora'] font-semibold text-white mb-5">
                     {tabContent[activeTab].title}
                   </h3>
                   <ul className="space-y-5">
@@ -330,7 +313,7 @@ function Overlay() {
                         </div>
                         <div>
                           <strong className="text-white text-sm">{point.strong}</strong>
-                          <p className="text-sm text-[#888] mt-0.5">{point.text}</p>
+                          <p className="text-sm text-[#64748B] mt-0.5 leading-relaxed">{point.text}</p>
                         </div>
                       </li>
                     ))}
@@ -338,17 +321,26 @@ function Overlay() {
                 </div>
               </div>
 
-              {/* Right: tech stack */}
-              <div className="bg-[#1E293B] border border-[#334155] rounded-2xl p-7">
-                <h3 className="text-lg font-['Sora'] font-semibold text-white mb-6">Tech Stack</h3>
-                <TechItem label="Language" value="Kotlin" />
-                <TechItem label="UI Framework" value="Jetpack Compose M3" />
-                <TechItem label="Min SDK" value="API 30 (Android 11)" />
-                <TechItem label="Target SDK" value="API 36 (Android 16)" />
-                <TechItem label="ML Runtime" value="TensorFlow Lite" />
-                <TechItem label="Gesture Engine" value="MediaPipe" />
-                <TechItem label="OCR" value="Google ML Kit" />
-                <TechItem label="IDE" value="Android Studio Iguana" />
+              {/* Right: tech stack table */}
+              <div className="bg-[#0F172A] border border-[#334155] rounded-2xl overflow-hidden">
+                <div className="px-6 py-4 border-b border-[#334155] flex items-center gap-3">
+                  <div className="flex gap-1.5">
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
+                  </div>
+                  <span className="text-xs text-[#64748B] uppercase tracking-widest font-semibold">Tech Stack</span>
+                </div>
+                <div className="px-4 py-2">
+                  <TechItem label="Language" value="Kotlin" />
+                  <TechItem label="UI Framework" value="Jetpack Compose M3" />
+                  <TechItem label="Min SDK" value="API 30 (Android 11)" />
+                  <TechItem label="Target SDK" value="API 36 (Android 16)" />
+                  <TechItem label="ML Runtime" value="TensorFlow Lite" />
+                  <TechItem label="Gesture Engine" value="MediaPipe" />
+                  <TechItem label="OCR" value="Google ML Kit" />
+                  <TechItem label="IDE" value="Android Studio Iguana" />
+                </div>
               </div>
             </div>
           </div>
@@ -357,27 +349,25 @@ function Overlay() {
 
       {/* ── 6. HOW IT WORKS ── */}
       <FlowSection aria-label="How it works" style={{ backgroundColor: '#0B1221' }}>
-        <div className="flex-1 flex flex-col justify-center items-center">
+        <div className="flex-1 flex flex-col justify-center items-center px-4">
           <div className="w-full max-w-4xl">
-            <p className="uiverse-label mb-4">
+            <p className="uiverse-label mb-3 md:mb-4">
               Getting Started
             </p>
-            <h2 className="text-3xl md:text-5xl font-['Sora'] font-bold text-white mb-12 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-['Sora'] font-bold text-white mb-8 md:mb-12 tracking-tight">
               Three steps. That's it.
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
               {[
                 { step: '01', title: 'Download', desc: 'Grab the APK from GitHub Releases or clone the repo to build from source.' },
                 { step: '02', title: 'Install', desc: 'Sideload the APK onto any Android device running API 30+ (Android 11 or later).' },
                 { step: '03', title: 'Use', desc: 'Open AccessApp, choose a module, and point your camera. No sign-ups. No accounts. No cloud.' },
               ].map((item) => (
-                <div key={item.step} className="group">
-                  <p className="uiverse-step-num mb-4">
-                    {item.step}
-                  </p>
-                  <h3 className="text-lg font-['Sora'] font-semibold text-white mb-2">{item.title}</h3>
-                  <p className="text-sm text-[#888] leading-relaxed">{item.desc}</p>
+                <div key={item.step} className="step-card group">
+                  <p className="uiverse-step-num mb-3">{item.step}</p>
+                  <h3 className="text-base md:text-lg font-['Sora'] font-semibold text-white mb-2">{item.title}</h3>
+                  <p className="text-sm text-[#64748B] leading-relaxed">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -387,27 +377,28 @@ function Overlay() {
 
       {/* ── 7. CTA / FOOTER ── */}
       <FlowSection aria-label="Footer" style={{ backgroundColor: '#0F172A' }}>
-        <div className="flex-1 flex flex-col justify-center items-center text-center pointer-events-auto">
-          <h2 className="text-4xl md:text-7xl font-['Sora'] font-extrabold text-white uppercase tracking-tighter mb-6 leading-[0.95]">
+        <div className="flex-1 flex flex-col justify-center items-center text-center pointer-events-auto px-4">
+          <h2 className="text-[clamp(2rem,7vw,6rem)] font-['Sora'] font-extrabold text-white uppercase tracking-tighter mb-5 leading-[0.95]">
             See the world<br />differently.
           </h2>
-          <p className="text-base text-[#777] max-w-md mb-12">
+          <p className="text-sm md:text-base text-[#64748B] max-w-sm md:max-w-md mb-10 md:mb-12 leading-relaxed">
             AccessApp is free, open-source, and built for the people who need it most.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 items-center mb-24">
+          <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center w-full sm:w-auto max-w-sm sm:max-w-none mb-16 md:mb-24">
             <DownloadButton large />
             <GithubButton large />
           </div>
 
-          <div className="w-full border-t border-[#1A1A1A] pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-[#555] uppercase tracking-widest">
-            <p>© 2026 Vortex AI</p>
-            <div className="flex gap-6 mt-4 md:mt-0 flex-wrap justify-center">
-              <span>Avadhi Sharma</span>
-              <span>Mudit Vaishnav</span>
-              <span>Mudra Chauhan</span>
-              <span>Jigyasha Mahariya</span>
-              <span>Monalika Vyas</span>
+          {/* Footer bar */}
+          <div className="w-full border-t border-[#1E293B] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-xs text-[#475569] uppercase tracking-widest">© 2026 Vortex AI</p>
+            <div className="flex flex-wrap gap-x-8 gap-y-2 justify-center">
+              {['Avadhi Sharma', 'Mudit Vaishnav', 'Mudra Chauhan', 'Jigyasha Mahariya', 'Monalika Vyas'].map((name) => (
+                <span key={name} className="text-xs text-[#475569] uppercase tracking-widest hover:text-[#94A3B8] transition-colors duration-200 cursor-default">
+                  {name}
+                </span>
+              ))}
             </div>
           </div>
         </div>
@@ -420,7 +411,7 @@ function Overlay() {
 export default function App() {
   return (
     <MagneticCursor magneticFactor={0.5} blendMode="difference" cursorSize={40}>
-      <div className="w-full min-h-screen overflow-x-hidden bg-black relative">
+      <div className="w-full min-h-screen overflow-x-hidden bg-[#0F172A] relative">
         <Canvas
           camera={{ position: [0, 0, 9], fov: 40 }}
           style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none' }}

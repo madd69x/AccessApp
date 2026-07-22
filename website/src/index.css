@@ -6,36 +6,28 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  background-color: #0F172A; /* Slate 900 */
-  color: #F8FAFC; /* Slate 50 */
+  background-color: #0F172A;
+  color: #F8FAFC;
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: #1E293B; /* Slate 800 */
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #334155; /* Slate 700 */
-}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #334155; }
 
-/* ── UIverse: Animated rotating border card ── */
+/* ── UIverse: Rotating border card ── */
 .uiverse-card {
   position: relative;
   border-radius: 1rem;
   overflow: hidden;
-  background: #1E293B; /* Slate 800 */
-  transition: transform 0.3s ease;
+  background: #1E293B;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .uiverse-card:hover {
   transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(59, 130, 246, 0.08);
 }
 .uiverse-card::before {
   content: "";
@@ -46,7 +38,7 @@ body {
     from 0deg,
     transparent 0deg,
     transparent 80deg,
-    #3B82F6 120deg, /* Classic Professional Blue */
+    #3B82F6 120deg,
     transparent 160deg,
     transparent 360deg
   );
@@ -55,21 +47,16 @@ body {
   animation: card-rotate 4s linear infinite;
   z-index: 0;
 }
-.uiverse-card:hover::before {
-  opacity: 1;
-}
+.uiverse-card:hover::before { opacity: 1; }
 .uiverse-card::after {
   content: "";
   position: absolute;
   inset: 1px;
   border-radius: inherit;
-  background: #1E293B; /* Slate 800 */
+  background: #1E293B;
   z-index: 1;
 }
-.uiverse-card > * {
-  position: relative;
-  z-index: 2;
-}
+.uiverse-card > * { position: relative; z-index: 2; }
 @keyframes card-rotate {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -82,7 +69,7 @@ body {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #3B82F6; /* Blue pulse */
+  background: #3B82F6;
 }
 .uiverse-pulse::before {
   content: "";
@@ -106,7 +93,7 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.35em;
-  color: #94A3B8; /* Slate 400 */
+  color: #94A3B8;
 }
 .uiverse-label::before {
   content: "";
@@ -116,9 +103,7 @@ body {
   background: linear-gradient(to right, transparent, #3B82F6);
 }
 
-/* ── UIverse: Skew-Reveal Buttons (App Theme) ── */
-
-/* Primary: blue gradient background, dark skew slides away */
+/* ── UIverse: Skew-Reveal Buttons ── */
 .uiverse-btn-primary {
   position: relative;
   font-family: 'Sora', 'Inter', sans-serif;
@@ -128,11 +113,13 @@ body {
   border-radius: 0.8em;
   cursor: pointer;
   border: none;
-  background: linear-gradient(to right, #3B82F6, #2563EB); /* Blue gradient */
+  background: linear-gradient(to right, #3B82F6, #2563EB);
   color: white;
   overflow: hidden;
   text-decoration: none;
   display: inline-flex;
+  width: 100%;
+  justify-content: center;
 }
 .uiverse-btn-primary span {
   position: relative;
@@ -142,46 +129,28 @@ body {
   align-items: center;
   gap: 0.5em;
   padding: 0.85em 1.4em 0.85em 1.2em;
+  width: 100%;
+  justify-content: center;
 }
-.uiverse-btn-primary svg {
-  width: 1.1em;
-  height: 1.1em;
-  flex-shrink: 0;
-}
+.uiverse-btn-primary svg { width: 1.1em; height: 1.1em; flex-shrink: 0; }
 .uiverse-btn-primary::before,
 .uiverse-btn-primary::after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
 }
 .uiverse-btn-primary::before {
   content: "";
-  background: #0F172A; /* Slate 900 */
-  width: 120%;
-  left: -10%;
+  background: #0F172A;
+  width: 120%; left: -10%;
   transform: skew(30deg);
   transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
 }
-.uiverse-btn-primary:hover::before {
-  transform: translate3d(100%, 0, 0);
-}
-.uiverse-btn-primary:hover span {
-  color: white;
-}
-.uiverse-btn-primary:active {
-  transform: scale(0.95);
-}
-.uiverse-btn-primary.large {
-  font-size: 16px;
-}
-.uiverse-btn-primary.large span {
-  padding: 1em 1.6em 1em 1.4em;
-}
+.uiverse-btn-primary:hover::before { transform: translate3d(100%, 0, 0); }
+.uiverse-btn-primary:hover span { color: white; }
+.uiverse-btn-primary:active { transform: scale(0.95); }
+.uiverse-btn-primary.large { font-size: 16px; }
+.uiverse-btn-primary.large span { padding: 1em 1.6em; }
 
-/* Secondary: slate background, blue skew slides away */
+/* secondary button — full width on mobile too */
 .uiverse-btn-secondary {
   position: relative;
   font-family: 'Sora', 'Inter', sans-serif;
@@ -190,12 +159,14 @@ body {
   letter-spacing: 0.05em;
   border-radius: 0.8em;
   cursor: pointer;
-  border: 1px solid #1E293B; /* Slate 800 */
+  border: 1px solid #334155;
   background: linear-gradient(to right, #1E293B, #0F172A);
-  color: #94A3B8; /* Slate 400 */
+  color: #94A3B8;
   overflow: hidden;
   text-decoration: none;
   display: inline-flex;
+  width: 100%;
+  justify-content: center;
 }
 .uiverse-btn-secondary span {
   position: relative;
@@ -205,84 +176,77 @@ body {
   align-items: center;
   gap: 0.5em;
   padding: 0.85em 1.4em 0.85em 1.2em;
+  width: 100%;
+  justify-content: center;
 }
-.uiverse-btn-secondary svg {
-  width: 1.1em;
-  height: 1.1em;
-  flex-shrink: 0;
-}
+.uiverse-btn-secondary svg { width: 1.1em; height: 1.1em; flex-shrink: 0; }
 .uiverse-btn-secondary::before,
 .uiverse-btn-secondary::after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
 }
 .uiverse-btn-secondary::before {
   content: "";
-  background: #3B82F6; /* Blue skew */
-  width: 120%;
-  left: -10%;
+  background: #3B82F6;
+  width: 120%; left: -10%;
   transform: skew(30deg);
   transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
 }
-.uiverse-btn-secondary:hover::before {
-  transform: translate3d(100%, 0, 0);
-}
-.uiverse-btn-secondary:hover span {
-  color: #fff;
-}
-.uiverse-btn-secondary:hover {
-  border-color: #334155; /* Slate 700 */
-}
-.uiverse-btn-secondary:active {
-  transform: scale(0.95);
-}
-.uiverse-btn-secondary.large {
-  font-size: 16px;
-}
-.uiverse-btn-secondary.large span {
-  padding: 1em 1.6em 1em 1.4em;
+.uiverse-btn-secondary:hover::before { transform: translate3d(100%, 0, 0); }
+.uiverse-btn-secondary:hover span { color: #fff; }
+.uiverse-btn-secondary:hover { border-color: #3B82F6; }
+.uiverse-btn-secondary:active { transform: scale(0.95); }
+.uiverse-btn-secondary.large { font-size: 16px; }
+.uiverse-btn-secondary.large span { padding: 1em 1.6em; }
+
+/* On sm+ screens, buttons go back to auto width */
+@media (min-width: 640px) {
+  .uiverse-btn-primary,
+  .uiverse-btn-secondary {
+    width: auto;
+  }
+  .uiverse-btn-primary span,
+  .uiverse-btn-secondary span {
+    width: auto;
+    justify-content: flex-start;
+  }
 }
 
 /* ── UIverse: Pill tab switcher ── */
 .uiverse-tabs {
-  display: inline-flex;
-  background: #0F172A; /* Slate 900 */
-  border-radius: 9999px;
+  display: flex;
+  flex-wrap: wrap;
+  background: #0F172A;
+  border-radius: 1rem;
   padding: 4px;
-  gap: 2px;
-  border: 1px solid #1E293B; /* Slate 800 */
+  gap: 4px;
+  border: 1px solid #1E293B;
 }
 .uiverse-tab {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 16px;
-  border-radius: 9999px;
-  font-size: 12px;
+  padding: 8px 14px;
+  border-radius: 0.75rem;
+  font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #94A3B8; /* Slate 400 */
+  letter-spacing: 0.08em;
+  color: #94A3B8;
   background: transparent;
   border: none;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: 'Sora', 'Inter', sans-serif;
+  white-space: nowrap;
 }
-.uiverse-tab:hover {
-  color: #F8FAFC; /* Slate 50 */
-}
+.uiverse-tab:hover { color: #F8FAFC; background: rgba(30,41,59,0.6); }
 .uiverse-tab.active {
-  background: #1E293B; /* Slate 800 */
-  color: #3B82F6; /* Blue accent */
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  background: #1E293B;
+  color: #3B82F6;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
 }
 
-/* ── UIverse: Stat counter with underline accent ── */
+/* ── UIverse: Stat counter ── */
 .uiverse-stat {
   position: relative;
   text-align: center;
@@ -291,18 +255,14 @@ body {
 .uiverse-stat::after {
   content: "";
   position: absolute;
-  bottom: 0;
-  left: 50%;
+  bottom: 0; left: 50%;
   transform: translateX(-50%) scaleX(0);
-  width: 40px;
-  height: 2px;
-  background: #3B82F6; /* Blue */
+  width: 40px; height: 2px;
+  background: #3B82F6;
   border-radius: 1px;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.uiverse-stat:hover::after {
-  transform: translateX(-50%) scaleX(1);
-}
+.uiverse-stat:hover::after { transform: translateX(-50%) scaleX(1); }
 
 /* ── UIverse: Tag pill ── */
 .uiverse-tag {
@@ -311,31 +271,108 @@ body {
   font-size: 10px;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: #94A3B8; /* Slate 400 */
-  border: 1px solid #334155; /* Slate 700 */
+  letter-spacing: 0.1em;
+  color: #94A3B8;
+  border: 1px solid #334155;
   border-radius: 9999px;
-  padding: 4px 12px;
+  padding: 3px 10px;
   transition: all 0.3s ease;
+  white-space: nowrap;
 }
 .uiverse-tag:hover {
-  color: #F8FAFC; /* Slate 50 */
-  border-color: #3B82F6; /* Blue */
+  color: #F8FAFC;
+  border-color: #3B82F6;
   background: rgba(59, 130, 246, 0.1);
 }
 
 /* ── UIverse: Step number with outline ── */
 .uiverse-step-num {
   font-family: 'Sora', sans-serif;
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-weight: 800;
   color: transparent;
-  -webkit-text-stroke: 1px #334155; /* Slate 700 */
+  -webkit-text-stroke: 1px #334155;
   transition: all 0.4s ease;
   line-height: 1;
 }
 .uiverse-step-num:hover {
-  -webkit-text-stroke: 1px #3B82F6; /* Blue */
+  -webkit-text-stroke: 1px #3B82F6;
   text-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
 }
 
+/* ── Tech table row ── */
+.tech-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 10px;
+  border-bottom: 1px solid #334155;
+  border-left: 2px solid transparent;
+  border-radius: 0 8px 8px 0;
+  transition: all 0.25s ease;
+  cursor: default;
+}
+.tech-row:last-child { border-bottom: none; }
+.tech-row:hover {
+  background: rgba(30, 41, 59, 0.6);
+  border-left-color: #3B82F6;
+  padding-left: 14px;
+}
+
+/* ── Badge pills (stats section) ── */
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid #334155;
+  border-radius: 9999px;
+  padding: 8px 16px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #94A3B8;
+  transition: all 0.3s ease;
+}
+.badge-pill:hover {
+  border-color: #3B82F6;
+  color: #F8FAFC;
+  background: rgba(59, 130, 246, 0.08);
+}
+
+/* ── Step card (mobile style for How It Works) ── */
+.step-card {
+  background: #1E293B;
+  border: 1px solid #334155;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.step-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, #3B82F6, #2563EB);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.step-card:hover::before { transform: scaleX(1); }
+.step-card:hover {
+  border-color: #475569;
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.06);
+}
+
+/* ── Mobile overrides ── */
+@media (max-width: 640px) {
+  .uiverse-step-num { font-size: 2.25rem; }
+  .uiverse-btn-primary span,
+  .uiverse-btn-secondary span {
+    padding: 0.8em 1.1em;
+  }
+  .uiverse-label { font-size: 10px; letter-spacing: 0.25em; }
+}
