@@ -156,7 +156,7 @@ function Overlay() {
 
           <h1
             data-magnetic
-            className="text-[clamp(2.8rem,8vw,10rem)] font-['Sora'] font-extrabold uppercase tracking-tighter mb-5 text-white leading-[0.9] cursor-default"
+            className="text-[clamp(3.5rem,8vw,7.5rem)] font-['Sora'] font-extrabold uppercase tracking-tighter mb-5 text-white leading-[0.9] cursor-default"
           >
             Access<br />App
           </h1>
@@ -223,7 +223,7 @@ function Overlay() {
       {/* ── 4. FLAGSHIP MODULES ── */}
       <FlowSection aria-label="Modules" style={{ backgroundColor: '#0F172A' }}>
         <div className="flex-1 flex flex-col justify-center items-center pointer-events-auto px-4">
-          <div className="w-full max-w-4xl">
+          <div className="w-full max-w-5xl">
             <p className="uiverse-label mb-3 md:mb-4">
               Core Features
             </p>
@@ -264,7 +264,7 @@ function Overlay() {
       {/* ── 5. ARCHITECTURE ── */}
       <FlowSection aria-label="Architecture" style={{ backgroundColor: '#141E33' }}>
         <div className="flex-1 flex flex-col justify-center items-center pointer-events-auto px-4">
-          <div className="w-full max-w-4xl">
+          <div className="w-full max-w-5xl">
             <p className="uiverse-label mb-3 md:mb-4">
               Under the Hood
             </p>
@@ -342,7 +342,7 @@ function Overlay() {
       {/* ── 6. HOW IT WORKS ── */}
       <FlowSection aria-label="How it works" style={{ backgroundColor: '#0B1221' }}>
         <div className="flex-1 flex flex-col justify-center items-center px-4">
-          <div className="w-full max-w-4xl">
+          <div className="w-full max-w-5xl">
             <p className="uiverse-label mb-3 md:mb-4">
               Getting Started
             </p>

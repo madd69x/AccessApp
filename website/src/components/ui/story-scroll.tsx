@@ -27,15 +27,12 @@ export const FlowSection: React.FC<FlowSectionProps> = ({
   <section
     data-flow-section
     aria-label={ariaLabel}
-    className={cx('relative min-h-screen w-full', className)}
+    className={cx('relative min-h-[90vh] flex flex-col justify-center w-full py-16 md:py-24 lg:py-32', className)}
     style={{ ...style, overflowX: 'clip' }}
   >
     <div
       data-flow-inner
-      className={cx(
-        'flow-art-container relative flex min-h-screen w-full flex-col justify-between gap-6 px-4 sm:px-[4vw] pt-[clamp(2rem,8vw,4vw)] pb-[4vw]',
-      )}
-      style={{ transformOrigin: 'bottom center' }}
+      className="flow-art-container relative w-full px-5 md:px-8 lg:px-12 mx-auto"
     >
       {children}
     </div>
@@ -61,9 +58,8 @@ const FlowArt: React.FC<FlowArtProps> = ({
     () => {
       if (!containerRef.current) return;
 
-      // Disable all GSAP scroll effects on mobile — linear scroll only
-      const isMobile = window.matchMedia('(max-width: 768px)').matches;
-      if (isMobile) return;
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) return;
 
       const sections = Array.from(
         containerRef.current.querySelectorAll<HTMLElement>('[data-flow-section]'),
@@ -73,37 +69,27 @@ const FlowArt: React.FC<FlowArtProps> = ({
       const triggers: ScrollTrigger[] = [];
 
       sections.forEach((section, i) => {
-        gsap.set(section, { zIndex: i + 1 });
+        // Skip hero section animation so it's visible immediately
+        if (i === 0) return;
 
         const inner = section.querySelector<HTMLElement>('.flow-art-container');
         if (!inner) return;
 
-        if (i > 0) {
-          gsap.set(inner, { rotation: 8, transformOrigin: 'bottom center' });
-          const tween = gsap.to(inner, {
-            rotation: 0,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: section,
-              start: 'top bottom',
-              end: 'top 25%',
-              scrub: true,
-            },
-          });
-          if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
-        }
+        gsap.set(inner, { y: 60, opacity: 0 });
 
-        if (i < sections.length - 1) {
-          triggers.push(
-            ScrollTrigger.create({
-              trigger: section,
-              start: 'bottom bottom',
-              end: 'bottom top',
-              pin: true,
-              pinSpacing: false,
-            }),
-          );
-        }
+        const tween = gsap.to(inner, {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+        });
+        
+        if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
       });
 
       ScrollTrigger.refresh();
