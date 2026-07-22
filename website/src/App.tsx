@@ -170,7 +170,7 @@ function Overlay() {
             Runs entirely on-device. No cloud. No latency. No compromise.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center pointer-events-auto w-full sm:w-auto max-w-sm sm:max-w-none mb-12 md:mb-16">
+          <div className="flex flex-wrap justify-center gap-3 items-center pointer-events-auto mb-12 md:mb-16">
             <DownloadButton />
             <GithubButton />
           </div>
@@ -381,7 +381,7 @@ function Overlay() {
             AccessApp is free, open-source, and built for the people who need it most.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center w-full sm:w-auto max-w-sm sm:max-w-none mb-16 md:mb-24">
+          <div className="flex flex-wrap justify-center gap-3 items-center mb-16 md:mb-24">
             <DownloadButton large />
             <GithubButton large />
           </div>
