@@ -33,10 +33,10 @@ export const FlowSection: React.FC<FlowSectionProps> = ({
     <div
       data-flow-inner
       className={cx(
-        'flow-art-container relative flex min-h-screen w-full flex-col justify-between gap-6 px-[4vw] pt-[clamp(2rem,8vw,4vw)] pb-[4vw]',
+        'flow-art-container relative flex min-h-screen w-full flex-col justify-between gap-6 px-4 sm:px-[4vw] pt-[clamp(2rem,8vw,4vw)] pb-[4vw]',
         'will-change-transform',
       )}
-      style={{ transformOrigin: 'bottom left' }}
+      style={{ transformOrigin: 'bottom center' }}
     >
       {children}
     </div>
@@ -76,7 +76,10 @@ const FlowArt: React.FC<FlowArtProps> = ({
         if (!inner) return;
 
         if (i > 0) {
-          gsap.set(inner, { rotation: 30, transformOrigin: 'bottom left' });
+          // Use subtle rotation on desktop, none on mobile
+          const isMobile = window.matchMedia('(max-width: 768px)').matches;
+          const rotationAmount = isMobile ? 0 : 8;
+          gsap.set(inner, { rotation: rotationAmount, transformOrigin: 'bottom center' });
           const tween = gsap.to(inner, {
             rotation: 0,
             ease: 'none',

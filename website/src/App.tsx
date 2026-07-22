@@ -415,7 +415,7 @@ export default function App() {
       <div className="w-full min-h-screen overflow-x-hidden bg-[#0F172A] relative">
         <Canvas
           camera={{ position: [0, 0, 9], fov: 40 }}
-          style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none' }}
+          style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' }}
         >
           <color attach="background" args={['#0F172A']} />
           <ambientLight intensity={0.5} />
