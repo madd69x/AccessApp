@@ -237,7 +237,7 @@ function Overlay() {
             <p className="uiverse-label mb-8">
               The Problem
             </p>
-            <h2 className="text-[clamp(2rem,5vw,4.5rem)] font-['Sora'] font-bold leading-[1.1] text-white mb-8">
+            <h2 className="text-[clamp(1.5rem,3vw,2.75rem)] font-['Sora'] font-bold leading-[1.1] text-white mb-8 tracking-tight">
               Accessibility shouldn't depend on a Wi-Fi signal.
             </h2>
             <p className="text-lg text-[#777] font-normal leading-relaxed mb-6">
