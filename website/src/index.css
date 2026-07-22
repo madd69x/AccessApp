@@ -300,23 +300,20 @@ body {
   text-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
 }
 
-/* ── Tech table row ── */
-.tech-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 10px;
-  border-bottom: 1px solid #334155;
-  border-left: 2px solid transparent;
-  border-radius: 0 8px 8px 0;
-  transition: all 0.25s ease;
+/* ── Tech Bento Card ── */
+.tech-bento-card {
+  background: #0F172A;
+  border: 1px solid #1E293B;
+  border-radius: 12px;
+  padding: 14px;
+  transition: all 0.3s ease;
   cursor: default;
 }
-.tech-row:last-child { border-bottom: none; }
-.tech-row:hover {
-  background: rgba(30, 41, 59, 0.6);
-  border-left-color: #3B82F6;
-  padding-left: 14px;
+.tech-bento-card:hover {
+  border-color: #3B82F6;
+  background: #1E293B;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
+  transform: translateY(-2px);
 }
 
 /* ── Badge pills (stats section) ── */

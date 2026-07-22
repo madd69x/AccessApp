@@ -3,7 +3,7 @@ import { Environment, MeshTransmissionMaterial, Float } from "@react-three/drei"
 import { useRef, useState } from "react";
 import * as THREE from "three";
 import { MagneticCursor } from "./components/ui/magnetic-cursor";
-import { Radar, Languages, Sun, Layers, Cpu, Eye, Download, Shield, WifiOff, ChevronDown } from "lucide-react";
+import { Radar, Languages, Sun, Layers, Cpu, Eye, Download, Shield, WifiOff, ChevronDown, Code2, Smartphone, Target, Hand, ScanText, Monitor } from "lucide-react";
 import FlowArt, { FlowSection } from "./components/ui/story-scroll";
 
 // ── Background 3D element ──
@@ -109,13 +109,7 @@ const GithubButton = ({ large = false }: { large?: boolean }) => (
   </a>
 );
 
-// ── Tech stack table row ──
-const TechItem = ({ label, value }: { label: string; value: string }) => (
-  <div className="tech-row">
-    <span className="text-xs text-[#64748B] uppercase tracking-widest font-medium">{label}</span>
-    <span className="text-sm text-[#F1F5F9] font-semibold">{value}</span>
-  </div>
-);
+// Tech stack item (removed, using bento cards now)
 
 // ── Main overlay ──
 function Overlay() {
@@ -321,26 +315,28 @@ function Overlay() {
                 </div>
               </div>
 
-              {/* Right: tech stack table */}
-              <div className="bg-[#0F172A] border border-[#334155] rounded-2xl overflow-hidden">
-                <div className="px-6 py-4 border-b border-[#334155] flex items-center gap-3">
-                  <div className="flex gap-1.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
+              {/* Right: tech stack grid */}
+              <div className="grid grid-cols-2 gap-3 md:gap-4">
+                {[
+                  { label: 'Language', value: 'Kotlin', icon: <Code2 size={16} color="#3B82F6" /> },
+                  { label: 'UI Framework', value: 'Jetpack Compose', icon: <Layers size={16} color="#3B82F6" /> },
+                  { label: 'Minimum SDK', value: 'API 30 (Android 11)', icon: <Smartphone size={16} color="#3B82F6" /> },
+                  { label: 'Target SDK', value: 'API 36 (Android 16)', icon: <Target size={16} color="#3B82F6" /> },
+                  { label: 'ML Runtime', value: 'TensorFlow Lite', icon: <Cpu size={16} color="#3B82F6" /> },
+                  { label: 'Gesture Engine', value: 'MediaPipe', icon: <Hand size={16} color="#3B82F6" /> },
+                  { label: 'OCR Engine', value: 'Google ML Kit', icon: <ScanText size={16} color="#3B82F6" /> },
+                  { label: 'Development IDE', value: 'Android Studio', icon: <Monitor size={16} color="#3B82F6" /> }
+                ].map((tech) => (
+                  <div key={tech.label} className="tech-bento-card group">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="p-1.5 rounded bg-[#0F172A] group-hover:bg-[#3B82F6]/10 transition-colors">
+                        {tech.icon}
+                      </div>
+                      <span className="text-[10px] text-[#64748B] uppercase tracking-wider font-semibold">{tech.label}</span>
+                    </div>
+                    <span className="text-xs md:text-sm text-[#F1F5F9] font-medium block">{tech.value}</span>
                   </div>
-                  <span className="text-xs text-[#64748B] uppercase tracking-widest font-semibold">Tech Stack</span>
-                </div>
-                <div className="px-4 py-2">
-                  <TechItem label="Language" value="Kotlin" />
-                  <TechItem label="UI Framework" value="Jetpack Compose M3" />
-                  <TechItem label="Min SDK" value="API 30 (Android 11)" />
-                  <TechItem label="Target SDK" value="API 36 (Android 16)" />
-                  <TechItem label="ML Runtime" value="TensorFlow Lite" />
-                  <TechItem label="Gesture Engine" value="MediaPipe" />
-                  <TechItem label="OCR" value="Google ML Kit" />
-                  <TechItem label="IDE" value="Android Studio Iguana" />
-                </div>
+                ))}
               </div>
             </div>
           </div>
@@ -393,11 +389,16 @@ function Overlay() {
           {/* Footer bar */}
           <div className="w-full border-t border-[#1E293B] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-xs text-[#475569] uppercase tracking-widest">© 2026 Vortex AI</p>
-            <div className="flex flex-wrap gap-x-8 gap-y-2 justify-center">
-              {['Avadhi Sharma', 'Mudit Vaishnav', 'Mudra Chauhan', 'Jigyasha Mahariya', 'Monalika Vyas'].map((name) => (
-                <span key={name} className="text-xs text-[#475569] uppercase tracking-widest hover:text-[#94A3B8] transition-colors duration-200 cursor-default">
-                  {name}
-                </span>
+            <div className="flex flex-wrap items-center justify-center gap-y-2">
+              {['Avadhi Sharma', 'Mudit Vaishnav', 'Mudra Chauhan', 'Jigyasha Mahariya', 'Monalika Vyas'].map((name, i, arr) => (
+                <div key={name} className="flex items-center">
+                  <span className="text-xs text-[#475569] uppercase tracking-widest hover:text-[#94A3B8] transition-colors duration-200 cursor-default">
+                    {name}
+                  </span>
+                  {i < arr.length - 1 && (
+                    <span className="mx-4 text-[#334155]">•</span>
+                  )}
+                </div>
               ))}
             </div>
           </div>
