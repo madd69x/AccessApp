@@ -27,14 +27,13 @@ export const FlowSection: React.FC<FlowSectionProps> = ({
   <section
     data-flow-section
     aria-label={ariaLabel}
-    className={cx('relative min-h-screen w-full overflow-hidden', className)}
-    style={style}
+    className={cx('relative min-h-screen w-full', className)}
+    style={{ ...style, overflowX: 'clip' }}
   >
     <div
       data-flow-inner
       className={cx(
         'flow-art-container relative flex min-h-screen w-full flex-col justify-between gap-6 px-4 sm:px-[4vw] pt-[clamp(2rem,8vw,4vw)] pb-[4vw]',
-        'will-change-transform',
       )}
       style={{ transformOrigin: 'bottom center' }}
     >
@@ -62,6 +61,10 @@ const FlowArt: React.FC<FlowArtProps> = ({
     () => {
       if (!containerRef.current) return;
 
+      // Disable all GSAP scroll effects on mobile — linear scroll only
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      if (isMobile) return;
+
       const sections = Array.from(
         containerRef.current.querySelectorAll<HTMLElement>('[data-flow-section]'),
       );
@@ -76,10 +79,7 @@ const FlowArt: React.FC<FlowArtProps> = ({
         if (!inner) return;
 
         if (i > 0) {
-          // Use subtle rotation on desktop, none on mobile
-          const isMobile = window.matchMedia('(max-width: 768px)').matches;
-          const rotationAmount = isMobile ? 0 : 8;
-          gsap.set(inner, { rotation: rotationAmount, transformOrigin: 'bottom center' });
+          gsap.set(inner, { rotation: 8, transformOrigin: 'bottom center' });
           const tween = gsap.to(inner, {
             rotation: 0,
             ease: 'none',
@@ -119,7 +119,8 @@ const FlowArt: React.FC<FlowArtProps> = ({
     <main
       ref={containerRef}
       aria-label={ariaLabel}
-      className={cx('w-full overflow-x-hidden', className)}
+      className={cx('w-full', className)}
+      style={{ overflowX: 'clip' }}
     >
       {children}
     </main>
