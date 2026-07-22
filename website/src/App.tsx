@@ -98,7 +98,7 @@ const GithubButton = ({ large = false }: { large?: boolean }) => (
     href="https://github.com/madd69x/AccessApp"
     target="_blank"
     rel="noreferrer"
-    className={`uiverse-btn-secondary pointer-events-auto${large ? ' large' : ''}`}
+    className={`uiverse-btn-primary pointer-events-auto${large ? ' large' : ''}`}
   >
     <span>
       <svg viewBox="0 0 24 24" fill="currentColor">
