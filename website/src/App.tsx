@@ -156,7 +156,7 @@ function Overlay() {
 
           <h1
             data-magnetic
-            className="text-[clamp(3.5rem,8vw,7.5rem)] font-['Sora'] font-extrabold uppercase tracking-tighter mb-5 text-white leading-[0.9] cursor-default"
+            className="text-[clamp(2.5rem,8vw,7.5rem)] font-['Sora'] font-extrabold uppercase tracking-tighter mb-5 text-white leading-[0.9] cursor-default"
           >
             Access<br />App
           </h1>
@@ -312,7 +312,7 @@ function Overlay() {
               </div>
 
               {/* Right: tech stack grid */}
-              <div className="grid grid-cols-2 gap-3 md:gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                 {[
                   { label: 'Language', value: 'Kotlin', icon: <Code2 size={16} color="#3B82F6" /> },
                   { label: 'UI Framework', value: 'Jetpack Compose', icon: <Layers size={16} color="#3B82F6" /> },

@@ -27,8 +27,8 @@ export const FlowSection: React.FC<FlowSectionProps> = ({
   <section
     data-flow-section
     aria-label={ariaLabel}
-    className={cx('relative min-h-[90vh] flex flex-col justify-center w-full py-16 md:py-24 lg:py-32', className)}
-    style={{ ...style, overflowX: 'clip' }}
+    className={cx('relative min-h-[100dvh] flex flex-col justify-center w-full py-16 md:py-24 lg:py-32', className)}
+    style={{ ...style, overflowX: 'hidden' }}
   >
     <div
       data-flow-inner
@@ -59,7 +59,8 @@ const FlowArt: React.FC<FlowArtProps> = ({
       if (!containerRef.current) return;
 
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReducedMotion) return;
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      if (prefersReducedMotion || isMobile) return;
 
       const sections = Array.from(
         containerRef.current.querySelectorAll<HTMLElement>('[data-flow-section]'),
@@ -106,7 +107,7 @@ const FlowArt: React.FC<FlowArtProps> = ({
       ref={containerRef}
       aria-label={ariaLabel}
       className={cx('w-full', className)}
-      style={{ overflowX: 'clip' }}
+      style={{ overflowX: 'hidden' }}
     >
       {children}
     </main>
