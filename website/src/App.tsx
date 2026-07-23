@@ -408,7 +408,7 @@ function Overlay() {
 export default function App() {
   return (
     <MagneticCursor magneticFactor={0.5} blendMode="difference" cursorSize={40}>
-      <div className="w-full min-h-screen overflow-x-hidden bg-[#0F172A] relative">
+      <div className="w-full min-h-screen bg-[#0F172A] relative">
         <Canvas
           camera={{ position: [0, 0, 9], fov: 40 }}
           style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' }}
