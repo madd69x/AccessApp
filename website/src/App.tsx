@@ -1,35 +1,8 @@
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, MeshTransmissionMaterial, Float } from "@react-three/drei";
-import { useRef, useState } from "react";
-import * as THREE from "three";
+import { useState } from "react";
 import { MagneticCursor } from "./components/ui/magnetic-cursor";
 import { Radar, Languages, Sun, Layers, Cpu, Eye, Download, Shield, WifiOff, ChevronDown, Code2, Smartphone, Target, Hand, ScanText, Monitor } from "lucide-react";
 import FlowArt, { FlowSection } from "./components/ui/story-scroll";
 import { playHoverSound, playClickSound } from "./lib/sounds";
-
-// ── Background 3D element ──
-const ObsidianGlass = () => {
-  const meshRef = useRef<THREE.Mesh>(null);
-  useFrame((_state, delta) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x += delta * 0.1;
-      meshRef.current.rotation.y += delta * 0.15;
-    }
-  });
-  return (
-    <Float speed={2} rotationIntensity={1} floatIntensity={2}>
-      <mesh ref={meshRef}>
-        <torusGeometry args={[2.5, 0.8, 64, 128]} />
-        <MeshTransmissionMaterial
-          backside samples={4} thickness={0.5}
-          chromaticAberration={1} anisotropy={0.3}
-          distortion={0.5} distortionScale={0.5}
-          temporalDistortion={0.1} color="#111827"
-        />
-      </mesh>
-    </Float>
-  );
-};
 
 // ── Icon wrapper ──
 const IconWrapper = ({ children }: { children: React.ReactNode }) => (
@@ -412,17 +385,6 @@ export default function App() {
   return (
     <MagneticCursor magneticFactor={0.5} blendMode="difference" cursorSize={40}>
       <div className="w-full min-h-screen bg-[#0F172A] relative max-w-[100vw] overflow-hidden">
-        <Canvas
-          camera={{ position: [0, 0, 9], fov: 40 }}
-          style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' }}
-        >
-          <color attach="background" args={['#0F172A']} />
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[10, 10, 10]} intensity={1} />
-          <Environment preset="studio" />
-          <ObsidianGlass />
-        </Canvas>
-
         <div style={{ position: 'relative', zIndex: 10 }}>
           <Overlay />
         </div>
