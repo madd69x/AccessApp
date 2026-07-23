@@ -27,7 +27,7 @@ export const FlowSection: React.FC<FlowSectionProps> = ({
   <section
     data-flow-section
     aria-label={ariaLabel}
-    className={cx('relative min-h-[100dvh] flex flex-col justify-center w-full py-16 md:py-24 lg:py-32', className)}
+    className={cx('relative py-24 md:min-h-screen flex flex-col justify-center w-full lg:py-32', className)}
     style={style}
   >
     <div
