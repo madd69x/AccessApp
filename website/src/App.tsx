@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { LoadingScreen } from "./components/ui/loading-screen";
 import { MagneticCursor } from "./components/ui/magnetic-cursor";
 import { Radar, Languages, Sun, Layers, Cpu, Eye, Download, Shield, WifiOff, ChevronDown, Code2, Smartphone, Target, Hand, ScanText, Monitor } from "lucide-react";
 import { playHoverSound, playClickSound } from "./lib/sounds";
@@ -471,9 +472,17 @@ function Overlay() {
 }
 
 export default function App() {
+  const [showLoading, setShowLoading] = useState(true);
+
   return (
     <MagneticCursor magneticFactor={0.5} blendMode="difference" cursorSize={40}>
-      <div className="w-full bg-[#0F172A] relative flex flex-col overflow-x-hidden">
+      {showLoading && (
+        <LoadingScreen onComplete={() => setShowLoading(false)} />
+      )}
+      <div 
+        className="w-full bg-[#0F172A] relative flex flex-col overflow-x-hidden transition-opacity duration-1000 ease-in-out"
+        style={{ opacity: showLoading ? 0 : 1, pointerEvents: showLoading ? 'none' : 'auto', height: showLoading ? '100vh' : 'auto', overflowY: showLoading ? 'hidden' : 'auto' }}
+      >
         <Overlay />
       </div>
     </MagneticCursor>
