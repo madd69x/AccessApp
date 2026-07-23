@@ -132,7 +132,8 @@ function Overlay() {
 
           <h1
             data-magnetic
-            className="text-6xl md:text-[clamp(3.5rem,8vw,7.5rem)] font-['Sora'] font-extrabold uppercase tracking-tighter mb-5 text-white leading-none md:leading-[0.9] cursor-default break-words max-w-full"
+            className="text-5xl sm:text-6xl md:text-[clamp(3.5rem,8vw,7.5rem)] font-['Sora'] font-extrabold uppercase tracking-tighter mb-5 text-white leading-none md:leading-[0.9] cursor-default break-words max-w-full"
+            style={{ wordBreak: 'break-word' }}
           >
             Access<br />App
           </h1>
@@ -183,7 +184,7 @@ function Overlay() {
             <p className="uiverse-label mb-6 md:mb-8">
               The Problem
             </p>
-            <h2 className="text-3xl md:text-[clamp(1.5rem,3vw,2.75rem)] font-['Sora'] font-bold leading-tight md:leading-[1.15] text-white mb-6 md:mb-8 tracking-tight break-words max-w-full">
+            <h2 className="text-2xl sm:text-3xl md:text-[clamp(1.5rem,3vw,2.75rem)] font-['Sora'] font-bold leading-tight md:leading-[1.15] text-white mb-6 md:mb-8 tracking-tight break-words max-w-full" style={{ wordBreak: 'break-word' }}>
               Accessibility shouldn't depend on a Wi-Fi signal.
             </h2>
             <p className="text-sm md:text-base text-[#64748B] font-normal leading-relaxed mb-5">
@@ -346,7 +347,7 @@ function Overlay() {
       {/* ── 7. CTA / FOOTER ── */}
       <FlowSection aria-label="Footer" style={{ backgroundColor: '#0F172A' }}>
         <div className="flex-1 flex flex-col justify-center items-center text-center pointer-events-auto px-4">
-          <h2 className="text-4xl md:text-[clamp(2rem,7vw,6rem)] font-['Sora'] font-extrabold text-white uppercase tracking-tighter mb-5 leading-tight md:leading-[0.95] break-words max-w-full">
+          <h2 className="text-3xl sm:text-4xl md:text-[clamp(2rem,7vw,6rem)] font-['Sora'] font-extrabold text-white uppercase tracking-tighter mb-5 leading-tight md:leading-[0.95] break-words max-w-full" style={{ wordBreak: 'break-word' }}>
             See the world<br />differently.
           </h2>
           <p className="text-sm md:text-base text-[#64748B] max-w-sm md:max-w-md mb-10 md:mb-12 leading-relaxed">
@@ -384,7 +385,7 @@ function Overlay() {
 export default function App() {
   return (
     <MagneticCursor magneticFactor={0.5} blendMode="difference" cursorSize={40}>
-      <div className="w-full min-h-screen bg-[#0F172A] relative max-w-[100vw] overflow-hidden">
+      <div className="w-full min-h-screen bg-[#0F172A] relative max-w-[100vw] overflow-x-hidden">
         <div style={{ position: 'relative', zIndex: 10 }}>
           <Overlay />
         </div>

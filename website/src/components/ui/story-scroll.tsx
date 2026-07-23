@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -53,6 +53,12 @@ const FlowArt: React.FC<FlowArtProps> = ({
   'aria-label': ariaLabel = 'Story scroll',
 }) => {
   const containerRef = useRef<HTMLElement>(null);
+  
+  // Safe mobile detection that runs on mount
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
 
   useGSAP(
     () => {
@@ -67,46 +73,62 @@ const FlowArt: React.FC<FlowArtProps> = ({
       if (sections.length === 0) return;
 
       const triggers: ScrollTrigger[] = [];
+      
+      const isMobileDevice = window.innerWidth < 768;
 
       sections.forEach((section, i) => {
         const inner = section.querySelector<HTMLElement>('.flow-art-container');
         if (!inner) return;
 
-        // The original premium rotating animation
-        gsap.set(inner, {
-          transformOrigin: 'bottom center',
-          rotationX: i === 0 ? 0 : -30,
-          scale: i === 0 ? 1 : 0.9,
-          opacity: i === 0 ? 1 : 0,
-          y: i === 0 ? 0 : 50,
-        });
-
-        // Add a master scroll trigger for the whole section
-        const st = ScrollTrigger.create({
-          trigger: section,
-          start: 'top top',
-          end: '+=100%',
-          pin: true,
-          pinSpacing: false, // Prevents layout shifting/overflow bugs on mobile!
-        });
-        triggers.push(st);
-
-        if (i > 0) {
-          const tween = gsap.to(inner, {
-            rotationX: 0,
-            scale: 1,
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: 'power3.out',
-            scrollTrigger: {
+        if (isMobileDevice) {
+          // SIMPLE MOBILE ANIMATION (NO PINNING, NO OVERFLOW BUGS)
+          if (i > 0) {
+            gsap.set(inner, { opacity: 0, y: 50 });
+            const st = ScrollTrigger.create({
               trigger: section,
               start: 'top 80%',
-              end: 'top top',
-              scrub: 1,
-            },
+              animation: gsap.to(inner, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }),
+              toggleActions: 'play none none reverse',
+            });
+            triggers.push(st);
+          }
+        } else {
+          // PREMIUM DESKTOP ANIMATION (PINNING AND ROTATION)
+          gsap.set(inner, {
+            transformOrigin: 'bottom center',
+            rotationX: i === 0 ? 0 : -30,
+            scale: i === 0 ? 1 : 0.9,
+            opacity: i === 0 ? 1 : 0,
+            y: i === 0 ? 0 : 50,
           });
-          if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
+
+          // Pin the section wrapper
+          const st = ScrollTrigger.create({
+            trigger: section,
+            start: 'top top',
+            end: '+=100%',
+            pin: true,
+            pinSpacing: false, // Prevents giant gaps between slides
+          });
+          triggers.push(st);
+
+          if (i > 0) {
+            const tween = gsap.to(inner, {
+              rotationX: 0,
+              scale: 1,
+              opacity: 1,
+              y: 0,
+              duration: 1,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: section,
+                start: 'top 80%',
+                end: 'top top',
+                scrub: 1,
+              },
+            });
+            if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
+          }
         }
       });
 
@@ -114,7 +136,7 @@ const FlowArt: React.FC<FlowArtProps> = ({
         triggers.forEach((t) => t.kill());
       };
     },
-    { scope: containerRef, dependencies: [childCount(children)] },
+    { scope: containerRef, dependencies: [childCount(children), isMobile] },
   );
 
   return (
