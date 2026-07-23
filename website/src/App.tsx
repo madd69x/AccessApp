@@ -166,9 +166,9 @@ function Overlay() {
             Runs entirely on-device. No cloud. No latency. No compromise.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4 md:gap-5 items-center pointer-events-auto mb-12 md:mb-16">
-            <DownloadButton />
-            <GithubButton />
+          <div className="flex flex-col sm:flex-row justify-center gap-5 sm:gap-8 items-center pointer-events-auto w-full max-w-sm sm:max-w-none mb-12 md:mb-16">
+            <div className="w-full sm:w-auto flex justify-center"><DownloadButton /></div>
+            <div className="w-full sm:w-auto flex justify-center"><GithubButton /></div>
           </div>
 
           <div className="animate-bounce text-[#334155]">
@@ -377,9 +377,9 @@ function Overlay() {
             AccessApp is free, open-source, and built for the people who need it most.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4 md:gap-5 items-center mb-16 md:mb-24">
-            <DownloadButton large />
-            <GithubButton large />
+          <div className="flex flex-col sm:flex-row justify-center gap-5 sm:gap-8 items-center w-full max-w-sm sm:max-w-none mb-16 md:mb-24">
+            <div className="w-full sm:w-auto flex justify-center"><DownloadButton large /></div>
+            <div className="w-full sm:w-auto flex justify-center"><GithubButton large /></div>
           </div>
 
           {/* Footer bar */}
