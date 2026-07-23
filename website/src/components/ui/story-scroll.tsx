@@ -27,12 +27,12 @@ export const FlowSection: React.FC<FlowSectionProps> = ({
   <section
     data-flow-section
     aria-label={ariaLabel}
-    className={cx('relative py-24 md:min-h-screen flex flex-col justify-center w-full lg:py-32', className)}
+    className={cx('relative min-h-[100dvh] flex flex-col justify-center w-full', className)}
     style={style}
   >
     <div
       data-flow-inner
-      className="flow-art-container relative w-full px-5 md:px-8 lg:px-12 mx-auto"
+      className="flow-art-container relative w-full h-full min-h-[100dvh] px-5 md:px-8 lg:px-12 mx-auto flex flex-col justify-center transform-gpu"
     >
       {children}
     </div>
@@ -69,30 +69,46 @@ const FlowArt: React.FC<FlowArtProps> = ({
       const triggers: ScrollTrigger[] = [];
 
       sections.forEach((section, i) => {
-        // Skip hero section animation so it's visible immediately
-        if (i === 0) return;
-
         const inner = section.querySelector<HTMLElement>('.flow-art-container');
         if (!inner) return;
 
-        gsap.set(inner, { y: 60, opacity: 0 });
-
-        const tween = gsap.to(inner, {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse',
-          },
+        // The original premium rotating animation
+        gsap.set(inner, {
+          transformOrigin: 'bottom center',
+          rotationX: i === 0 ? 0 : -30,
+          scale: i === 0 ? 1 : 0.9,
+          opacity: i === 0 ? 1 : 0,
+          y: i === 0 ? 0 : 50,
         });
-        
-        if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
-      });
 
-      ScrollTrigger.refresh();
+        // Add a master scroll trigger for the whole section
+        const st = ScrollTrigger.create({
+          trigger: section,
+          start: 'top top',
+          end: '+=100%',
+          pin: true,
+          pinSpacing: false, // Prevents layout shifting/overflow bugs on mobile!
+        });
+        triggers.push(st);
+
+        if (i > 0) {
+          const tween = gsap.to(inner, {
+            rotationX: 0,
+            scale: 1,
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 80%',
+              end: 'top top',
+              scrub: 1,
+            },
+          });
+          if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
+        }
+      });
 
       return () => {
         triggers.forEach((t) => t.kill());
@@ -105,7 +121,8 @@ const FlowArt: React.FC<FlowArtProps> = ({
     <main
       ref={containerRef}
       aria-label={ariaLabel}
-      className={cx('w-full', className)}
+      className={cx('w-full perspective-1000', className)}
+      style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}
     >
       {children}
     </main>

@@ -5,6 +5,7 @@ import * as THREE from "three";
 import { MagneticCursor } from "./components/ui/magnetic-cursor";
 import { Radar, Languages, Sun, Layers, Cpu, Eye, Download, Shield, WifiOff, ChevronDown, Code2, Smartphone, Target, Hand, ScanText, Monitor } from "lucide-react";
 import FlowArt, { FlowSection } from "./components/ui/story-scroll";
+import { playHoverSound, playClickSound } from "./lib/sounds";
 
 // ── Background 3D element ──
 const ObsidianGlass = () => {
@@ -75,13 +76,14 @@ const FeatureCard = ({
   </div>
 );
 
-// ── Download APK button ──
 const DownloadButton = ({ large = false }: { large?: boolean }) => (
   <a
     data-magnetic
     href="https://github.com/madd69x/AccessApp/releases"
     target="_blank"
     rel="noreferrer"
+    onMouseEnter={playHoverSound}
+    onClick={playClickSound}
     className={`uiverse-btn-primary w-full sm:w-auto justify-center pointer-events-auto${large ? ' large' : ''}`}
   >
     <Download size={16} strokeWidth={2} />
@@ -89,13 +91,14 @@ const DownloadButton = ({ large = false }: { large?: boolean }) => (
   </a>
 );
 
-// ── GitHub Source Code button ──
 const GithubButton = ({ large = false }: { large?: boolean }) => (
   <a
     data-magnetic
     href="https://github.com/madd69x/AccessApp"
     target="_blank"
     rel="noreferrer"
+    onMouseEnter={playHoverSound}
+    onClick={playClickSound}
     className={`uiverse-btn-secondary w-full sm:w-auto justify-center pointer-events-auto${large ? ' large' : ''}`}
   >
     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0 }}>
@@ -156,7 +159,7 @@ function Overlay() {
 
           <h1
             data-magnetic
-            className="text-6xl md:text-[clamp(3.5rem,8vw,7.5rem)] font-['Sora'] font-extrabold uppercase tracking-tighter mb-5 text-white leading-none md:leading-[0.9] cursor-default"
+            className="text-6xl md:text-[clamp(3.5rem,8vw,7.5rem)] font-['Sora'] font-extrabold uppercase tracking-tighter mb-5 text-white leading-none md:leading-[0.9] cursor-default break-words max-w-full"
           >
             Access<br />App
           </h1>
@@ -207,7 +210,7 @@ function Overlay() {
             <p className="uiverse-label mb-6 md:mb-8">
               The Problem
             </p>
-            <h2 className="text-3xl md:text-[clamp(1.5rem,3vw,2.75rem)] font-['Sora'] font-bold leading-tight md:leading-[1.15] text-white mb-6 md:mb-8 tracking-tight">
+            <h2 className="text-3xl md:text-[clamp(1.5rem,3vw,2.75rem)] font-['Sora'] font-bold leading-tight md:leading-[1.15] text-white mb-6 md:mb-8 tracking-tight break-words max-w-full">
               Accessibility shouldn't depend on a Wi-Fi signal.
             </h2>
             <p className="text-sm md:text-base text-[#64748B] font-normal leading-relaxed mb-5">
@@ -370,7 +373,7 @@ function Overlay() {
       {/* ── 7. CTA / FOOTER ── */}
       <FlowSection aria-label="Footer" style={{ backgroundColor: '#0F172A' }}>
         <div className="flex-1 flex flex-col justify-center items-center text-center pointer-events-auto px-4">
-          <h2 className="text-4xl md:text-[clamp(2rem,7vw,6rem)] font-['Sora'] font-extrabold text-white uppercase tracking-tighter mb-5 leading-tight md:leading-[0.95]">
+          <h2 className="text-4xl md:text-[clamp(2rem,7vw,6rem)] font-['Sora'] font-extrabold text-white uppercase tracking-tighter mb-5 leading-tight md:leading-[0.95] break-words max-w-full">
             See the world<br />differently.
           </h2>
           <p className="text-sm md:text-base text-[#64748B] max-w-sm md:max-w-md mb-10 md:mb-12 leading-relaxed">
@@ -406,28 +409,19 @@ function Overlay() {
 }
 
 export default function App() {
-  const [isMobile] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return window.innerWidth < 768;
-    }
-    return false;
-  });
-
   return (
     <MagneticCursor magneticFactor={0.5} blendMode="difference" cursorSize={40}>
-      <div className="w-full min-h-screen bg-[#0F172A] relative">
-        {!isMobile && (
-          <Canvas
-            camera={{ position: [0, 0, 9], fov: 40 }}
-            style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' }}
-          >
-            <color attach="background" args={['#0F172A']} />
-            <ambientLight intensity={0.5} />
-            <directionalLight position={[10, 10, 10]} intensity={1} />
-            <Environment preset="studio" />
-            <ObsidianGlass />
-          </Canvas>
-        )}
+      <div className="w-full min-h-screen bg-[#0F172A] relative max-w-[100vw] overflow-hidden">
+        <Canvas
+          camera={{ position: [0, 0, 9], fov: 40 }}
+          style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' }}
+        >
+          <color attach="background" args={['#0F172A']} />
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[10, 10, 10]} intensity={1} />
+          <Environment preset="studio" />
+          <ObsidianGlass />
+        </Canvas>
 
         <div style={{ position: 'relative', zIndex: 10 }}>
           <Overlay />
