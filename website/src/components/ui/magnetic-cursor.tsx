@@ -299,7 +299,7 @@ export const MagneticCursor: FC<MagneticCursorProps> = ({
     };
   }, [disableOnTouch, isTouchDevice, hoverPadding, hoverAttribute, cursorColor, shape]);
 
-  if (disableOnTouch && isTouchDevice) return <>{children}</>;
+  // Removed early return to prevent React element re-use bugs
 
   const styles: React.CSSProperties = {
     position: 'fixed',
@@ -320,7 +320,12 @@ export const MagneticCursor: FC<MagneticCursorProps> = ({
 
   return (
     <>
-      <div ref={cursorRef} className={`magnetic-cursor ${cursorClassName}`} style={styles} />
+      <div 
+        key="magnetic-cursor" 
+        ref={cursorRef} 
+        className={`magnetic-cursor ${cursorClassName}`} 
+        style={{...styles, display: (disableOnTouch && isTouchDevice) ? 'none' : 'block'}} 
+      />
       {children}
     </>
   );

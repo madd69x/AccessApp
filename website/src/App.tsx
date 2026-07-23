@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { MagneticCursor } from "./components/ui/magnetic-cursor";
 import { Radar, Languages, Sun, Layers, Cpu, Eye, Download, Shield, WifiOff, ChevronDown, Code2, Smartphone, Target, Hand, ScanText, Monitor } from "lucide-react";
 import { playHoverSound, playClickSound } from "./lib/sounds";
@@ -13,6 +13,13 @@ gsap.registerPlugin(ScrollTrigger);
 const Reveal = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   
+  // Refresh ScrollTrigger when fonts load to prevent miscalculated trigger positions
+  useEffect(() => {
+    document.fonts?.ready.then(() => {
+      ScrollTrigger.refresh();
+    });
+  }, []);
+
   useGSAP(() => {
     if (!ref.current) return;
     
@@ -161,7 +168,7 @@ function Overlay() {
     <main className="text-white font-['Inter'] selection:bg-blue-500 selection:text-white w-full">
 
       {/* ── 1. HERO ── */}
-      <section aria-label="Hero" className="bg-[#0F172A] w-full min-h-[90vh] flex flex-col justify-center items-center py-24 md:py-32 px-5 sm:px-8">
+      <section aria-label="Hero" className="bg-[#0F172A] w-full pt-32 pb-24 md:pt-40 md:pb-32 landscape:pt-16 landscape:pb-12 px-5 sm:px-8">
         <div className="w-full max-w-7xl mx-auto flex flex-col items-center text-center">
           <Reveal>
             <p className="uiverse-label mb-8 md:mb-10">
@@ -202,7 +209,7 @@ function Overlay() {
       </section>
 
       {/* ── 2. STATS ── */}
-      <section aria-label="Stats" className="bg-[#141E33] w-full py-24 md:py-32 px-5 sm:px-8">
+      <section aria-label="Stats" className="bg-[#141E33] w-full py-24 md:py-32 landscape:py-16 px-5 sm:px-8">
         <div className="w-full max-w-7xl mx-auto flex flex-col items-center">
           <Reveal>
             <p className="uiverse-label mb-12 md:mb-16">
@@ -228,7 +235,7 @@ function Overlay() {
       </section>
 
       {/* ── 3. MISSION ── */}
-      <section aria-label="Mission" className="bg-[#0B1221] w-full py-24 md:py-32 px-5 sm:px-8">
+      <section aria-label="Mission" className="bg-[#0B1221] w-full py-24 md:py-32 landscape:py-16 px-5 sm:px-8">
         <div className="w-full max-w-4xl mx-auto">
           <Reveal>
             <p className="uiverse-label mb-8">
@@ -254,7 +261,7 @@ function Overlay() {
       </section>
 
       {/* ── 4. FLAGSHIP MODULES ── */}
-      <section aria-label="Modules" className="bg-[#0F172A] w-full py-24 md:py-32 px-5 sm:px-8">
+      <section aria-label="Modules" className="bg-[#0F172A] w-full py-24 md:py-32 landscape:py-16 px-5 sm:px-8">
         <div className="w-full max-w-6xl mx-auto">
           <Reveal>
             <p className="uiverse-label mb-4">
@@ -305,7 +312,7 @@ function Overlay() {
       </section>
 
       {/* ── 5. ARCHITECTURE ── */}
-      <section aria-label="Architecture" className="bg-[#141E33] w-full py-24 md:py-32 px-5 sm:px-8">
+      <section aria-label="Architecture" className="bg-[#141E33] w-full py-24 md:py-32 landscape:py-16 px-5 sm:px-8">
         <div className="w-full max-w-6xl mx-auto">
           <Reveal>
             <p className="uiverse-label mb-4">
@@ -388,7 +395,7 @@ function Overlay() {
       </section>
 
       {/* ── 6. HOW IT WORKS ── */}
-      <section aria-label="How it works" className="bg-[#0B1221] w-full py-24 md:py-32 px-5 sm:px-8">
+      <section aria-label="How it works" className="bg-[#0B1221] w-full py-24 md:py-32 landscape:py-16 px-5 sm:px-8">
         <div className="w-full max-w-6xl mx-auto">
           <Reveal>
             <p className="uiverse-label mb-4">
@@ -420,7 +427,7 @@ function Overlay() {
       </section>
 
       {/* ── 7. CTA / FOOTER ── */}
-      <section aria-label="Footer" className="bg-[#0F172A] w-full py-24 md:py-32 px-5 sm:px-8">
+      <section aria-label="Footer" className="bg-[#0F172A] w-full py-24 md:py-32 landscape:py-16 px-5 sm:px-8">
         <div className="w-full max-w-4xl mx-auto flex flex-col items-center text-center">
           <Reveal>
             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-['Sora'] font-extrabold text-white uppercase tracking-tighter mb-6 leading-tight break-words" style={{ wordBreak: 'break-word' }}>
