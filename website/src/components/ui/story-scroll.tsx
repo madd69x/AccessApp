@@ -32,7 +32,7 @@ export const FlowSection: React.FC<FlowSectionProps> = ({
   >
     <div
       data-flow-inner
-      className="flow-art-container relative w-full h-full min-h-[100dvh] px-5 md:px-8 lg:px-12 mx-auto flex flex-col justify-center transform-gpu"
+      className="flow-art-container relative w-full h-full min-h-[100dvh] px-5 md:px-8 lg:px-12 mx-auto flex flex-col justify-center"
     >
       {children}
     </div>
@@ -54,10 +54,18 @@ const FlowArt: React.FC<FlowArtProps> = ({
 }) => {
   const containerRef = useRef<HTMLElement>(null);
   
-  // Safe mobile detection that runs on mount
-  const [isMobile, setIsMobile] = useState(false);
+  // Safe mobile detection that runs synchronously on mount (Vite is client-only)
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768;
+    }
+    return false;
+  });
+
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useGSAP(
@@ -143,8 +151,8 @@ const FlowArt: React.FC<FlowArtProps> = ({
     <main
       ref={containerRef}
       aria-label={ariaLabel}
-      className={cx('w-full perspective-1000', className)}
-      style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}
+      className={cx('w-full', !isMobile && 'perspective-1000', className)}
+      style={!isMobile ? { perspective: '1000px', transformStyle: 'preserve-3d' } : {}}
     >
       {children}
     </main>
