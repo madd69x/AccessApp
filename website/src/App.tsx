@@ -475,16 +475,18 @@ export default function App() {
   const [showLoading, setShowLoading] = useState(true);
 
   return (
-    <MagneticCursor magneticFactor={0.5} blendMode="difference" cursorSize={40}>
+    <>
       {showLoading && (
         <LoadingScreen onComplete={() => setShowLoading(false)} />
       )}
-      <div 
-        className="w-full bg-[#0F172A] relative flex flex-col overflow-x-hidden transition-opacity duration-1000 ease-in-out"
-        style={{ opacity: showLoading ? 0 : 1, pointerEvents: showLoading ? 'none' : 'auto', height: showLoading ? '100vh' : 'auto', overflowY: showLoading ? 'hidden' : 'auto' }}
-      >
-        <Overlay />
-      </div>
-    </MagneticCursor>
+      <MagneticCursor magneticFactor={0.5} blendMode="difference" cursorSize={40}>
+        <div 
+          className="w-full bg-[#0F172A] relative flex flex-col overflow-x-hidden transition-opacity duration-1000 ease-in-out"
+          style={{ opacity: showLoading ? 0 : 1, pointerEvents: showLoading ? 'none' : 'auto', height: showLoading ? '100vh' : 'auto', overflowY: showLoading ? 'hidden' : 'auto' }}
+        >
+          <Overlay />
+        </div>
+      </MagneticCursor>
+    </>
   );
 }

@@ -43,7 +43,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
 
   return (
     <div 
-      className="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-[#050A15] transition-opacity duration-800 ease-in-out"
+      className="fixed inset-0 w-screen h-[100dvh] z-[10000] flex flex-col items-center justify-center bg-[#050A15] transition-opacity duration-800 ease-in-out"
       style={{ opacity: isFading ? 0 : 1, pointerEvents: isFading ? 'none' : 'auto' }}
     >
       <div className="relative flex flex-col items-center">
