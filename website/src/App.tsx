@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { LoadingScreen } from "./components/ui/loading-screen";
 import { FloatingToolbar } from "./components/ui/FloatingToolbar";
+import { CustomCursor, ScrollProgress } from "./components/ui/FinishingTouches";
 import Spline from '@splinetool/react-spline';
 import { MagneticCursor } from "./components/ui/magnetic-cursor";
 import { Radar, Languages, Sun, Layers, Cpu, Eye, Download, Shield, WifiOff, ChevronDown, Code2, Smartphone } from "lucide-react";
@@ -8,8 +9,6 @@ import { playHoverSound, playClickSound } from "./lib/sounds";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-
-// Swiper for 3D Carousel
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination, Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
@@ -520,10 +519,10 @@ export default function App() {
 
   return (
     <>
-      {showLoading && (
-        <LoadingScreen onComplete={() => setShowLoading(false)} />
-      )}
-      <FloatingToolbar />
+      <CustomCursor />
+      <ScrollProgress />
+      {showLoading && <LoadingScreen onComplete={() => setShowLoading(false)} />}
+      {!showLoading && <FloatingToolbar />}
       <MagneticCursor magneticFactor={0.5} blendMode="difference" cursorSize={40}>
         <div 
           className="w-full bg-black relative flex flex-col overflow-x-hidden transition-opacity duration-1000 ease-in-out"
