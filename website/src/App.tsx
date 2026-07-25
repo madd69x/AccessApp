@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { LoadingScreen } from "./components/ui/loading-screen";
 import { FloatingToolbar } from "./components/ui/FloatingToolbar";
-
+import Spline from '@splinetool/react-spline';
 import { MagneticCursor } from "./components/ui/magnetic-cursor";
 import { Radar, Languages, Sun, Layers, Cpu, Eye, Download, Shield, WifiOff, ChevronDown, Code2, Smartphone, Target, Hand, ScanText, Monitor } from "lucide-react";
 import { playHoverSound, playClickSound } from "./lib/sounds";
@@ -176,8 +176,17 @@ function Overlay() {
     <main className="text-white font-['Inter'] selection:bg-blue-500 selection:text-white w-full">
 
       {/* ── 1. HERO ── */}
-      <section aria-label="Hero" className="bg-[#0F172A] w-full pt-32 pb-24 md:pt-40 md:pb-32 landscape:pt-16 landscape:pb-12 px-5 sm:px-8">
-        <div className="w-full max-w-7xl mx-auto flex flex-col items-center text-center">
+      <section aria-label="Hero" className="bg-[#0F172A] w-full min-h-screen flex items-center justify-center pt-32 pb-24 md:pt-40 md:pb-32 landscape:pt-16 landscape:pb-12 px-5 sm:px-8 relative overflow-hidden">
+        
+        {/* Spline Background */}
+        <div className="absolute inset-0 w-full h-full z-0 pointer-events-auto">
+          <Spline scene="https://prod.spline.design/47GLu4jJKPAAd4Yk/scene.splinecode" />
+        </div>
+        
+        {/* Dark gradient overlay so text is still readable if the spline is bright */}
+        <div className="absolute inset-0 w-full h-full z-0 bg-gradient-to-b from-[#0F172A]/80 via-transparent to-[#0F172A] pointer-events-none" />
+
+        <div className="w-full max-w-7xl mx-auto flex flex-col items-center text-center relative z-10 pointer-events-none">
           <Reveal>
             <p className="uiverse-label mb-8 md:mb-10">
               Accessibility · Reimagined
