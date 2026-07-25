@@ -63,10 +63,10 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
           <button
             onClick={handleEnter}
             onMouseEnter={playHoverSound}
-            className="group relative px-10 py-4 bg-transparent border border-white/20 rounded-full overflow-hidden hover:border-white/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,255,255,0.15)]"
+            className="group relative px-12 py-5 bg-white/10 border border-white/40 rounded-full overflow-hidden hover:border-white transition-all duration-500 hover:shadow-[0_0_40px_rgba(255,255,255,0.25)]"
           >
             <div className="absolute inset-0 bg-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]" />
-            <span className="relative z-10 text-sm font-bold tracking-[0.2em] uppercase text-white/50 group-hover:text-black transition-colors duration-500">
+            <span className="relative z-10 text-base font-bold tracking-[0.2em] uppercase text-white group-hover:text-black transition-colors duration-500">
               Enter Experience
             </span>
           </button>

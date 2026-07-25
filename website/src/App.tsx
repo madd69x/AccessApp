@@ -11,10 +11,11 @@ import { useGSAP } from "@gsap/react";
 
 // Swiper for 3D Carousel
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
+import { EffectCoverflow, Pagination, Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -169,8 +170,10 @@ function Overlay() {
       <section aria-label="Hero" className="bg-transparent w-full min-h-screen flex items-center justify-center pt-32 pb-24 md:pt-40 md:pb-32 landscape:pt-16 landscape:pb-12 px-5 sm:px-8 relative overflow-hidden">
         
         {/* Spline Background */}
-        <div className="absolute inset-0 w-full h-full z-0 pointer-events-auto opacity-70 mix-blend-screen">
-          <Spline scene="https://prod.spline.design/47GLu4jJKPAAd4Yk/scene.splinecode" />
+        <div className="absolute inset-0 w-full h-full z-0 pointer-events-auto opacity-70 mix-blend-screen overflow-hidden">
+          <div className="w-full h-full" style={{ transform: 'scale(1.05)' }}>
+            <Spline scene="https://prod.spline.design/47GLu4jJKPAAd4Yk/scene.splinecode" />
+          </div>
         </div>
         
         {/* Dark gradient overlay */}
@@ -297,8 +300,9 @@ function Overlay() {
                   slideShadows: false,
                 }}
                 pagination={{ clickable: true }}
-                autoplay={{ delay: 3500, disableOnInteraction: true }}
-                modules={[EffectCoverflow, Pagination, Autoplay]}
+                navigation={true}
+                autoplay={{ delay: 5000, disableOnInteraction: true }}
+                modules={[EffectCoverflow, Pagination, Autoplay, Navigation]}
                 className="w-full max-w-5xl"
                 breakpoints={{
                   320: { slidesPerView: 1.1, spaceBetween: 20 },
@@ -358,10 +362,10 @@ function Overlay() {
             </div>
           </Reveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 mb-12">
             {architectureCards.map((card, i) => (
               <Reveal key={card.title} delay={0.2 + (i * 0.1)}>
-                <div className="tech-bento-card h-full">
+                <div className="tech-bento-card h-full min-h-[250px]">
                   <div className="flex items-center gap-4 mb-6">
                     {card.icon}
                     <h3 className="text-xl font-['Sora'] font-bold text-white">{card.title}</h3>
@@ -441,8 +445,10 @@ function Overlay() {
       <section aria-label="Footer" className="bg-transparent w-full min-h-[90vh] flex flex-col justify-between py-24 md:py-32 landscape:py-16 px-5 sm:px-8 relative overflow-hidden">
         
         {/* Spline Background: Fixed layout so robot sits properly (removed rotation and heavy scaling) */}
-        <div className="absolute inset-0 w-full h-full z-0 opacity-60 mix-blend-screen pointer-events-auto flex items-end justify-center mb-[-10%]">
-          <Spline scene="https://prod.spline.design/47GLu4jJKPAAd4Yk/scene.splinecode" />
+        <div className="absolute inset-0 w-full h-full z-0 opacity-60 mix-blend-screen pointer-events-auto flex items-end justify-center mb-[-10%] overflow-hidden">
+          <div className="w-full h-full" style={{ transform: 'scale(1.05)' }}>
+            <Spline scene="https://prod.spline.design/47GLu4jJKPAAd4Yk/scene.splinecode" />
+          </div>
         </div>
         
         <div className="absolute inset-0 w-full h-full z-0 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none" />
@@ -471,11 +477,14 @@ function Overlay() {
         <div className="w-full relative z-10 mt-20">
           <div className="max-w-5xl mx-auto flex flex-col lg:flex-row justify-between items-center gap-6 pointer-events-auto p-6">
             <p className="text-xs text-white/30 uppercase tracking-[0.2em] font-bold">© 2026 Vortex AI</p>
-            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-              {['Avadhi', 'Mudit', 'Mudra', 'Jigyasha', 'Monalika'].map((name) => (
-                <span key={name} className="text-xs text-white/30 font-bold uppercase tracking-[0.1em] hover:text-white transition-colors duration-300 cursor-pointer">
-                  {name}
-                </span>
+            <div className="flex flex-wrap items-center justify-center gap-y-3">
+              {['Avadhi', 'Mudit', 'Mudra', 'Jigyasha', 'Monalika'].map((name, i, arr) => (
+                <div key={name} className="flex items-center">
+                  <span className="text-xs text-white/40 font-bold uppercase tracking-[0.1em] hover:text-white transition-colors duration-300 cursor-pointer mx-3">
+                    {name}
+                  </span>
+                  {i < arr.length - 1 && <span className="text-white/20">•</span>}
+                </div>
               ))}
             </div>
           </div>

@@ -18,11 +18,15 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
 
 /* Hide Spline Logo Watermark */
+#logo, 
+.spline-watermark,
 div[class*="spline"] a,
 a[href*="spline.design"] {
   display: none !important;
   opacity: 0 !important;
+  visibility: hidden !important;
   pointer-events: none !important;
+  z-index: -9999 !important;
 }
 
 /* ── Monochromatic 3D Card ── */
@@ -30,16 +34,16 @@ a[href*="spline.design"] {
   position: relative;
   border-radius: 1.5rem;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: none;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .uiverse-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 20px 40px rgba(255, 255, 255, 0.05), 0 0 20px rgba(255, 255, 255, 0.02);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 /* ── UIverse: Glowing pulse dot (Silver/White) ── */
@@ -56,7 +60,8 @@ a[href*="spline.design"] {
   position: absolute;
   inset: -3px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
   animation: pulse-ring 2s ease-out infinite;
 }
 @keyframes pulse-ring {
@@ -92,7 +97,7 @@ a[href*="spline.design"] {
   letter-spacing: 0.05em;
   border-radius: 9999px;
   cursor: pointer;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: none;
   background: white;
   color: black;
   overflow: hidden;
@@ -124,8 +129,8 @@ a[href*="spline.design"] {
   letter-spacing: 0.05em;
   border-radius: 9999px;
   cursor: pointer;
-  border: 1px solid rgba(255,255,255,0.2);
-  background: rgba(255,255,255,0.03);
+  border: none;
+  background: rgba(255,255,255,0.08);
   backdrop-filter: blur(12px);
   color: #F8FAFC;
   text-decoration: none;
@@ -137,8 +142,7 @@ a[href*="spline.design"] {
 }
 .uiverse-btn-secondary svg { width: 1.1em; height: 1.1em; flex-shrink: 0; }
 .uiverse-btn-secondary:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.15);
   transform: translateY(-2px);
 }
 .uiverse-btn-secondary:active { transform: translateY(1px); }
@@ -174,17 +178,16 @@ a[href*="spline.design"] {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: rgba(255,255,255,0.7);
-  border: 1px solid rgba(255,255,255,0.2);
+  border: none;
   border-radius: 9999px;
   padding: 4px 12px;
   transition: all 0.3s ease;
   white-space: nowrap;
-  background: rgba(255,255,255,0.03);
+  background: rgba(255,255,255,0.08);
 }
 .uiverse-tag:hover {
   color: #fff;
-  border-color: rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 /* ── UIverse: Step number ── */
@@ -204,9 +207,9 @@ a[href*="spline.design"] {
 
 /* ── Tech Bento Card ── */
 .tech-bento-card {
-  background: rgba(255,255,255,0.02);
+  background: rgba(255,255,255,0.05);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.1);
+  border: none;
   border-radius: 1.5rem;
   padding: 20px;
   transition: all 0.3s ease;
@@ -216,8 +219,7 @@ a[href*="spline.design"] {
   justify-content: space-between;
 }
 .tech-bento-card:hover {
-  border-color: rgba(255, 255, 255, 0.3);
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.08);
   transform: translateY(-2px);
 }
 
@@ -226,9 +228,9 @@ a[href*="spline.design"] {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255,255,255,0.03);
+  background: rgba(255,255,255,0.05);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.2);
+  border: none;
   border-radius: 9999px;
   padding: 8px 18px;
   font-size: 11px;
@@ -239,16 +241,15 @@ a[href*="spline.design"] {
   transition: all 0.3s ease;
 }
 .badge-pill:hover {
-  border-color: #fff;
   color: #fff;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 /* ── Step card ── */
 .step-card {
-  background: rgba(255,255,255,0.02);
+  background: rgba(255,255,255,0.05);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(255,255,255,0.1);
+  border: none;
   border-radius: 1.5rem;
   padding: 2rem;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -256,7 +257,7 @@ a[href*="spline.design"] {
   overflow: hidden;
 }
 .step-card:hover {
-  border-color: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.08);
   box-shadow: 0 15px 40px rgba(255, 255, 255, 0.05);
   transform: translateY(-4px);
 }
