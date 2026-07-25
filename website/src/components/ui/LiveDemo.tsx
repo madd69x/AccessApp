@@ -40,6 +40,8 @@ export const LiveDemo = () => {
     return () => { active = false; };
   }, []);
 
+  const lastVideoTimeRef = useRef(-1);
+
   const enableCam = async () => {
     playClickSound();
     if (!handLandmarker) return;
@@ -49,23 +51,24 @@ export const LiveDemo = () => {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
-        videoRef.current.onloadedmetadata = () => {
-          if (videoRef.current) {
-             videoRef.current.play().then(() => {
-               setIsLoading(false);
-               setIsCameraActive(true);
-               predictWebcam();
-             }).catch(e => {
-               console.error("Play failed", e);
-               setIsLoading(false);
-               setErrorMsg("Could not start video playback.");
-             });
-          }
-        };
+        // Rely on onLoadedMetadata in JSX
       }
     } catch (err) {
       setIsLoading(false);
       setErrorMsg("Camera access denied or unavailable.");
+    }
+  };
+
+  const handleVideoLoadedMetadata = () => {
+    if (videoRef.current && isLoading) {
+      videoRef.current.play().then(() => {
+        setIsLoading(false);
+        setIsCameraActive(true);
+      }).catch(e => {
+        console.error("Play failed", e);
+        setIsLoading(false);
+        setErrorMsg("Could not start video playback.");
+      });
     }
   };
 
@@ -99,8 +102,8 @@ export const LiveDemo = () => {
     }
 
     const startTimeMs = performance.now();
-    if (lastVideoTime !== video.currentTime) {
-      setLastVideoTime(video.currentTime);
+    if (lastVideoTimeRef.current !== video.currentTime) {
+      lastVideoTimeRef.current = video.currentTime;
       const results = handLandmarker.detectForVideo(video, startTimeMs);
       
       const ctx = canvas.getContext('2d');
@@ -136,20 +139,21 @@ export const LiveDemo = () => {
       }
     }
 
-    if (isCameraActive) {
-      requestRef.current = requestAnimationFrame(predictWebcam);
-    }
+    // Always loop if active
+    requestRef.current = requestAnimationFrame(predictWebcam);
   };
 
-  // Ensure loop runs continuously while active
+  // Ensure loop starts/stops smoothly when isCameraActive changes
   useEffect(() => {
-    if (isCameraActive && videoRef.current) {
+    if (isCameraActive) {
       requestRef.current = requestAnimationFrame(predictWebcam);
+    } else if (requestRef.current) {
+      cancelAnimationFrame(requestRef.current);
     }
     return () => {
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
-  }, [isCameraActive, lastVideoTime]);
+  }, [isCameraActive, handLandmarker]);
 
   return (
     <div className="w-full relative rounded-2xl overflow-hidden border border-[#1E293B] bg-[#050A15] shadow-2xl">
@@ -199,6 +203,7 @@ export const LiveDemo = () => {
           autoPlay
           playsInline
           muted
+          onLoadedMetadata={handleVideoLoadedMetadata}
         />
         <canvas
           ref={canvasRef}
