@@ -18,13 +18,13 @@ export const FloatingToolbar: React.FC = () => {
         onMouseEnter={playHoverSound}
         className={`group relative flex items-center gap-3 px-5 py-3 rounded-full backdrop-blur-2xl border transition-all duration-500 overflow-hidden shadow-2xl ${
           isMuted 
-            ? 'bg-black/40 border-white/10 hover:border-white/30' 
-            : 'bg-black/60 border-[#EC4899]/50 hover:border-[#EC4899] shadow-[0_0_30px_rgba(236,72,153,0.25)]'
+            ? 'bg-black/60 border-white/5 hover:border-white/20' 
+            : 'bg-white/10 border-white/20 hover:border-white/40 shadow-[0_0_20px_rgba(255,255,255,0.05)]'
         }`}
       >
         {/* Animated background glow when playing */}
         {!isMuted && (
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#EC4899]/20 to-transparent -translate-x-full animate-[shimmer_3s_infinite] pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full animate-[shimmer_3s_infinite] pointer-events-none" />
         )}
         
         {/* Equalizer bars (only when playing) */}
@@ -33,7 +33,7 @@ export const FloatingToolbar: React.FC = () => {
             {[1, 2, 3].map((i) => (
               <div 
                 key={i} 
-                className="w-1 bg-[#EC4899] rounded-t-sm animate-[eq_1s_ease-in-out_infinite_alternate]"
+                className="w-1 bg-white rounded-t-sm animate-[eq_1s_ease-in-out_infinite_alternate]"
                 style={{ 
                   height: '100%',
                   animationDelay: `${i * 0.15}s` 
@@ -45,14 +45,14 @@ export const FloatingToolbar: React.FC = () => {
 
         <div className="relative z-10 flex items-center justify-center">
           {isMuted ? (
-            <VolumeX size={18} className="text-white/40 group-hover:text-white transition-colors" />
+            <VolumeX size={18} className="text-white/30 group-hover:text-white transition-colors" />
           ) : (
-            <Volume2 size={18} className="text-[#EC4899]" />
+            <Volume2 size={18} className="text-white" />
           )}
         </div>
         
-        <span className={`relative z-10 font-['Sora'] text-xs font-bold tracking-widest uppercase transition-colors ${
-          isMuted ? 'text-white/40 group-hover:text-white' : 'text-white/90'
+        <span className={`relative z-10 font-['Sora'] text-xs font-bold tracking-[0.15em] uppercase transition-colors ${
+          isMuted ? 'text-white/30 group-hover:text-white' : 'text-white'
         }`}>
           {isMuted ? 'Audio Off' : 'Sound On'}
         </span>
