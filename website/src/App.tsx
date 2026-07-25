@@ -460,8 +460,18 @@ function Overlay() {
       {/* ── 7. CTA / FOOTER ── */}
       <section aria-label="Footer" className="bg-transparent w-full min-h-[90vh] flex flex-col justify-between py-24 md:py-32 landscape:py-16 px-5 sm:px-8 relative overflow-hidden">
         
-        {/* Removed duplicate Spline here to fix massive mobile lag. Using deep gradient instead. */}
-        <div className="absolute inset-0 w-full h-full z-0 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none" />
+        {/* New Spline Background with CSS Monochromatic Filter */}
+        {!isMobile ? (
+          <div className="absolute inset-0 w-full h-full z-0 pointer-events-none opacity-60 mix-blend-screen overflow-hidden" style={{ filter: 'grayscale(100%) contrast(1.2)' }}>
+            <div className="w-full h-full" style={{ transform: 'scale(1.2) translate(-2%, 5%)' }}>
+              <Spline scene="https://prod.spline.design/ULlouvbE3GBDruDM/scene.splinecode" />
+            </div>
+          </div>
+        ) : (
+          <div className="absolute inset-0 w-full h-full z-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-white/10 via-black to-black pointer-events-none" />
+        )}
+        
+        <div className="absolute inset-0 w-full h-full z-0 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none" />
 
         <div className="w-full max-w-5xl mx-auto flex flex-col items-center text-center relative z-10 pointer-events-none mt-10">
           <Reveal>
