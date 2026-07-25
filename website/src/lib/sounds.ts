@@ -67,10 +67,16 @@ export const playAmbientMelody = () => {
   if (typeof window === 'undefined') return;
   try {
     if (!ambientAudio) {
-      // 1. Create the audio element
       ambientAudio = new Audio('/ambient_track.mp3');
       ambientAudio.loop = true;
       ambientAudio.crossOrigin = "anonymous";
+      
+      // Reliably skip the first 4 seconds by waiting for metadata to load
+      ambientAudio.addEventListener('loadedmetadata', () => {
+        if (ambientAudio && ambientAudio.currentTime < 4) {
+          ambientAudio.currentTime = 4;
+        }
+      });
       
       // 2. Set up Web Audio API for Spatial 3D Audio
       ambientAudioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
@@ -126,8 +132,8 @@ export const playAmbientMelody = () => {
     
     // Play the audio
     if (ambientAudio.paused) {
-      if (ambientAudio.currentTime === 0) {
-        ambientAudio.currentTime = 4; // Skip the first 4 seconds
+      if (ambientAudio.readyState >= 1 && ambientAudio.currentTime === 0) {
+         ambientAudio.currentTime = 4;
       }
       ambientAudio.play().catch((e) => {
         console.error("Audio playback prevented by browser:", e);
