@@ -171,7 +171,7 @@ function Overlay() {
         
         {/* Spline Background */}
         <div className="absolute inset-0 w-full h-full z-0 pointer-events-auto opacity-70 mix-blend-screen overflow-hidden">
-          <div className="w-full h-full" style={{ transform: 'scale(1.05)' }}>
+          <div className="w-full h-full" style={{ transform: 'scale(1.2) translate(-2%, 5%)' }}>
             <Spline scene="https://prod.spline.design/47GLu4jJKPAAd4Yk/scene.splinecode" />
           </div>
         </div>
@@ -299,6 +299,7 @@ function Overlay() {
                   modifier: 1,
                   slideShadows: false,
                 }}
+                loop={true}
                 pagination={{ clickable: true }}
                 navigation={true}
                 autoplay={{ delay: 5000, disableOnInteraction: true }}
@@ -365,20 +366,17 @@ function Overlay() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 mb-12">
             {architectureCards.map((card, i) => (
               <Reveal key={card.title} delay={0.2 + (i * 0.1)}>
-                <div className="tech-bento-card h-full min-h-[250px]">
+                <div className="tech-bento-card h-auto">
                   <div className="flex items-center gap-4 mb-6">
                     {card.icon}
                     <h3 className="text-xl font-['Sora'] font-bold text-white">{card.title}</h3>
                   </div>
-                  <ul className="space-y-4">
+                  <ul className="space-y-6">
                     {card.points.map((point) => (
                       <li key={point.strong} className="flex gap-3">
-                        <div className="mt-2 flex-shrink-0">
-                          <div className="w-1.5 h-1.5 rounded-full bg-white/50" />
-                        </div>
                         <div>
-                          <strong className="text-white/90 text-sm font-semibold block">{point.strong}</strong>
-                          <p className="text-sm text-white/50 mt-1 leading-relaxed">{point.text}</p>
+                          <strong className="text-white/90 text-base font-semibold block mb-1">{point.strong}</strong>
+                          <p className="text-sm text-white/50 leading-relaxed">{point.text}</p>
                         </div>
                       </li>
                     ))}
@@ -446,7 +444,7 @@ function Overlay() {
         
         {/* Spline Background: Fixed layout so robot sits properly (removed rotation and heavy scaling) */}
         <div className="absolute inset-0 w-full h-full z-0 opacity-60 mix-blend-screen pointer-events-auto flex items-end justify-center mb-[-10%] overflow-hidden">
-          <div className="w-full h-full" style={{ transform: 'scale(1.05)' }}>
+          <div className="w-full h-full" style={{ transform: 'scale(1.2) translate(-2%, 5%)' }}>
             <Spline scene="https://prod.spline.design/47GLu4jJKPAAd4Yk/scene.splinecode" />
           </div>
         </div>
