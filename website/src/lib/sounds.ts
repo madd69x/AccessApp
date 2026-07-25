@@ -126,6 +126,9 @@ export const playAmbientMelody = () => {
     
     // Play the audio
     if (ambientAudio.paused) {
+      if (ambientAudio.currentTime === 0) {
+        ambientAudio.currentTime = 4; // Skip the first 4 seconds
+      }
       ambientAudio.play().catch((e) => {
         console.error("Audio playback prevented by browser:", e);
       });
