@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { playAmbientMelody, playHoverSound, playClickSound } from '../../lib/sounds';
 
+import { Headphones } from 'lucide-react';
+
 interface LoadingScreenProps {
   onComplete: () => void;
 }
@@ -59,7 +61,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
         </div>
 
         {/* Enter Button (Premium Glow) */}
-        <div className={`transition-all duration-700 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div className={`transition-all duration-700 transform flex flex-col items-center gap-6 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <button
             onClick={handleEnter}
             onMouseEnter={playHoverSound}
@@ -70,6 +72,11 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
               Enter Experience
             </span>
           </button>
+          
+          <div className="flex items-center gap-2 text-white/40 animate-pulse">
+            <Headphones size={14} />
+            <span className="text-[10px] uppercase tracking-widest font-bold">Use headphones for spatial audio</span>
+          </div>
         </div>
       </div>
     </div>
