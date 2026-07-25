@@ -270,6 +270,13 @@ a[href*="spline.design"] {
     padding: 0.8em 1.1em;
   }
   .uiverse-label { font-size: 10px; letter-spacing: 0.25em; }
+  
+  /* Disable massive GPU killers on mobile */
+  .uiverse-card, .tech-bento-card, .badge-pill, .step-card {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+  }
 }
 
 /* Swiper custom overrides */
