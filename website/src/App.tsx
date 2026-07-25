@@ -394,7 +394,7 @@ function Overlay() {
                 { label: 'Minimum SDK', value: 'API 30', icon: <Smartphone size={18} className="text-white" /> },
                 { label: 'ML Runtime', value: 'TensorFlow Lite', icon: <Cpu size={18} className="text-white" /> },
               ].map((tech) => (
-                <div key={tech.label} className="tech-bento-card p-5 justify-center items-center text-center">
+                <div key={tech.label} className="flex flex-col p-4 justify-center items-center text-center rounded-sm bg-white/5 hover:bg-white/10 transition-colors duration-300">
                   <div className="mb-3 opacity-70">
                     {tech.icon}
                   </div>
