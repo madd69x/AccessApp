@@ -64,8 +64,20 @@ const Reveal = ({ children, delay = 0 }: { children: React.ReactNode, delay?: nu
     });
   }, { scope: ref });
 
-  return <div ref={ref} className="will-change-[opacity,transform]">{children}</div>;
+  return <div ref={ref}>{children}</div>;
 };
+
+// ── Mobile Detection Hook ──
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  return isMobile;
+}
 
 // ── Stat counter ──
 const StatItem = ({ value, label }: { value: string; label: string }) => (
@@ -133,6 +145,8 @@ const GithubButton = ({ large = false }: { large?: boolean }) => (
 );
 
 function Overlay() {
+  const isMobile = useIsMobile();
+  
   const architectureCards = [
     {
       title: 'UX Design',
@@ -169,12 +183,16 @@ function Overlay() {
       {/* ── 1. HERO ── */}
       <section aria-label="Hero" className="bg-transparent w-full min-h-screen flex items-center justify-center pt-32 pb-24 md:pt-40 md:pb-32 landscape:pt-16 landscape:pb-12 px-5 sm:px-8 relative overflow-hidden">
         
-        {/* Spline Background */}
-        <div className="absolute inset-0 w-full h-full z-0 pointer-events-none opacity-70 mix-blend-screen overflow-hidden">
-          <div className="w-full h-full" style={{ transform: 'scale(1.2) translate(-2%, 5%)' }}>
-            <Spline scene="https://prod.spline.design/47GLu4jJKPAAd4Yk/scene.splinecode" />
+        {/* Spline Background: Unmounted entirely on mobile to save GPU */}
+        {!isMobile ? (
+          <div className="absolute inset-0 w-full h-full z-0 pointer-events-none opacity-70 mix-blend-screen overflow-hidden">
+            <div className="w-full h-full" style={{ transform: 'scale(1.2) translate(-2%, 5%)' }}>
+              <Spline scene="https://prod.spline.design/47GLu4jJKPAAd4Yk/scene.splinecode" />
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="absolute inset-0 w-full h-full z-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/10 via-black to-black" />
+        )}
         
         {/* Dark gradient overlay */}
         <div className="absolute inset-0 w-full h-full z-0 bg-gradient-to-b from-black/80 via-transparent to-black pointer-events-none" />
@@ -287,7 +305,7 @@ function Overlay() {
           <Reveal delay={0.2}>
             <div className="w-full cursor-grab active:cursor-grabbing pb-12">
               <Swiper
-                effect={'coverflow'}
+                effect={isMobile ? 'slide' : 'coverflow'}
                 grabCursor={true}
                 centeredSlides={true}
                 slidesPerView={'auto'}
@@ -301,7 +319,7 @@ function Overlay() {
                 }}
                 loop={true}
                 pagination={{ clickable: true }}
-                navigation={true}
+                navigation={!isMobile}
                 autoplay={{ delay: 5000, disableOnInteraction: true }}
                 modules={[EffectCoverflow, Pagination, Autoplay, Navigation]}
                 className="w-full max-w-5xl"
