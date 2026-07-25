@@ -49,14 +49,19 @@ export const LiveDemo = () => {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
-        videoRef.current.addEventListener("loadeddata", () => {
+        videoRef.current.onloadedmetadata = () => {
           if (videoRef.current) {
-             videoRef.current.play().catch(e => console.error("Play failed", e));
+             videoRef.current.play().then(() => {
+               setIsLoading(false);
+               setIsCameraActive(true);
+               predictWebcam();
+             }).catch(e => {
+               console.error("Play failed", e);
+               setIsLoading(false);
+               setErrorMsg("Could not start video playback.");
+             });
           }
-          setIsLoading(false);
-          setIsCameraActive(true);
-          predictWebcam();
-        });
+        };
       }
     } catch (err) {
       setIsLoading(false);
