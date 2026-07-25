@@ -21,7 +21,7 @@
 
 <div align="center">
   <h4><a href="DOCUMENTATION.md">View Technical Documentation</a></h4>
-  <h2> <a href="https://https://app-access-one.vercel.app/">Experience the Live Website</a></h2>
+  <h2> <a href="https://app-access-one.vercel.app/">Experience the Live Website</a></h2>
 </div>
 
 ---
