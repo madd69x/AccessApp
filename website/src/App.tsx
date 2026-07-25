@@ -11,12 +11,9 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ── Reveal Animation Wrapper ──
-// Safe, layout-preserving fade-up animation. No pinning, no absolute positioning.
 const Reveal = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   
-  // Refresh ScrollTrigger when fonts load to prevent miscalculated trigger positions
   useEffect(() => {
     document.fonts?.ready.then(() => {
       ScrollTrigger.refresh();
@@ -26,7 +23,6 @@ const Reveal = ({ children, delay = 0 }: { children: React.ReactNode, delay?: nu
   useGSAP(() => {
     if (!ref.current) return;
     
-    // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       gsap.set(ref.current, { opacity: 1, y: 0 });
@@ -53,21 +49,19 @@ const Reveal = ({ children, delay = 0 }: { children: React.ReactNode, delay?: nu
   return <div ref={ref} className="will-change-[opacity,transform]">{children}</div>;
 };
 
-// ── Icon wrapper ──
 const IconWrapper = ({ children }: { children: React.ReactNode }) => (
   <div
-    className="rounded-xl border border-[#334155] bg-[#0F172A] flex items-center justify-center mb-4 flex-shrink-0"
-    style={{ width: '44px', height: '44px', minWidth: '44px', minHeight: '44px' }}
+    className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl flex items-center justify-center mb-4 flex-shrink-0"
+    style={{ width: '48px', height: '48px', minWidth: '48px', minHeight: '48px' }}
   >
     {children}
   </div>
 );
 
-// ── Stat counter ──
 const StatItem = ({ value, label }: { value: string; label: string }) => (
   <div className="uiverse-stat w-full">
-    <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-['Sora'] font-bold text-white tracking-tight">{value}</p>
-    <p className="text-xs text-[#64748B] uppercase tracking-widest mt-3">{label}</p>
+    <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-['Sora'] font-bold text-transparent bg-clip-text bg-gradient-to-br from-white to-white/50 tracking-tight">{value}</p>
+    <p className="text-xs text-white/50 uppercase tracking-widest mt-3">{label}</p>
   </div>
 );
 
@@ -82,15 +76,16 @@ const FeatureCard = ({
 }) => (
   <div className="uiverse-card group p-6 md:p-8 h-full flex flex-col relative overflow-hidden">
     {image && (
-      <div className="w-full h-32 md:h-40 mb-6 rounded-lg overflow-hidden border border-[#334155]">
-        <img src={image} alt={title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div className="w-full h-32 md:h-40 mb-6 rounded-xl overflow-hidden border border-white/5 relative">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 pointer-events-none" />
+        <img src={image} alt={title} className="w-full h-full object-cover group-hover:scale-105 group-hover:rotate-1 transition-transform duration-700 ease-out" />
       </div>
     )}
     <div className="flex items-start gap-4 flex-1 relative z-10">
       <IconWrapper>{icon}</IconWrapper>
       <div className="flex-1 min-w-0">
-        <h3 className="text-lg md:text-xl font-['Sora'] font-semibold text-white mb-2 tracking-tight group-hover:text-[#3B82F6] transition-colors duration-300">{title}</h3>
-        <p className="text-sm md:text-base text-[#94A3B8] font-normal leading-relaxed group-hover:text-white transition-colors duration-300">{description}</p>
+        <h3 className="text-lg md:text-xl font-['Sora'] font-bold text-white mb-2 tracking-tight group-hover:text-[#EC4899] transition-colors duration-300">{title}</h3>
+        <p className="text-sm md:text-base text-white/60 font-normal leading-relaxed group-hover:text-white/90 transition-colors duration-300">{description}</p>
         {tags && tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-4">
             {tags.map((tag) => (
@@ -135,7 +130,6 @@ const GithubButton = ({ large = false }: { large?: boolean }) => (
   </a>
 );
 
-// ── Main application ──
 function Overlay() {
   const [activeTab, setActiveTab] = useState(0);
 
@@ -173,18 +167,18 @@ function Overlay() {
   ];
 
   return (
-    <main className="text-white font-['Inter'] selection:bg-blue-500 selection:text-white w-full">
+    <main className="text-white font-['Inter'] selection:bg-pink-500 selection:text-white w-full bg-black">
 
       {/* ── 1. HERO ── */}
-      <section aria-label="Hero" className="bg-[#0F172A] w-full min-h-screen flex items-center justify-center pt-32 pb-24 md:pt-40 md:pb-32 landscape:pt-16 landscape:pb-12 px-5 sm:px-8 relative overflow-hidden">
+      <section aria-label="Hero" className="bg-transparent w-full min-h-screen flex items-center justify-center pt-32 pb-24 md:pt-40 md:pb-32 landscape:pt-16 landscape:pb-12 px-5 sm:px-8 relative overflow-hidden">
         
         {/* Spline Background */}
-        <div className="absolute inset-0 w-full h-full z-0 pointer-events-auto">
+        <div className="absolute inset-0 w-full h-full z-0 pointer-events-auto opacity-70 mix-blend-screen">
           <Spline scene="https://prod.spline.design/47GLu4jJKPAAd4Yk/scene.splinecode" />
         </div>
         
-        {/* Dark gradient overlay so text is still readable if the spline is bright */}
-        <div className="absolute inset-0 w-full h-full z-0 bg-gradient-to-b from-[#0F172A]/80 via-transparent to-[#0F172A] pointer-events-none" />
+        {/* Dark gradient overlay */}
+        <div className="absolute inset-0 w-full h-full z-0 bg-gradient-to-b from-black/80 via-transparent to-black pointer-events-none" />
 
         <div className="w-full max-w-7xl mx-auto flex flex-col items-center text-center relative z-10 pointer-events-none">
           <Reveal>
@@ -196,7 +190,7 @@ function Overlay() {
           <Reveal delay={0.1}>
             <h1
               data-magnetic
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-[7.5rem] font-['Sora'] font-extrabold uppercase tracking-tighter mb-6 text-white leading-none break-words"
+              className="text-6xl sm:text-7xl md:text-8xl lg:text-[9rem] font-['Sora'] font-extrabold uppercase tracking-tighter mb-6 text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-white/30 leading-none break-words drop-shadow-2xl"
               style={{ wordBreak: 'break-word' }}
             >
               Access<br />App
@@ -204,21 +198,21 @@ function Overlay() {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <p className="text-base sm:text-lg md:text-xl text-[#94A3B8] font-normal max-w-2xl leading-relaxed mb-12">
+            <p className="text-base sm:text-lg md:text-xl text-white/70 font-normal max-w-2xl leading-relaxed mb-12">
               AI-powered spatial awareness for the visually and hearing impaired.
               Runs entirely on-device. No cloud. No latency. No compromise.
             </p>
           </Reveal>
 
           <Reveal delay={0.3}>
-            <div className="flex flex-col sm:flex-row justify-center items-center w-full max-w-sm sm:max-w-none gap-4 sm:gap-6 mb-16">
+            <div className="flex flex-col sm:flex-row justify-center items-center w-full max-w-sm sm:max-w-none gap-4 sm:gap-6 mb-16 pointer-events-auto">
               <DownloadButton large />
               <GithubButton large />
             </div>
           </Reveal>
 
           <Reveal delay={0.4}>
-            <div className="animate-bounce text-[#475569]">
+            <div className="animate-bounce text-white/30 hover:text-white/80 transition-colors pointer-events-auto cursor-pointer">
               <ChevronDown size={28} />
             </div>
           </Reveal>
@@ -226,8 +220,13 @@ function Overlay() {
       </section>
 
       {/* ── 2. STATS ── */}
-      <section aria-label="Stats" className="bg-[#141E33] w-full py-24 md:py-32 landscape:py-16 px-5 sm:px-8">
-        <div className="w-full max-w-7xl mx-auto flex flex-col items-center">
+      <section aria-label="Stats" className="bg-[#030303] w-full py-24 md:py-32 landscape:py-16 px-5 sm:px-8 border-y border-white/5 relative overflow-hidden">
+        
+        {/* Abstract blur blobs */}
+        <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-pink-600/10 rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="w-full max-w-7xl mx-auto flex flex-col items-center relative z-10">
           <Reveal>
             <p className="uiverse-label mb-12 md:mb-16">
               Built for Impact
@@ -243,16 +242,16 @@ function Overlay() {
 
           <Reveal delay={0.5}>
             <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
-              <div className="badge-pill"><WifiOff size={14} />No Internet Required</div>
-              <div className="badge-pill"><Shield size={14} />Privacy First</div>
-              <div className="badge-pill"><Eye size={14} />Open Source</div>
+              <div className="badge-pill"><WifiOff size={14} className="text-[#8B5CF6]" />No Internet Required</div>
+              <div className="badge-pill"><Shield size={14} className="text-[#EC4899]" />Privacy First</div>
+              <div className="badge-pill"><Eye size={14} className="text-[#8B5CF6]" />Open Source</div>
             </div>
           </Reveal>
         </div>
       </section>
 
       {/* ── 3. MISSION ── */}
-      <section aria-label="Mission" className="bg-[#0B1221] w-full py-24 md:py-32 landscape:py-16 px-5 sm:px-8">
+      <section aria-label="Mission" className="bg-transparent w-full py-24 md:py-32 landscape:py-16 px-5 sm:px-8">
         <div className="w-full max-w-4xl mx-auto">
           <Reveal>
             <p className="uiverse-label mb-8">
@@ -260,33 +259,33 @@ function Overlay() {
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-['Sora'] font-bold leading-[1.1] text-white mb-8 tracking-tight break-words" style={{ wordBreak: 'break-word' }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-['Sora'] font-extrabold leading-[1.1] text-transparent bg-clip-text bg-gradient-to-br from-white to-white/50 mb-8 tracking-tighter break-words" style={{ wordBreak: 'break-word' }}>
               Accessibility shouldn't depend on a Wi-Fi signal.
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="text-base sm:text-lg text-[#94A3B8] font-normal leading-relaxed mb-6">
+            <p className="text-base sm:text-lg text-white/60 font-normal leading-relaxed mb-6">
               Traditional accessibility tools rely on high-latency cloud APIs, compromising privacy and failing completely in low-connectivity environments — precisely where users need them most.
             </p>
           </Reveal>
           <Reveal delay={0.3}>
-            <p className="text-base sm:text-lg text-[#94A3B8] font-normal leading-relaxed">
-              AccessApp fundamentally changes this by running advanced computer vision models directly on the user's device. Instant response. Total privacy. Works anywhere.
+            <p className="text-base sm:text-lg text-white/60 font-normal leading-relaxed">
+              <strong className="text-white">AccessApp</strong> fundamentally changes this by running advanced computer vision models directly on the user's device. Instant response. Total privacy. Works anywhere.
             </p>
           </Reveal>
         </div>
       </section>
 
       {/* ── 4. FLAGSHIP MODULES ── */}
-      <section aria-label="Modules" className="bg-[#0F172A] w-full py-24 md:py-32 landscape:py-16 px-5 sm:px-8">
-        <div className="w-full max-w-6xl mx-auto">
+      <section aria-label="Modules" className="bg-[#030303] w-full py-24 md:py-32 landscape:py-16 px-5 sm:px-8 border-t border-white/5 relative">
+        <div className="w-full max-w-6xl mx-auto relative z-10">
           <Reveal>
             <p className="uiverse-label mb-4">
               Core Features
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-['Sora'] font-bold text-white mb-12 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-['Sora'] font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-white to-white/50 mb-12 tracking-tighter">
               Four modules. Zero cloud dependency.
             </h2>
           </Reveal>
@@ -294,7 +293,7 @@ function Overlay() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
             <Reveal delay={0.2}>
               <FeatureCard
-                icon={<Radar size={22} color="#3B82F6" />}
+                icon={<Radar size={22} color="#EC4899" />}
                 title="Obstacle Radar"
                 description="Real-time object detection via the device camera. Identifies approaching obstacles and their distance with millimeter precision."
                 tags={['Haptic Feedback', 'Sonar Alerts', 'TFLite']}
@@ -303,7 +302,7 @@ function Overlay() {
             </Reveal>
             <Reveal delay={0.3}>
               <FeatureCard
-                icon={<Eye size={22} color="#3B82F6" />}
+                icon={<Eye size={22} color="#8B5CF6" />}
                 title="Notes-to-Audio"
                 description="OCR scanner powered by ML Kit that converts any printed or handwritten text into spoken audio instantly."
                 tags={['Auto-Language', 'Neural TTS', 'ML Kit']}
@@ -312,7 +311,7 @@ function Overlay() {
             </Reveal>
             <Reveal delay={0.4}>
               <FeatureCard
-                icon={<Languages size={22} color="#3B82F6" />}
+                icon={<Languages size={22} color="#EC4899" />}
                 title="Live ASL Translator"
                 description="Uses MediaPipe Gesture Recognizer to identify American Sign Language letters in real-time from the camera feed."
                 tags={['MediaPipe', 'Real-time', 'A–Z Letters']}
@@ -321,7 +320,7 @@ function Overlay() {
             </Reveal>
             <Reveal delay={0.5}>
               <FeatureCard
-                icon={<Sun size={22} color="#3B82F6" />}
+                icon={<Sun size={22} color="#8B5CF6" />}
                 title="Color & Light"
                 description="Analyzes camera feed to output exact RGB values and relative luminance, converting them to human-readable color names."
                 tags={['RGB Analysis', 'Luminance', 'Voice Output']}
@@ -332,18 +331,24 @@ function Overlay() {
         </div>
       </section>
 
-
-
       {/* ── 5. ARCHITECTURE ── */}
-      <section aria-label="Architecture" className="bg-[#141E33] w-full py-24 md:py-32 landscape:py-16 px-5 sm:px-8">
-        <div className="w-full max-w-6xl mx-auto">
+      <section aria-label="Architecture" className="bg-transparent w-full py-24 md:py-32 landscape:py-16 px-5 sm:px-8 border-t border-white/5 relative overflow-hidden">
+        
+        {/* Background Spline inside architecture */}
+        <div className="absolute inset-0 w-full h-full z-0 opacity-20 mix-blend-screen pointer-events-none" style={{ transform: 'scale(1.5)' }}>
+          <Spline scene="https://prod.spline.design/47GLu4jJKPAAd4Yk/scene.splinecode" />
+        </div>
+        
+        <div className="absolute inset-0 bg-black/60 z-0 pointer-events-none" />
+
+        <div className="w-full max-w-6xl mx-auto relative z-10">
           <Reveal>
             <p className="uiverse-label mb-4">
               Under the Hood
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-['Sora'] font-bold text-white mb-12 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-['Sora'] font-extrabold text-white mb-12 tracking-tighter">
               Engineering at the edge.
             </h2>
           </Reveal>
@@ -368,7 +373,7 @@ function Overlay() {
                 </div>
 
                 <div className="min-h-[220px]">
-                  <h3 className="text-xl md:text-2xl font-['Sora'] font-semibold text-white mb-6">
+                  <h3 className="text-xl md:text-2xl font-['Sora'] font-bold text-white mb-6">
                     {tabContent[activeTab].title}
                   </h3>
                   <ul className="space-y-6">
@@ -379,7 +384,7 @@ function Overlay() {
                         </div>
                         <div>
                           <strong className="text-white text-base font-semibold">{point.strong}</strong>
-                          <p className="text-base text-[#94A3B8] mt-1.5 leading-relaxed">{point.text}</p>
+                          <p className="text-base text-white/60 mt-1.5 leading-relaxed">{point.text}</p>
                         </div>
                       </li>
                     ))}
@@ -392,23 +397,23 @@ function Overlay() {
             <Reveal delay={0.3}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
-                  { label: 'Language', value: 'Kotlin', icon: <Code2 size={18} color="#3B82F6" /> },
-                  { label: 'UI Framework', value: 'Jetpack Compose', icon: <Layers size={18} color="#3B82F6" /> },
-                  { label: 'Minimum SDK', value: 'API 30', icon: <Smartphone size={18} color="#3B82F6" /> },
-                  { label: 'Target SDK', value: 'API 36', icon: <Target size={18} color="#3B82F6" /> },
-                  { label: 'ML Runtime', value: 'TensorFlow Lite', icon: <Cpu size={18} color="#3B82F6" /> },
-                  { label: 'Gesture Engine', value: 'MediaPipe', icon: <Hand size={18} color="#3B82F6" /> },
-                  { label: 'OCR Engine', value: 'Google ML Kit', icon: <ScanText size={18} color="#3B82F6" /> },
-                  { label: 'IDE', value: 'Android Studio', icon: <Monitor size={18} color="#3B82F6" /> }
+                  { label: 'Language', value: 'Kotlin', icon: <Code2 size={18} color="#8B5CF6" /> },
+                  { label: 'UI Framework', value: 'Jetpack Compose', icon: <Layers size={18} color="#EC4899" /> },
+                  { label: 'Minimum SDK', value: 'API 30', icon: <Smartphone size={18} color="#8B5CF6" /> },
+                  { label: 'Target SDK', value: 'API 36', icon: <Target size={18} color="#EC4899" /> },
+                  { label: 'ML Runtime', value: 'TensorFlow Lite', icon: <Cpu size={18} color="#8B5CF6" /> },
+                  { label: 'Gesture Engine', value: 'MediaPipe', icon: <Hand size={18} color="#EC4899" /> },
+                  { label: 'OCR Engine', value: 'Google ML Kit', icon: <ScanText size={18} color="#8B5CF6" /> },
+                  { label: 'IDE', value: 'Android Studio', icon: <Monitor size={18} color="#EC4899" /> }
                 ].map((tech) => (
                   <div key={tech.label} className="tech-bento-card group p-5">
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2 rounded bg-[#0F172A] group-hover:bg-[#3B82F6]/10 transition-colors">
+                      <div className="p-2 rounded-lg bg-white/5 group-hover:bg-white/10 transition-colors border border-white/5">
                         {tech.icon}
                       </div>
-                      <span className="text-[11px] text-[#64748B] uppercase tracking-wider font-semibold">{tech.label}</span>
+                      <span className="text-[11px] text-white/50 uppercase tracking-widest font-bold">{tech.label}</span>
                     </div>
-                    <span className="text-sm md:text-base text-[#F1F5F9] font-medium block">{tech.value}</span>
+                    <span className="text-sm md:text-base text-white font-semibold block tracking-tight">{tech.value}</span>
                   </div>
                 ))}
               </div>
@@ -418,7 +423,7 @@ function Overlay() {
       </section>
 
       {/* ── 6. HOW IT WORKS ── */}
-      <section aria-label="How it works" className="bg-[#0B1221] w-full py-24 md:py-32 landscape:py-16 px-5 sm:px-8">
+      <section aria-label="How it works" className="bg-[#030303] w-full py-24 md:py-32 landscape:py-16 px-5 sm:px-8 border-y border-white/5">
         <div className="w-full max-w-6xl mx-auto">
           <Reveal>
             <p className="uiverse-label mb-4">
@@ -426,7 +431,7 @@ function Overlay() {
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-['Sora'] font-bold text-white mb-12 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-['Sora'] font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-white to-white/50 mb-12 tracking-tighter">
               Three steps. That's it.
             </h2>
           </Reveal>
@@ -435,13 +440,13 @@ function Overlay() {
             {[
               { step: '01', title: 'Download', desc: 'Grab the APK from GitHub Releases or clone the repo to build from source.' },
               { step: '02', title: 'Install', desc: 'Sideload the APK onto any Android device running API 30+ (Android 11 or later).' },
-              { step: '03', title: 'Use', desc: 'Open AccessApp, choose a module, and point your camera. No sign-ups. No accounts. No cloud.' },
+              { step: '03', title: 'Use', desc: 'Open AccessApp, choose a module, and point your camera. No sign-ups. No cloud.' },
             ].map((item, index) => (
               <Reveal key={item.step} delay={0.2 + (index * 0.1)}>
                 <div className="step-card group h-full">
                   <p className="uiverse-step-num mb-4">{item.step}</p>
-                  <h3 className="text-lg md:text-xl font-['Sora'] font-semibold text-white mb-3">{item.title}</h3>
-                  <p className="text-base text-[#94A3B8] leading-relaxed">{item.desc}</p>
+                  <h3 className="text-lg md:text-xl font-['Sora'] font-bold text-white mb-3 tracking-tight">{item.title}</h3>
+                  <p className="text-base text-white/60 leading-relaxed">{item.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -450,37 +455,45 @@ function Overlay() {
       </section>
 
       {/* ── 7. CTA / FOOTER ── */}
-      <section aria-label="Footer" className="bg-[#0F172A] w-full py-24 md:py-32 landscape:py-16 px-5 sm:px-8">
-        <div className="w-full max-w-4xl mx-auto flex flex-col items-center text-center">
+      <section aria-label="Footer" className="bg-black w-full min-h-screen flex items-center justify-center py-24 md:py-32 landscape:py-16 px-5 sm:px-8 relative overflow-hidden">
+        
+        {/* Deep Spline Background */}
+        <div className="absolute inset-0 w-full h-full z-0 opacity-90 mix-blend-screen pointer-events-auto" style={{ transform: 'rotate(180deg) scale(1.2)' }}>
+          <Spline scene="https://prod.spline.design/47GLu4jJKPAAd4Yk/scene.splinecode" />
+        </div>
+        
+        <div className="absolute inset-0 w-full h-full z-0 bg-gradient-to-t from-black via-black/40 to-black pointer-events-none" />
+
+        <div className="w-full max-w-5xl mx-auto flex flex-col items-center text-center relative z-10 pointer-events-none mt-20">
           <Reveal>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-['Sora'] font-extrabold text-white uppercase tracking-tighter mb-6 leading-tight break-words" style={{ wordBreak: 'break-word' }}>
+            <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-[8rem] font-['Sora'] font-extrabold text-white uppercase tracking-tighter mb-6 leading-none break-words drop-shadow-2xl" style={{ wordBreak: 'break-word' }}>
               See the world<br />differently.
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="text-base sm:text-lg md:text-xl text-[#94A3B8] max-w-2xl mb-12 leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl text-white/70 max-w-2xl mb-12 leading-relaxed">
               AccessApp is free, open-source, and built for the people who need it most.
             </p>
           </Reveal>
 
           <Reveal delay={0.2}>
-            <div className="flex flex-col sm:flex-row justify-center items-center w-full max-w-sm sm:max-w-none gap-4 sm:gap-6 mb-24">
+            <div className="flex flex-col sm:flex-row justify-center items-center w-full max-w-sm sm:max-w-none gap-4 sm:gap-6 mb-32 pointer-events-auto">
               <DownloadButton large />
               <GithubButton large />
             </div>
           </Reveal>
 
           {/* Footer bar */}
-          <div className="w-full border-t border-[#1E293B] pt-10 flex flex-col lg:flex-row justify-between items-center gap-6">
-            <p className="text-sm text-[#475569] uppercase tracking-widest font-medium">© 2026 Vortex AI</p>
+          <div className="w-full border-t border-white/10 pt-10 flex flex-col lg:flex-row justify-between items-center gap-6 pointer-events-auto backdrop-blur-md bg-black/20 p-6 rounded-3xl">
+            <p className="text-sm text-white/40 uppercase tracking-widest font-bold">© 2026 Vortex AI</p>
             <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3">
               {['Avadhi Sharma', 'Mudit Vaishnav', 'Mudra Chauhan', 'Jigyasha Mahariya', 'Monalika Vyas'].map((name, i, arr) => (
                 <div key={name} className="flex items-center">
-                  <span className="text-sm text-[#475569] font-medium uppercase tracking-widest hover:text-[#94A3B8] transition-colors duration-200 cursor-default">
+                  <span className="text-xs sm:text-sm text-white/40 font-bold uppercase tracking-widest hover:text-[#EC4899] transition-colors duration-300 cursor-pointer">
                     {name}
                   </span>
                   {i < arr.length - 1 && (
-                    <span className="ml-4 text-[#334155]">•</span>
+                    <span className="ml-4 text-white/20">•</span>
                   )}
                 </div>
               ))}
@@ -504,7 +517,7 @@ export default function App() {
       <FloatingToolbar />
       <MagneticCursor magneticFactor={0.5} blendMode="difference" cursorSize={40}>
         <div 
-          className="w-full bg-[#0F172A] relative flex flex-col overflow-x-hidden transition-opacity duration-1000 ease-in-out"
+          className="w-full bg-black relative flex flex-col overflow-x-hidden transition-opacity duration-1000 ease-in-out"
           style={{ opacity: showLoading ? 0 : 1, pointerEvents: showLoading ? 'none' : 'auto', height: showLoading ? '100vh' : 'auto', overflowY: showLoading ? 'hidden' : 'auto' }}
         >
           <Overlay />
