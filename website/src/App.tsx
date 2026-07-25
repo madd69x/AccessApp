@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { LoadingScreen } from "./components/ui/loading-screen";
 import { FloatingToolbar } from "./components/ui/FloatingToolbar";
-import { LiveDemo } from "./components/ui/LiveDemo";
+
 import { MagneticCursor } from "./components/ui/magnetic-cursor";
 import { Radar, Languages, Sun, Layers, Cpu, Eye, Download, Shield, WifiOff, ChevronDown, Code2, Smartphone, Target, Hand, ScanText, Monitor } from "lucide-react";
 import { playHoverSound, playClickSound } from "./lib/sounds";
@@ -323,30 +323,7 @@ function Overlay() {
         </div>
       </section>
 
-      {/* ── 4.5 LIVE DEMO ── */}
-      <section aria-label="Live Demo" className="bg-[#0B1221] w-full py-24 md:py-32 landscape:py-16 px-5 sm:px-8">
-        <div className="w-full max-w-5xl mx-auto flex flex-col items-center">
-          <Reveal>
-            <p className="uiverse-label mb-4 text-center">
-              Try It Live
-            </p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-['Sora'] font-bold text-white mb-8 tracking-tight text-center">
-              Experience the ML Engine
-            </h2>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <p className="text-base sm:text-lg text-[#94A3B8] font-normal max-w-2xl leading-relaxed mb-12 text-center">
-              The Live ASL Translator uses MediaPipe to detect hand joints in real-time. Try the browser port of our on-device model below using your webcam.
-            </p>
-          </Reveal>
-          
-          <Reveal delay={0.3}>
-            <LiveDemo />
-          </Reveal>
-        </div>
-      </section>
+
 
       {/* ── 5. ARCHITECTURE ── */}
       <section aria-label="Architecture" className="bg-[#141E33] w-full py-24 md:py-32 landscape:py-16 px-5 sm:px-8">
