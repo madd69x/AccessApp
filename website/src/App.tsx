@@ -82,9 +82,8 @@ const FeatureCard = ({
 }) => (
   <div className="uiverse-card group p-6 md:p-8 h-full flex flex-col relative overflow-hidden">
     {image && (
-      <div className="absolute inset-0 w-full h-full opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none">
-        <img src={image} alt={title} className="w-full h-full object-cover grayscale brightness-50 contrast-125" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/80 to-transparent" />
+      <div className="w-full h-32 md:h-40 mb-6 rounded-lg overflow-hidden border border-[#334155]">
+        <img src={image} alt={title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
       </div>
     )}
     <div className="flex items-start gap-4 flex-1 relative z-10">
