@@ -49,6 +49,16 @@ export const playClickSound = () => {
 };
 
 let ambientAudioCtx: AudioContext | null = null;
+let ambientMasterGain: GainNode | null = null;
+let isMuted = false;
+
+export const toggleMute = () => {
+  isMuted = !isMuted;
+  if (ambientMasterGain) {
+    ambientMasterGain.gain.setTargetAtTime(isMuted ? 0 : 0.08, ambientAudioCtx!.currentTime, 0.5);
+  }
+  return isMuted;
+};
 
 export const playAmbientMelody = () => {
   if (typeof window === 'undefined') return;
@@ -61,10 +71,12 @@ export const playAmbientMelody = () => {
       ambientAudioCtx.resume();
     }
 
+    if (ambientMasterGain) return; // Already playing
+
     const ctx = ambientAudioCtx;
-    const masterGain = ctx.createGain();
-    masterGain.gain.value = 0.08; // Keep it very quiet and ambient
-    masterGain.connect(ctx.destination);
+    ambientMasterGain = ctx.createGain();
+    ambientMasterGain.gain.value = isMuted ? 0 : 0.08; // Keep it very quiet and ambient
+    ambientMasterGain.connect(ctx.destination);
 
     // Create a slow, generative ambient pad
     const createDrone = (freq: number, detune: number, rate: number) => {
@@ -101,11 +113,11 @@ export const playAmbientMelody = () => {
         
         osc.connect(gain);
         gain.connect(panner);
-        panner.connect(masterGain);
+        panner.connect(ambientMasterGain!);
         panLfo.start();
       } else {
         osc.connect(gain);
-        gain.connect(masterGain);
+        gain.connect(ambientMasterGain!);
       }
 
       osc.start();

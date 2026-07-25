@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { LoadingScreen } from "./components/ui/loading-screen";
+import { FloatingToolbar } from "./components/ui/FloatingToolbar";
+import { LiveDemo } from "./components/ui/LiveDemo";
 import { MagneticCursor } from "./components/ui/magnetic-cursor";
 import { Radar, Languages, Sun, Layers, Cpu, Eye, Download, Shield, WifiOff, ChevronDown, Code2, Smartphone, Target, Hand, ScanText, Monitor } from "lucide-react";
 import { playHoverSound, playClickSound } from "./lib/sounds";
@@ -69,21 +71,27 @@ const StatItem = ({ value, label }: { value: string; label: string }) => (
   </div>
 );
 
-// ── Feature card ──
 const FeatureCard = ({
-  icon, title, description, tags,
+  icon, title, description, tags, image
 }: {
   icon: React.ReactNode;
   title: string;
   description: string;
   tags?: string[];
+  image?: string;
 }) => (
-  <div className="uiverse-card group p-6 md:p-8 h-full flex flex-col">
-    <div className="flex items-start gap-4 flex-1">
+  <div className="uiverse-card group p-6 md:p-8 h-full flex flex-col relative overflow-hidden">
+    {image && (
+      <div className="absolute inset-0 w-full h-full opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none">
+        <img src={image} alt={title} className="w-full h-full object-cover grayscale brightness-50 contrast-125" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/80 to-transparent" />
+      </div>
+    )}
+    <div className="flex items-start gap-4 flex-1 relative z-10">
       <IconWrapper>{icon}</IconWrapper>
       <div className="flex-1 min-w-0">
-        <h3 className="text-lg md:text-xl font-['Sora'] font-semibold text-white mb-2 tracking-tight">{title}</h3>
-        <p className="text-sm md:text-base text-[#94A3B8] font-normal leading-relaxed">{description}</p>
+        <h3 className="text-lg md:text-xl font-['Sora'] font-semibold text-white mb-2 tracking-tight group-hover:text-[#3B82F6] transition-colors duration-300">{title}</h3>
+        <p className="text-sm md:text-base text-[#94A3B8] font-normal leading-relaxed group-hover:text-white transition-colors duration-300">{description}</p>
         {tags && tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-4">
             {tags.map((tag) => (
@@ -282,6 +290,7 @@ function Overlay() {
                 title="Obstacle Radar"
                 description="Real-time object detection via the device camera. Identifies approaching obstacles and their distance with millimeter precision."
                 tags={['Haptic Feedback', 'Sonar Alerts', 'TFLite']}
+                image="/images/radar_banner.jpg"
               />
             </Reveal>
             <Reveal delay={0.3}>
@@ -290,6 +299,7 @@ function Overlay() {
                 title="Notes-to-Audio"
                 description="OCR scanner powered by ML Kit that converts any printed or handwritten text into spoken audio instantly."
                 tags={['Auto-Language', 'Neural TTS', 'ML Kit']}
+                image="/images/ocr_banner.jpg"
               />
             </Reveal>
             <Reveal delay={0.4}>
@@ -298,6 +308,7 @@ function Overlay() {
                 title="Live ASL Translator"
                 description="Uses MediaPipe Gesture Recognizer to identify American Sign Language letters in real-time from the camera feed."
                 tags={['MediaPipe', 'Real-time', 'A–Z Letters']}
+                image="/images/asl_banner.jpg"
               />
             </Reveal>
             <Reveal delay={0.5}>
@@ -306,9 +317,35 @@ function Overlay() {
                 title="Color & Light"
                 description="Analyzes camera feed to output exact RGB values and relative luminance, converting them to human-readable color names."
                 tags={['RGB Analysis', 'Luminance', 'Voice Output']}
+                image="/images/color_banner.jpg"
               />
             </Reveal>
           </div>
+        </div>
+      </section>
+
+      {/* ── 4.5 LIVE DEMO ── */}
+      <section aria-label="Live Demo" className="bg-[#0B1221] w-full py-24 md:py-32 landscape:py-16 px-5 sm:px-8">
+        <div className="w-full max-w-5xl mx-auto flex flex-col items-center">
+          <Reveal>
+            <p className="uiverse-label mb-4 text-center">
+              Try It Live
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-['Sora'] font-bold text-white mb-8 tracking-tight text-center">
+              Experience the ML Engine
+            </h2>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <p className="text-base sm:text-lg text-[#94A3B8] font-normal max-w-2xl leading-relaxed mb-12 text-center">
+              The Live ASL Translator uses MediaPipe to detect hand joints in real-time. Try the browser port of our on-device model below using your webcam.
+            </p>
+          </Reveal>
+          
+          <Reveal delay={0.3}>
+            <LiveDemo />
+          </Reveal>
         </div>
       </section>
 
@@ -479,6 +516,7 @@ export default function App() {
       {showLoading && (
         <LoadingScreen onComplete={() => setShowLoading(false)} />
       )}
+      <FloatingToolbar />
       <MagneticCursor magneticFactor={0.5} blendMode="difference" cursorSize={40}>
         <div 
           className="w-full bg-[#0F172A] relative flex flex-col overflow-x-hidden transition-opacity duration-1000 ease-in-out"
