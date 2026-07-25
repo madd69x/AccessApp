@@ -124,12 +124,12 @@ export const playAmbientMelody = () => {
       lfo.start();
     };
 
-    // F minor9 chord spread out (F2, C3, G3, Ab3, Eb4)
-    createDrone(87.31, 0, 0.05);   // F2
-    createDrone(130.81, 5, 0.07);  // C3
-    createDrone(196.00, -3, 0.04); // G3
-    createDrone(207.65, 2, 0.06);  // Ab3
-    createDrone(311.13, -4, 0.03); // Eb4
+    // Beautiful, shimmering Cmaj9 chord (C4, E4, G4, B4, D5)
+    createDrone(261.63, 0, 0.03);  // C4
+    createDrone(329.63, 4, 0.05);  // E4
+    createDrone(392.00, -2, 0.04); // G4
+    createDrone(493.88, 3, 0.06);  // B4
+    createDrone(587.33, -3, 0.02); // D5
 
   } catch (e) {
     console.error("Audio initialization failed", e);

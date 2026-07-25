@@ -50,6 +50,9 @@ export const LiveDemo = () => {
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
         videoRef.current.addEventListener("loadeddata", () => {
+          if (videoRef.current) {
+             videoRef.current.play().catch(e => console.error("Play failed", e));
+          }
           setIsLoading(false);
           setIsCameraActive(true);
           predictWebcam();
