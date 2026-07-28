@@ -21,7 +21,8 @@
 
 <div align="center">
   <h4><a href="DOCUMENTATION.md">View Technical Documentation</a></h4>
-  <h2> <a href="https://app-access-one.vercel.app/">Experience the Live Website</a></h2>
+  <h2>🌐 <a href="https://accessapp.vercel.app">Experience the Live Website</a></h2>
+  <h2>📱 <a href="https://github.com/madd69x/AccessApp/releases">Download the Android App (APK)</a></h2>
 </div>
 
 ---
