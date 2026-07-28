@@ -26,6 +26,41 @@
 
 ---
 
+## Prototype Workflow Architecture
+
+```mermaid
+graph TD
+    A[User Launches AccessApp] --> B{Selects Module}
+    
+    B -->|Obstacle Radar| C[CameraX Captures Frame]
+    C --> D[MediaPipe Object Detection Model]
+    D --> E[Calculate Distance & Bounding Box]
+    E --> F[Trigger Haptic & Spatial Audio Feedback]
+    
+    B -->|Live ASL Translator| G[CameraX Captures Frame]
+    G --> H[MediaPipe Hand Landmark Tracking]
+    H --> I[Extract Skeleton Coordinates]
+    I --> J[Translate to English Text Overlay]
+    
+    B -->|Notes-to-Audio OCR| K[CameraX Captures Frame]
+    K --> L[ML Kit Text Recognition v2]
+    L --> M[Auto-Detect Language]
+    M --> N[Android Native Text-to-Speech Engine]
+    
+    B -->|Color & Light Detector| O[CameraX Image Analysis]
+    O --> P[Extract Center Pixel RGB & Luminance]
+    P --> Q[Map to Human-Readable Color Name]
+    Q --> R[Auditory Readout]
+    
+    %% Zero Cloud Note
+    classDef offline fill:#1e293b,stroke:#3b82f6,stroke-width:2px,color:#fff;
+    class D,H,L,P offline;
+```
+
+> **Note:** All processing nodes highlighted in blue execute strictly on-device (Zero Cloud architecture), ensuring absolute privacy and zero latency.
+
+---
+
 ## Flagship Modules
 
 <table>
