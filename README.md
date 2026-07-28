@@ -87,6 +87,13 @@ In accordance with our Zero-Cloud privacy architecture, all machine learning inf
 *   **Performance Metrics:** >95% accuracy on printed text in well-lit conditions.
 *   **Known Limitations:** Handwritten text recognition is less accurate. Highly stylized fonts or extremely degraded paper can cause hallucinated characters.
 
+### 4. Color & Light Detector: Computer Vision Heuristic
+*   **Base Architecture:** CameraX ImageAnalysis (Algorithmic Processing)
+*   **Input:** High-speed `CameraX` video frames (YUV_420_888 format).
+*   **Output:** Average RGB values, relative luminance, and nearest human-readable color name.
+*   **Performance Metrics:** <5ms inference latency per frame. Extremely lightweight, allowing for continuous background polling without battery drain.
+*   **Known Limitations:** Highly sensitive to ambient lighting conditions. Shadows or harsh yellow room lighting can skew the detected color (e.g., mistaking white for yellow).
+
 ---
 
 ## Flagship Modules
