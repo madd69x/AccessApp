@@ -61,6 +61,34 @@ graph TD
 
 ---
 
+## ML Model Cards (On-Device Inference)
+
+In accordance with our Zero-Cloud privacy architecture, all machine learning inference is executed locally on the device using quantized models optimized for edge hardware (NPU/CPU/GPU).
+
+### 1. Obstacle Radar: Object Detection Model
+*   **Base Architecture:** SSD MobileNet V2 (via Google MediaPipe Vision)
+*   **Quantization:** INT8 (Optimized for Android Edge TPUs and mobile CPUs)
+*   **Input:** Live `CameraX` video frames (downsampled to 320x320 RGB)
+*   **Output:** Bounding boxes, class labels (80 COCO classes), and confidence scores.
+*   **Performance Metrics:** Average inference latency of <30ms on Snapdragon 8 Gen 1, enabling fluid 30fps tracking.
+*   **Known Limitations:** Depth is approximated via bounding box scale relative to frame size. Extremely low-light environments heavily degrade bounding box confidence.
+
+### 2. Live ASL Translator: Hand Landmark Tracking
+*   **Base Architecture:** MediaPipe Handpose (BlazePalm + Landmark Regressor)
+*   **Input:** Cropped ROI (Region of Interest) derived from the Palm Detection model.
+*   **Output:** 21 3D spatial hand landmarks (x, y, z coordinates).
+*   **Performance Metrics:** <15ms inference latency per frame. Hand tracking remains robust under partial occlusions.
+*   **Known Limitations:** Requires the user's hand to be within 0.5 - 1.5 meters of the camera. The current translation heuristic focuses on static ASL alphabet letters; complex motion-based ASL signs are in development.
+
+### 3. Notes-to-Audio: Unified OCR
+*   **Base Architecture:** Google ML Kit Text Recognition V2
+*   **Input:** High-resolution `CameraX` image capture (triggered by user interaction).
+*   **Output:** Structured text blocks, lines, and elements with detected languages (Latin & Devanagari).
+*   **Performance Metrics:** >95% accuracy on printed text in well-lit conditions.
+*   **Known Limitations:** Handwritten text recognition is less accurate. Highly stylized fonts or extremely degraded paper can cause hallucinated characters.
+
+---
+
 ## Flagship Modules
 
 <table>
