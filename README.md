@@ -14,6 +14,11 @@
 
 </div>
 
+<div align="center">
+  <br>
+  <video src="https://github.com/madd69x/AccessApp/raw/main/demo.mp4" controls="controls" width="80%" style="border-radius: 8px;"></video>
+</div>
+
 ---
 
 <div align="center">
