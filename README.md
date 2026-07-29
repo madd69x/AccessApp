@@ -14,10 +14,7 @@
 
 </div>
 
-<div align="center">
-  <br>
-  <video src="./demo.mp4" controls="controls" muted="muted" width="80%" style="border-radius: 8px;"></video>
-</div>
+![AccessApp Demo Video](demo.mp4)
 
 ---
 
