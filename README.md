@@ -16,7 +16,7 @@
 
 <div align="center">
   <br>
-  <video src="https://github.com/madd69x/AccessApp/raw/main/demo.mp4" controls="controls" width="80%" style="border-radius: 8px;"></video>
+  <video src="./demo.mp4" controls="controls" muted="muted" width="80%" style="border-radius: 8px;"></video>
 </div>
 
 ---
