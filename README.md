@@ -20,7 +20,7 @@
   <h4><a href="DOCUMENTATION.md">View Technical Documentation</a></h4>
   <h4><a href="https://colab.research.google.com/github/madd69x/AccessApp/blob/main/AccessApp_ML_Demo.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> Verify ML Pipeline</h4>
   <h2><a href="https://app-access-one.vercel.app/">Experience the Live Website</a></h2>
-  <h2><a href="https://github.com/madd69x/AccessApp/releases">Download the Android App (APK)</a></h2>
+  <h2><a href="https://github.com/madd69x/AccessApp/releases/tag/AccessApp.apk">Download the Android App (APK)</a></h2>
 </div>
 
 ---

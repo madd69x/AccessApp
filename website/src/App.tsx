@@ -114,7 +114,7 @@ const FeatureCard = ({
 const DownloadButton = ({ large = false }: { large?: boolean }) => (
   <a
     data-magnetic
-    href="https://github.com/madd69x/AccessApp/releases"
+    href="https://github.com/madd69x/AccessApp/releases/tag/AccessApp.apk"
     target="_blank"
     rel="noreferrer"
     onMouseEnter={playHoverSound}
