@@ -15,7 +15,11 @@
 </div>
 
 <div align="center">
-  <video src="https://raw.githubusercontent.com/madd69x/AccessApp/main/demo.mp4" controls="controls" muted="muted" width="80%" style="border-radius: 8px;"></video>
+  <a href="https://youtu.be/M18-ensiwiE" target="_blank">
+    <img src="https://img.youtube.com/vi/M18-ensiwiE/maxresdefault.jpg" alt="AccessApp Demo Video" width="80%" style="border-radius: 8px;">
+  </a>
+  <br>
+  <i>Click the image above to watch the full demo on YouTube!</i>
 </div>
 
 ---
