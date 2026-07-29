@@ -235,6 +235,25 @@ function Overlay() {
         </div>
       </section>
 
+      {/* ── 1.5 DEMO VIDEO ── */}
+      <section aria-label="Demo Video" className="bg-transparent w-full pb-24 md:pb-32 px-5 sm:px-8 relative z-10 mt-[-4rem]">
+        <div className="w-full max-w-5xl mx-auto flex flex-col items-center">
+          <Reveal>
+            <div className="w-full rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(255,255,255,0.1)] border border-white/10 aspect-video relative bg-black">
+              <iframe 
+                width="100%" 
+                height="100%" 
+                src="https://www.youtube.com/embed/M18-ensiwiE?si=g788O781Qx2fP_6Y" 
+                title="AccessApp Demo Video" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowFullScreen
+                className="absolute top-0 left-0 w-full h-full"
+              ></iframe>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ── 2. STATS ── */}
       <section aria-label="Stats" className="bg-transparent w-full py-24 md:py-32 landscape:py-16 px-5 sm:px-8 relative z-10">
         <div className="w-full max-w-7xl mx-auto flex flex-col items-center">

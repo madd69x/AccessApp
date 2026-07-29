@@ -16,7 +16,7 @@
 
 <div align="center">
   <a href="https://youtu.be/M18-ensiwiE" target="_blank">
-    <img src="https://img.youtube.com/vi/M18-ensiwiE/maxresdefault.jpg" alt="AccessApp Demo Video" width="80%" style="border-radius: 8px;">
+    <img src="https://markdown-videos-api.jasonet.co/url?url=https://youtu.be/M18-ensiwiE" alt="AccessApp Demo Video" width="80%">
   </a>
   <br>
   <i>Click the image above to watch the full demo on YouTube!</i>
