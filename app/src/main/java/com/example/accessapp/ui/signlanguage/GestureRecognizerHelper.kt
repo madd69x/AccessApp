@@ -24,6 +24,7 @@ class GestureRecognizerHelper(
         try {
             val baseOptionsBuilder = BaseOptions.builder()
                 .setModelAssetPath("gesture_recognizer.task")
+                .setDelegate(com.google.mediapipe.tasks.core.Delegate.CPU)
 
             val optionsBuilder = GestureRecognizer.GestureRecognizerOptions.builder()
                 .setBaseOptions(baseOptionsBuilder.build())

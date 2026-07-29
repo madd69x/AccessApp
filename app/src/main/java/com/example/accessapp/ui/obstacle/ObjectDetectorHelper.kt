@@ -31,6 +31,7 @@ class ObjectDetectorHelper(
     private fun setupObjectDetector() {
         val baseOptionsBuilder = BaseOptions.builder()
             .setModelAssetPath("efficientdet_lite0.tflite")
+            .setDelegate(com.google.mediapipe.tasks.core.Delegate.CPU)
         
         try {
             val baseOptions = baseOptionsBuilder.build()

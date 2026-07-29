@@ -108,6 +108,7 @@ fun ColorLightDetectorScreen(onNavigateBack: () -> Unit) {
                         }
 
                         val imageAnalyzer = ImageAnalysis.Builder()
+                            .setTargetAspectRatio(androidx.camera.core.AspectRatio.RATIO_4_3)
                             .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888)
                             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                             .build()

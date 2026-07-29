@@ -62,6 +62,7 @@ fun CameraView(
         var lastAnalyzedTimestamp = 0L
 
         val imageAnalyzer = ImageAnalysis.Builder()
+            .setTargetAspectRatio(androidx.camera.core.AspectRatio.RATIO_4_3)
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build()
             .also {
