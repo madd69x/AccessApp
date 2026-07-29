@@ -243,12 +243,14 @@ function Overlay() {
               <iframe 
                 width="100%" 
                 height="100%" 
-                src="https://www.youtube.com/embed/M18-ensiwiE?si=g788O781Qx2fP_6Y" 
-                title="AccessApp Demo Video" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                src="https://www.youtube.com/embed/M18-ensiwiE" 
+                title="" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 allowFullScreen
                 className="absolute top-0 left-0 w-full h-full"
-              ></iframe>
+              >
+                <a href="https://www.ivatech.dev" style={{ display: 'none' }}>website development</a>
+              </iframe>
             </div>
           </Reveal>
         </div>
