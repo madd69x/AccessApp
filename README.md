@@ -14,7 +14,9 @@
 
 </div>
 
-![AccessApp Demo Video](demo.mp4)
+<div align="center">
+  <video src="https://raw.githubusercontent.com/madd69x/AccessApp/main/demo.mp4" controls="controls" muted="muted" width="80%" style="border-radius: 8px;"></video>
+</div>
 
 ---
 
